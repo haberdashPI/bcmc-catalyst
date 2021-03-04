@@ -2,20 +2,20 @@ import { format } from "date-fns"
 
 export default {
   name: "post",
-  title: "Post",
+  title: "Event",
   type: "document",
   fields: [
     {
       name: "title",
-      title: "Post Title",
+      title: "Event Title",
       type: "string",
       validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
-      title: "Post Slug",
+      title: "Event Slug",
       description:
-        "This defines the posts link on your website relative to the post path set in theme options via Gatsby. For example a slug of 'wicked-awesome' would end up at mysite.com/posts/wicked-awesome' by default.",
+        "This defines the event link on your website relative to the event path set in theme options via Gatsby. For example a slug of 'wicked-awesome' would end up at mysite.com/events/wicked-awesome' by default.",
       type: "slug",
       options: {
         source: "title",
@@ -49,7 +49,7 @@ export default {
     },
     {
       name: "body",
-      title: "Post Content",
+      title: "Event Description",
       type: "blockContent",
     },
   ],

@@ -32,6 +32,16 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+          fonts: [
+              `EB Garamond:400,700`,
+              `Raleway:400,700,1000`,
+          ],
+          display: "swap",
+      },
+    },
+    {
       resolve: `gatsby-theme-catalyst-core`,
       options: {
         // Default options are:
@@ -42,7 +52,7 @@ module.exports = {
         // displaySiteLogoMobile: true,
         // displaySiteTitleMobile: true,
         // invertSiteLogo: false,
-        // useStickyHeader: false,
+        useStickyHeader: true,
         // useSocialLinks: true,
         // useColorMode: true,
         // useKatex: false, // Dark mode is not supported when configuring the theme from SANITY.io dashboard
@@ -62,7 +72,6 @@ module.exports = {
         // sanityToken: process.env.SANITY_TOKEN,
         //
         // Default options are:
-        // sanityProjectId: "abc123" // Required
         // sanityDataset: "production"
         // sanityToken: null
         // sanityWatchMode: true
@@ -72,14 +81,14 @@ module.exports = {
         // sanityCreatePostsList: true
         // sanityCreateProjects: true
         // sanityCreateProjectsList: true
-        // sanityPostPath: "/posts"
-        // sanityProjectPath: "/projects"
-        // sanityPostListTitle: "Posts"
+        sanityPostPath: "/events",
+        sanityProjectPath: "/services",
+        sanityPostListTitle: "Events",
         // sanityDisplayPostListTitle: true
-        // sanityProjectListTitle: "Projects"
+        sanityProjectListTitle: "Services",
         // sanityDisplayProjectListTitle: true
         // useSanityTheme: false // Experimental right now
-        sanityProjectId: "p9a6h8j1",
+        sanityProjectId: "d4eml44h",
       },
     },
 

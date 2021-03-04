@@ -6,11 +6,14 @@ import prism from "@theme-ui/prism/presets/oceanic-next"
 export default {
   ...tailwind,
   breakpoints: ["480px", "768px", "1024px", "1440px"],
+  fontVariants: {
+    header: "small-caps"
+  },
   fonts: {
     ...tailwind.fonts,
     body:
-      'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
-    heading: "inherit",
+      'Raleway,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans",Helvetica,sans-serif',
+    heading: '"EB Garamond",Times',
     monospace:
       'Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
   },
@@ -24,7 +27,7 @@ export default {
     highlight: baseColors.orange[5],
     muted: baseColors.gray[2],
     header: {
-      background: baseColors.gray[2],
+      background: "#222",
       backgroundOpen: baseColors.blue[2],
       text: baseColors.gray[8],
       textOpen: baseColors.gray[8],

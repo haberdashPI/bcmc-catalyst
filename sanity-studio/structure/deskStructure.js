@@ -73,10 +73,10 @@ export default () =>
         .title("Pages")
         .child(S.documentTypeList("page").title("Pages")),
       S.listItem()
-        .title("Posts")
-        .child(S.documentTypeList("post").title("Posts")),
+        .title("Events")
+        .child(S.documentTypeList("post").title("Events")),
       S.listItem()
-        .title("Projects")
-        .child(S.documentTypeList("project").title("Projects")),
+        .title("Services")
+        .child(S.documentTypeList("project").title("Services")),
       ...S.documentTypeListItems().filter(hiddenDocTypes),
     ])

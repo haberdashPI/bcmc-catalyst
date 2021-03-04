@@ -4,6 +4,17 @@ import { tailwind, baseColors } from "@theme-ui/preset-tailwind"
 
 export default merge(BaseTheme, {
   // Modifications to the base theme go here. This is an example changing colors and using variants to change your navigation links. Uncomment the code below to see what happens.
+  fontVariants: {
+    header: "small-caps"
+  },
+  fonts: {
+    ...tailwind.fonts,
+    body:
+      'Raleway,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans",Helvetica,sans-serif',
+    heading: '"EB Garamond",Times',
+    monospace:
+      'Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
+  },
   colors: {
     ...tailwind.colors,
     background: baseColors.gray[1], //Try "#954264",
@@ -15,11 +26,11 @@ export default merge(BaseTheme, {
     highlight: baseColors.orange[5],
     muted: baseColors.gray[2],
     header: {
-      background: baseColors.gray[2],
+      background: "#222",
       backgroundOpen: baseColors.blue[2],
-      text: baseColors.gray[8],
+      text: "#eee",
       textOpen: baseColors.gray[8],
-      icons: baseColors.gray[6],
+      icons: "#eee",
       iconsOpen: baseColors.gray[8],
     },
     footer: {

@@ -1,11 +1,11 @@
 export default {
   name: "project",
-  title: "Project",
+  title: "Services",
   type: "document",
   fields: [
     {
       name: "title",
-      title: "Project Title",
+      title: "Service Name",
       type: "string",
       validation: (Rule) => Rule.required(),
     },
@@ -14,7 +14,7 @@ export default {
       title: "Slug",
       type: "slug",
       description:
-        "This defines the projects link on your website relative to the project path set in theme options via Gatsby. For example a slug of 'wicked-awesome' would end up at mysite.com/projects/wicked-awesome' by default.",
+        "This defines the services link on your website relative to the service path set in theme options via Gatsby. For example a slug of 'wicked-awesome' would end up at mysite.com/services/wicked-awesome' by default.",
       options: {
         source: "title",
         maxLength: 96,
@@ -23,7 +23,7 @@ export default {
     },
     {
       name: "body",
-      title: "Project Content",
+      title: "Service Description",
       type: "blockContent",
     },
   ],
