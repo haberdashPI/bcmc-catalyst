@@ -2,8 +2,13 @@ import { merge } from "theme-ui"
 import { BaseTheme } from "gatsby-theme-catalyst-core"
 import { tailwind, baseColors } from "@theme-ui/preset-tailwind"
 
+const theme = {
+  primary: "#498046",
+  secondary: "#d5b959",
+  tertiary: "#c45b4a",
+}
+
 export default merge(BaseTheme, {
-  // Modifications to the base theme go here. This is an example changing colors and using variants to change your navigation links. Uncomment the code below to see what happens.
   fonts: {
     ...tailwind.fonts,
     body:
@@ -17,9 +22,7 @@ export default merge(BaseTheme, {
     background: baseColors.gray[1], //Try "#954264",
     text: baseColors.gray[8],
     textGray: "#6e6e6e",
-    primary: "#498046",
-    secondary: "#d5b959",
-    tertiary: "#c45b4a",
+    ...theme,
     accent: baseColors.orange[2],
     highlight: baseColors.orange[5],
     muted: baseColors.gray[2],
@@ -43,7 +46,7 @@ export default merge(BaseTheme, {
         background: "#222",
         text: baseColors.gray[1],
         textGray: "#666",
-        primary: "#498046",
+        primary: theme.primary,
         secondary: baseColors.orange[7],
         accent: baseColors.gray[8],
         highlight: baseColors.orange[5],
@@ -79,14 +82,14 @@ export default merge(BaseTheme, {
     },
     navLinkPrimary: {
       fontFamily: "body",
-      fontWeight: "normal",
+      fontWeight: "bold",
       px: "0.5em",
       py: "0.5em",
     },
     navLinkSecondary: {
       fontFamily: "body",
-      fontWeight: "normal",
-      color: "#d5b959",
+      fontWeight: "bold",
+      color: theme.secondary,
       px: "0.5em",
       py: "0.5em",
     },
@@ -104,19 +107,20 @@ export default merge(BaseTheme, {
       borderStyle: "solid",
       borderRadius: "0.5rem",
       letterSpacing: "normal",
+      borderColor: "transparent"
     },
     navLiPrimary: {
       borderWidth: "2px",
       borderStyle: "solid",
       borderRadius: "0.5rem",
-      background: "#c45b4a",
-      borderColor: "#c45b4a",
+      background: theme.tertiary,
+      borderColor: theme.tertiary,
     },
     navLiSecondary: {
       borderWidth: "2px",
       borderStyle: "solid",
       borderRadius: "0.5rem",
-      borderColor: "#d5b959",
+      borderColor: theme.secondary,
     }
   },
 })
