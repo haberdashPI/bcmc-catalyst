@@ -17,6 +17,9 @@ export default merge(BaseTheme, {
     monospace:
       'Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
   },
+  sizes: {
+    maxContentWidth: "900px", // Sets the container size on larger screens, e.g. tablets and laptops
+  },
   colors: {
     ...tailwind.colors,
     background: baseColors.gray[1], //Try "#954264",
