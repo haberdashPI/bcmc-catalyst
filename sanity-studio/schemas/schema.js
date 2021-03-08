@@ -9,6 +9,7 @@ import blockContent from "./blockContent"
 import excerptBlockContent from "./excerptBlockContent"
 import figure from "./figure"
 import figureWide from "./figureWide"
+import hero from "./hero"
 import siteSettings from "./siteSettings"
 import menuLink from "./menuLink"
 import socialLink from "./socialLink"
@@ -33,6 +34,7 @@ export default createSchema({
     // The following are document types which will appear
     // in the studio.
     blockContent,
+    hero,
     figure,
     figureWide,
     siteSettings,

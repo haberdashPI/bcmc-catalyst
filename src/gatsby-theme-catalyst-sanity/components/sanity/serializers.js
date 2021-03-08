@@ -3,6 +3,7 @@ import { jsx, Styled } from "theme-ui"
 import Figure from "./figure"
 import FigureWide from "gatsby-theme-catalyst-sanity/src/components/sanity/figure-wide"
 import Code from "gatsby-theme-catalyst-sanity/src/components/sanity/code"
+import Hero from "./hero"
 
 const headerId = (id) => {
   return id
@@ -17,6 +18,7 @@ const serializers = {
     code: Code,
     figure: Figure,
     figureWide: FigureWide,
+    hero: Hero,
     block(props) {
       switch (props.node.style) {
         case "h1":
@@ -33,25 +35,25 @@ const serializers = {
           )
         case "h3":
           return (
-            <Styled.h3 id={headerId(props.children)}>
+            <Styled.h3  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
             </Styled.h3>
           )
         case "h4":
           return (
-            <Styled.h4 id={headerId(props.children)}>
+            <Styled.h4  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
             </Styled.h4>
           )
         case "h5":
           return (
-            <Styled.h5 id={headerId(props.children)}>
+            <Styled.h5  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
             </Styled.h5>
           )
         case "h6":
           return (
-            <Styled.h6 id={headerId(props.children)}>
+            <Styled.h6  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
             </Styled.h6>
           )

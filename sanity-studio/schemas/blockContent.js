@@ -82,5 +82,9 @@ export default {
     {
       type: "figureWide",
     },
+    {
+      type: "hero",
+      title: "Hero Section"
+    }
   ],
 }
