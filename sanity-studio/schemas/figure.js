@@ -27,6 +27,18 @@ export default {
       },
     },
     {
+      name: "position",
+      type: "string",
+      title: "Image Position",
+      options: {
+        isHighlighted: true,
+        list: [
+          { title: "Left", value: "left" },
+          { title: "Right", value: "right" }
+        ]
+      }
+    },
+    {
       name: "border",
       type: "string",
       title: "Image Border",
