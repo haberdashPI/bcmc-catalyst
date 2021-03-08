@@ -18,6 +18,10 @@ export default ({ node }) => {
     sanityConfig
   )
 
+  const hashPart = node.asset._ref.replace('image-','').slice(0, 4)
+  const colorNum = parseInt(hashPart, 16) % 3
+  const defaultColor = ["primary", "secondary", "tertiary"][colorNum]
+
   return (
     <figure
       sx={{
@@ -39,7 +43,7 @@ export default ({ node }) => {
           backgroundColor: node.border === "primary" ? "primary" :
             node.border === "secondary" ? "secondary" :
             node.border === "tertiary" ? "tertiary" :
-            "primary",
+            defaultColor,
         }}></div>
         <Img
           sx={{
