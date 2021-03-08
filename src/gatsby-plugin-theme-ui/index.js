@@ -40,10 +40,10 @@ export default merge(BaseTheme, {
     // You can delete dark mode by removing the "modes" object and setting useColorMode to false in gatsby-theme-catalyst-core
     modes: {
       dark: {
-        background: baseColors.gray[9],
+        background: "#222",
         text: baseColors.gray[1],
-        textGray: "#9f9f9f",
-        primary: "#458ad2",
+        textGray: "#666",
+        primary: "#498046",
         secondary: baseColors.orange[7],
         accent: baseColors.gray[8],
         highlight: baseColors.orange[5],
@@ -51,13 +51,13 @@ export default merge(BaseTheme, {
         header: {
           text: baseColors.gray[1],
           textOpen: baseColors.gray[1],
-          background: "#232946",
+          background: "#333",
           backgroundOpen: baseColors.gray[8],
           icons: baseColors.gray[1],
           iconsOpen: baseColors.gray[1],
         },
         footer: {
-          background: "#232946",
+          background: "#444",
           text: baseColors.gray[1],
           links: baseColors.gray[1],
           icons: baseColors.gray[1],
