@@ -74,24 +74,8 @@ export default merge(BaseTheme, {
       fontFamily: "body",
       fontWeight: "normal",
     },
-    navLink: {
-      fontFamily: "body",
-      fontWeight: "normal",
-      px: "0.5em",
-      py: "0.5em",
-    },
-    navLinkPrimary: {
-      fontFamily: "body",
-      fontWeight: "bold",
-      px: "0.5em",
-      py: "0.5em",
-    },
     navLinkSecondary: {
-      fontFamily: "body",
-      fontWeight: "bold",
       color: theme.secondary,
-      px: "0.5em",
-      py: "0.5em",
     },
 
     navLinksDropdown: {
@@ -103,23 +87,13 @@ export default merge(BaseTheme, {
     },
 
     navLi: {
-      borderWidth: "2px",
-      borderStyle: "solid",
-      borderRadius: "0.5rem",
-      letterSpacing: "normal",
       borderColor: "transparent"
     },
     navLiPrimary: {
-      borderWidth: "2px",
-      borderStyle: "solid",
-      borderRadius: "0.5rem",
       background: theme.tertiary,
       borderColor: theme.tertiary,
     },
     navLiSecondary: {
-      borderWidth: "2px",
-      borderStyle: "solid",
-      borderRadius: "0.5rem",
       borderColor: theme.secondary,
     }
   },
