@@ -95,13 +95,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-catalyst-hydrogen`,
-        short_name: `catalyst`,
+        name: `baltimore-community-mediation-center`,
+        short_name: `bcmc`,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#cccccc`,
+        background_color: `#222`,
+        theme_color: `#498046`,
         display: `minimal-ui`,
-        icon: `content/assets/catalyst-site-icon.png`, // This path is relative to the root of the site.
+        icon: `content/assets/logo_white_simple.png`, // This path is relative to the root of the site.
       },
     },
   ],
