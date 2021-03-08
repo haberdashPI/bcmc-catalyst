@@ -4,9 +4,6 @@ import { tailwind, baseColors } from "@theme-ui/preset-tailwind"
 
 export default merge(BaseTheme, {
   // Modifications to the base theme go here. This is an example changing colors and using variants to change your navigation links. Uncomment the code below to see what happens.
-  fontVariants: {
-    header: "small-caps"
-  },
   fonts: {
     ...tailwind.fonts,
     body:
@@ -20,8 +17,9 @@ export default merge(BaseTheme, {
     background: baseColors.gray[1], //Try "#954264",
     text: baseColors.gray[8],
     textGray: "#6e6e6e",
-    primary: baseColors.blue[7],
-    secondary: baseColors.orange[7],
+    primary: "#498046",
+    secondary: "#d5b959",
+    tertiary: "#c45b4a",
     accent: baseColors.orange[2],
     highlight: baseColors.orange[5],
     muted: baseColors.gray[2],
@@ -34,10 +32,10 @@ export default merge(BaseTheme, {
       iconsOpen: baseColors.gray[8],
     },
     footer: {
-      background: baseColors.gray[2],
-      text: baseColors.gray[8],
-      links: baseColors.gray[8],
-      icons: baseColors.gray[8],
+      background: "#444",
+      text: "#eee",
+      links: "#eee",
+      icons: "#eee"
     },
     // You can delete dark mode by removing the "modes" object and setting useColorMode to false in gatsby-theme-catalyst-core
     modes: {
@@ -69,7 +67,17 @@ export default merge(BaseTheme, {
   },
   variants: {
     siteTitle: {
-      fontSize: [3, 4, null, 5, null],
+      fontSize: [1, 2, null, 3, null],
+      fontFamily: "body",
+      fontWeight: "normal",
     },
+    navLink: {
+      fontFamily: "body",
+      fontWeight: "normal",
+    },
+    navLinksDropdown: {
+      fontFamily: "body",
+      fontWeight: "normal",
+    }
   },
 })

@@ -88,7 +88,7 @@ module.exports = {
         sanityProjectListTitle: "Services",
         // sanityDisplayProjectListTitle: true
         // useSanityTheme: false // Experimental right now
-        sanityProjectId: "d4eml44h",
+        sanityProjectId: "q16mco74",
       },
     },
 

@@ -26,6 +26,21 @@ export default {
         isHighlighted: true,
       },
     },
+    {
+      name: "border",
+      type: "string",
+      title: "Image Border",
+      options: {
+        isHighlighted: true,
+        list: [
+          { title: "Normal", value: "normal" },
+          { title: "None", value: "none" },
+          { title: "Primary", value: "primary" },
+          { title: "Secondary", value: "secondary" },
+          { title: "Tertiary", value: "tertiary" }
+        ]
+      }
+    }
   ],
   preview: {
     select: {
