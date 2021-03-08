@@ -74,10 +74,49 @@ export default merge(BaseTheme, {
     navLink: {
       fontFamily: "body",
       fontWeight: "normal",
+      px: "0.5em",
+      py: "0.5em",
     },
+    navLinkPrimary: {
+      fontFamily: "body",
+      fontWeight: "normal",
+      px: "0.5em",
+      py: "0.5em",
+    },
+    navLinkSecondary: {
+      fontFamily: "body",
+      fontWeight: "normal",
+      color: "#d5b959",
+      px: "0.5em",
+      py: "0.5em",
+    },
+
     navLinksDropdown: {
       fontFamily: "body",
       fontWeight: "normal",
+      letterSpacing: "normal",
+      px: "0.5em",
+      py: "1px",
+    },
+
+    navLi: {
+      borderWidth: "2px",
+      borderStyle: "solid",
+      borderRadius: "0.5rem",
+      letterSpacing: "normal",
+    },
+    navLiPrimary: {
+      borderWidth: "2px",
+      borderStyle: "solid",
+      borderRadius: "0.5rem",
+      background: "#c45b4a",
+      borderColor: "#c45b4a",
+    },
+    navLiSecondary: {
+      borderWidth: "2px",
+      borderStyle: "solid",
+      borderRadius: "0.5rem",
+      borderColor: "#d5b959",
     }
   },
 })
