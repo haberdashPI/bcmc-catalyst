@@ -18,16 +18,21 @@ export default ({ node }) => {
     sanityConfig
   )
 
-  const hashPart = node.asset._ref.replace('image-','').slice(0, 4)
-  const colorNum = parseInt(hashPart, 16) % 3
+  const colorHash = node.asset._ref.replace('image-','').slice(0, 4)
+  const colorNum = parseInt(colorHash, 16) % 3
   const defaultColor = ["primary", "secondary", "tertiary"][colorNum]
+
+  const posHash = node.asset._ref.replace('image-','').slice(4, 8)
+  const positionNum = parseInt(posHash, 16) % 2
+  const defaultPosition = ["left", "right"][positionNum]
+  const position = node.position ? node.position : defaultPosition
 
   return (
     <figure
       sx={{
-        marginLeft: node.position === "right" ? "2.5em": "0em",
-        marginRight: node.position === "right" ? "0em": "1em",
-        float: node.position === "right" ? "right" : "left",
+        marginLeft: position === "right" ? "2.5em": "0em",
+        marginRight: position === "right" ? "0em": "1em",
+        float: position === "right" ? "right" : "left",
         width: "50%",
         position: "relative",
       }}
@@ -37,8 +42,8 @@ export default ({ node }) => {
           top: "0%",
           left: "-5%",
           width: "90%",
-          height: "85%",
-          transform: node.position === "right" ? "rotate(-5deg)" : "rotate(5deg)",
+          height: node.caption ? "85%" : "100%",
+          transform: position === "right" ? "rotate(-5deg)" : "rotate(5deg)",
           zIndex: 0,
           backgroundColor: node.border === "primary" ? "primary" :
             node.border === "secondary" ? "secondary" :
@@ -50,8 +55,8 @@ export default ({ node }) => {
             minHeight: ["300px", "auto", null, null, null],
             variant: "variants.sanityFigure",
             ...(node.border === "none" ? {} : {
-              paddingLeft: node.position === "right" ? "0%" : "5%",
-              paddingRight: node.position === "right" ? "5%" : "0%",
+              paddingLeft: position === "right" ? "0%" : "5%",
+              paddingRight: position === "right" ? "5%" : "0%",
               width: "80%",
               height: "80%",
               zIndex: 1
