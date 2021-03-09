@@ -30,7 +30,7 @@ export default ({ node }) => {
         marginRight: "-50vw",
         left: "50%",
         right: "50%",
-        background: "#fff",
+        background: "#000",
         overflow: "hidden",
     }}>
         <div sx={{
@@ -54,7 +54,7 @@ export default ({ node }) => {
                 right: "50%",
                 zIndex: 1,
                 height: "100%",
-                background: "linear-gradient(90deg, rgba(0,0,0,1) 10%, rgba(50,50,50,0.7) 40%, rgba(50,50,50,0.7) 60%, rgba(0,0,0,1) 90%);"
+                background: "radial-gradient(circle at 50%, rgba(50,50,50,0.5), rgba(50,50,50,1) 400px)"
         }}>
         </div>
         <div
