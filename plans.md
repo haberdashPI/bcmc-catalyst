@@ -3,12 +3,13 @@ steps:
 Essential for meeting:
 
 1. create hero section
-    - start with a single image
+    + start with a single image
     - then add the react slider section
 2. Create the homepage content
+    - create a field for inserting buttons
 3. Create service page content
 4. Add circle/square feature to images
-5. Make it possible to create grids of images
+5. Make it possible to create grids of images/text/buttons
 6. Create the 'about' section
 
 Next steps:
