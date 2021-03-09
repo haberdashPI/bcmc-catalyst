@@ -15,7 +15,7 @@ const SiteHeader = () => {
   return (
     <header
       sx={{
-        boxShadow: "0px 5px 2px #444",
+        boxShadow: "0px 5px 2px #222",
         display: "grid",
         position: useStickyHeader ? "sticky" : "static",
         top: 0,

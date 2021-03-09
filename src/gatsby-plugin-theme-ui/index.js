@@ -30,7 +30,7 @@ export default merge(BaseTheme, {
     highlight: baseColors.orange[5],
     muted: baseColors.gray[2],
     header: {
-      background: "#222",
+      background: "#333",
       backgroundOpen: baseColors.blue[2],
       text: "#eee",
       textOpen: baseColors.gray[8],
@@ -72,6 +72,9 @@ export default merge(BaseTheme, {
     },
   },
   variants: {
+    main: {
+      my: 0
+    },
     siteTitle: {
       fontSize: [1, 2, null, 3, null],
       fontFamily: "body",
@@ -98,6 +101,13 @@ export default merge(BaseTheme, {
     },
     navLiSecondary: {
       borderColor: theme.secondary,
+    },
+    heroTitle: {
+      fontFamily: "body",
+      color: "#eee"
+    },
+    heroContent: {
+      color: "#eee"
     }
   },
 })

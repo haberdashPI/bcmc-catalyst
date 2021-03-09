@@ -12,7 +12,7 @@ const PageTemplate = ({ data }) => {
     <SanityThemeProvider>
       <Layout>
         <SEO title={page.title} />
-        <Styled.h1 sx={{fontVariant: "small-caps"}}>{page.title}</Styled.h1>
+        {/* <Styled.h1 sx={{fontVariant: "small-caps"}}>{page.title}</Styled.h1> */}
         <SanityContent data={page._rawBody} />
       </Layout>
     </SanityThemeProvider>
