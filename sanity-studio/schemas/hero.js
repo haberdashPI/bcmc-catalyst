@@ -22,4 +22,17 @@ export default {
             of: [{type: "image"}]
         }
     ],
+    preview: {
+        select: {
+          title: 'title',
+          images: 'images',
+        },
+        prepare(value) {
+          const images = (value.images || [])
+          return {
+            title: value.title,
+            media: images[0]
+          }
+        }
+      }
 }

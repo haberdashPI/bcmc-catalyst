@@ -78,9 +78,11 @@ export default {
     },
     {
       type: "figure",
+      title: "Figure"
     },
     {
       type: "figureWide",
+      title: "Wide Figure"
     },
     {
       type: "hero",
