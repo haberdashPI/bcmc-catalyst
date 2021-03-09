@@ -32,6 +32,7 @@ export default ({ node }) => {
         right: "50%",
         background: "#000",
         overflow: "hidden",
+        marginBottom: "3rem",
     }}>
         <div sx={{
                 maxWidth: "900px",

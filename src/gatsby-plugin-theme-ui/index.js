@@ -31,11 +31,11 @@ export default merge(BaseTheme, {
     muted: baseColors.gray[2],
     header: {
       background: "#333",
-      backgroundOpen: baseColors.blue[2],
+      backgroundOpen: "#333",
       text: "#eee",
-      textOpen: baseColors.gray[8],
+      textOpen: "#eee",
       icons: "#eee",
-      iconsOpen: baseColors.gray[8],
+      iconsOpen: "#eee"
     },
     footer: {
       background: "#444",
@@ -50,7 +50,7 @@ export default merge(BaseTheme, {
         text: baseColors.gray[1],
         textGray: "#666",
         primary: theme.primary,
-        secondary: baseColors.orange[7],
+        secondary: theme.secondary,
         accent: baseColors.gray[8],
         highlight: baseColors.orange[5],
         muted: baseColors.gray[8],
@@ -103,6 +103,7 @@ export default merge(BaseTheme, {
       borderColor: theme.secondary,
     },
     heroTitle: {
+      fontSize: [4, 5, null, 6, null],
       fontFamily: "body",
       color: "#eee"
     },
