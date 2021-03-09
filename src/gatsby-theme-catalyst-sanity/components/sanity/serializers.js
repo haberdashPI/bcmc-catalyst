@@ -4,6 +4,7 @@ import Figure from "./figure"
 import FigureWide from "gatsby-theme-catalyst-sanity/src/components/sanity/figure-wide"
 import Code from "gatsby-theme-catalyst-sanity/src/components/sanity/code"
 import Hero from "./hero"
+import ButtonRow from "./buttonRow.js"
 
 const headerId = (id) => {
   return id
@@ -19,6 +20,7 @@ const serializers = {
     figure: Figure,
     figureWide: FigureWide,
     hero: Hero,
+    buttonRow: ButtonRow,
     block(props) {
       switch (props.node.style) {
         case "h1":

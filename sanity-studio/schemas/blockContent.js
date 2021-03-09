@@ -85,6 +85,10 @@ export default {
     {
       type: "hero",
       title: "Hero Section"
+    },
+    {
+      type: "buttonRow",
+      title: "Buttons",
     }
   ],
 }

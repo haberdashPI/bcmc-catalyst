@@ -10,6 +10,9 @@ import excerptBlockContent from "./excerptBlockContent"
 import figure from "./figure"
 import figureWide from "./figureWide"
 import hero from "./hero"
+import buttonRow from "./buttonRow"
+import pageButton from "./pageButton"
+import urlButton from "./urlButton"
 import siteSettings from "./siteSettings"
 import menuLink from "./menuLink"
 import socialLink from "./socialLink"
@@ -35,6 +38,9 @@ export default createSchema({
     // in the studio.
     blockContent,
     hero,
+    buttonRow,
+    pageButton,
+    urlButton,
     figure,
     figureWide,
     siteSettings,
