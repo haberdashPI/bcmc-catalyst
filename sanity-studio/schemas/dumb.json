@@ -1,0 +1,1299 @@
+{
+    "data": {
+      "allSanityPage": {
+        "nodes": [
+          {
+            "title": "Page 1",
+            "_rawBody": [
+              {
+                "_key": "8796afc11ace",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "8796afc11ace0",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel diam vitae metus egestas varius in non mi. "
+                  },
+                  {
+                    "_key": "8796afc11ace1",
+                    "_type": "span",
+                    "marks": [
+                      "6076fb732d34"
+                    ],
+                    "text": "Aliquam sed vulputate"
+                  },
+                  {
+                    "_key": "8796afc11ace2",
+                    "_type": "span",
+                    "marks": [],
+                    "text": " ligula, ut eleifend diam. "
+                  },
+                  {
+                    "_key": "8796afc11ace3",
+                    "_type": "span",
+                    "marks": [
+                      "strong"
+                    ],
+                    "text": "Fusce fringilla"
+                  },
+                  {
+                    "_key": "8796afc11ace4",
+                    "_type": "span",
+                    "marks": [],
+                    "text": " in urna ut faucibus. Vestibulum pulvinar aliquam rhoncus. "
+                  }
+                ],
+                "markDefs": [
+                  {
+                    "_key": "6076fb732d34",
+                    "_type": "link",
+                    "blank": true,
+                    "href": "https://www.google.com"
+                  }
+                ],
+                "style": "normal"
+              },
+              {
+                "_key": "dadf35d2abd9",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "dadf35d2abd90",
+                    "_type": "span",
+                    "marks": [
+                      "code"
+                    ],
+                    "text": "<div>Code example</div>"
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "27767ec14476",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "27767ec144760",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Etiam id leo sit amet sapien "
+                  },
+                  {
+                    "_key": "27767ec144761",
+                    "_type": "span",
+                    "marks": [
+                      "em"
+                    ],
+                    "text": "faucibus vulputate"
+                  },
+                  {
+                    "_key": "27767ec144762",
+                    "_type": "span",
+                    "marks": [],
+                    "text": " at quis lacus. Sed tincidunt, elit in vulputate efficitur, dui erat varius magna, sed laoreet dolor arcu quis augue. Suspendisse at augue elementum, dapibus leo eget, aliquam diam. "
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "c1a0e30a8742",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "c1a0e30a87420",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Coffee"
+                  }
+                ],
+                "level": 1,
+                "listItem": "bullet",
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "d6bb7db16a7c",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "d6bb7db16a7c0",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Cheese"
+                  }
+                ],
+                "level": 1,
+                "listItem": "bullet",
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "6120715ff5cc",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "6120715ff5cc0",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Cake"
+                  }
+                ],
+                "level": 1,
+                "listItem": "bullet",
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "47d4e87f72d9",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "47d4e87f72d90",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Nulla hendrerit est quis elit porta, sed rutrum nibh auctor. Ut sed convallis erat. Maecenas at metus id ligula accumsan aliquam sit amet ut eros. Maecenas lacinia tellus sed tellus consequat, sed commodo metus aliquam."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "b4283e5ce954",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "b4283e5ce9540",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Suspendisse vel nibh eu felis ullamcorper eleifend nec vel ipsum. Duis elementum, elit a tincidunt vehicula, arcu metus molestie neque, ut efficitur dui odio sed risus. Duis pretium nunc vel risus dapibus, sed varius neque tristique. Mauris fringilla tempus purus a laoreet. Morbi mollis, nibh id rhoncus porta, metus quam commodo tellus, eget tempor ligula sem et lacus. "
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "a010a32cf1cc",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "a010a32cf1cc0",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Number one"
+                  }
+                ],
+                "level": 1,
+                "listItem": "number",
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "3d050714d954",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "3d050714d9540",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Number two"
+                  }
+                ],
+                "level": 1,
+                "listItem": "number",
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "18779b87da74",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "18779b87da740",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Number three is a much longer sentence to check wrapping and other things. We will see how this longer sentence looks. It certainly doesn't make much sense."
+                  }
+                ],
+                "level": 1,
+                "listItem": "number",
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "55c6c5c9a700",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "55c6c5c9a7000",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Cras et venenatis quam, non sollicitudin lacus. Phasellus varius eget augue et pharetra. Nunc quam sem, consectetur mattis porttitor tristique, commodo varius elit. Suspendisse ullamcorper faucibus posuere. Cras mattis rhoncus metus eget tincidunt. Suspendisse porttitor efficitur malesuada. Proin vel sollicitudin justo. Morbi aliquet, mauris mattis commodo varius, turpis odio congue lorem, ut ultrices metus nisl ac nunc. Fusce consequat imperdiet elit, a rhoncus dui ornare quis."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "9c18fcc1e4a5",
+                "_type": "figureWide",
+                "alt": "Art",
+                "asset": {
+                  "_id": "image-d83c56fa38349f29d68b68dfa86fe5957a144555-1440x965-jpg",
+                  "_type": "sanity.imageAsset",
+                  "_rev": "Bo3H2prJdZUj6cv1dbro15",
+                  "_createdAt": "2021-03-07T09:17:35Z",
+                  "_updatedAt": "2021-03-07T09:17:35Z",
+                  "assetId": "d83c56fa38349f29d68b68dfa86fe5957a144555",
+                  "extension": "jpg",
+                  "metadata": {
+                    "_type": "sanity.imageMetadata",
+                    "dimensions": {
+                      "_type": "sanity.imageDimensions",
+                      "aspectRatio": 1.4922279792746114,
+                      "height": 965,
+                      "width": 1440
+                    },
+                    "hasAlpha": false,
+                    "isOpaque": true,
+                    "lqip": "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAANABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMFBAf/xAAiEAABAwQCAgMAAAAAAAAAAAABAgMEAAURIQZBEiITMWH/xAAWAQEBAQAAAAAAAAAAAAAAAAAEAQL/xAAfEQACAgIBBQAAAAAAAAAAAAABAgMRACESEzFBQnH/2gAMAwEAAhEDEQA/AOdcTt6C09MdQXPFvKUjqsNwRInB2UmN8YQrxS2Bs/pqS1e5NqENUY+rjXsknR3To19kmaHSAQ4cFHW6XDL1IlAPtv5gpYRFO5ZbHHW/NZDmvlEhSXEkK7BH1RSOUSFLvLxwBjAoqSWrlbzUahlDV3z/2Q==",
+                    "palette": {
+                      "_type": "sanity.imagePalette",
+                      "darkMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#244546",
+                        "foreground": "#fff",
+                        "population": 1.89,
+                        "title": "#fff"
+                      },
+                      "darkVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#0a77b8",
+                        "foreground": "#fff",
+                        "population": 6.29,
+                        "title": "#fff"
+                      },
+                      "dominant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#0a77b8",
+                        "foreground": "#fff",
+                        "population": 6.29,
+                        "title": "#fff"
+                      },
+                      "lightMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#99afbb",
+                        "foreground": "#000",
+                        "population": 0.77,
+                        "title": "#fff"
+                      },
+                      "lightVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#6fb9d1",
+                        "foreground": "#000",
+                        "population": 0.4,
+                        "title": "#fff"
+                      },
+                      "muted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#6b9094",
+                        "foreground": "#fff",
+                        "population": 0.63,
+                        "title": "#fff"
+                      },
+                      "vibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#f14411",
+                        "foreground": "#fff",
+                        "population": 2.31,
+                        "title": "#fff"
+                      }
+                    }
+                  },
+                  "mimeType": "image/jpeg",
+                  "originalFilename": "art-2.jpg",
+                  "path": "images/q16mco74/production/d83c56fa38349f29d68b68dfa86fe5957a144555-1440x965.jpg",
+                  "sha1hash": "d83c56fa38349f29d68b68dfa86fe5957a144555",
+                  "size": 637009,
+                  "uploadId": "MYR2vH44r7LsRJZK5rsARhP9XvLcevbU",
+                  "url": "https://cdn.sanity.io/images/q16mco74/production/d83c56fa38349f29d68b68dfa86fe5957a144555-1440x965.jpg",
+                  "id": "image-d83c56fa38349f29d68b68dfa86fe5957a144555-1440x965-jpg",
+                  "children": [],
+                  "internal": {
+                    "type": "SanityImageAsset",
+                    "contentDigest": "11b103a02bb83055c3f867232aa28d1c",
+                    "counter": 101,
+                    "owner": "gatsby-source-sanity"
+                  },
+                  "parent": null
+                },
+                "caption": "Wide image"
+              },
+              {
+                "_key": "9833748313dd",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "9833748313dd0",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Ut facilisis dolor at ex tincidunt auctor. Pellentesque maximus tincidunt urna, quis sollicitudin urna. Etiam sit amet ex dignissim, ornare orci nec, mollis urna. Sed imperdiet neque mollis risus ullamcorper varius. Donec id eleifend odio. Mauris tortor purus, rutrum nec pellentesque sit amet, volutpat non risus. Donec blandit risus sollicitudin urna porttitor consectetur. Donec rhoncus dui at ante tristique, eu pretium turpis fringilla. Cras suscipit augue et velit suscipit rhoncus et a nulla. "
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "e35f39308670",
+                "_type": "figure",
+                "alt": "Art",
+                "asset": {
+                  "_id": "image-8f4a0f2ff82c9328006381826a5a0e8c2d61c67e-1440x960-jpg",
+                  "_type": "sanity.imageAsset",
+                  "_rev": "Bo3H2prJdZUj6cv1dbrnrV",
+                  "_createdAt": "2021-03-07T09:17:34Z",
+                  "_updatedAt": "2021-03-07T09:17:34Z",
+                  "assetId": "8f4a0f2ff82c9328006381826a5a0e8c2d61c67e",
+                  "extension": "jpg",
+                  "metadata": {
+                    "_type": "sanity.imageMetadata",
+                    "dimensions": {
+                      "_type": "sanity.imageDimensions",
+                      "aspectRatio": 1.5,
+                      "height": 960,
+                      "width": 1440
+                    },
+                    "hasAlpha": false,
+                    "isOpaque": true,
+                    "lqip": "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAANABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAUGA//EACMQAAICAgEEAgMAAAAAAAAAAAIDAQQABREGEiFBMWEUIlH/xAAWAQEBAQAAAAAAAAAAAAAAAAAFAwb/xAAjEQABAwMDBQEAAAAAAAAAAAABAgMhABExBAVBEhNxgZGh/9oADAMBAAIRAxEAPwDWdhXr6ummrKH3J5Jn6cxx7iJ+sT7SpSta1pMMnCAmxBwPEwfscU9KX3afbfgr7XA0iXBMjns5+ZjLPX9OLpVDrlYNwPdBlJj5ifr+YTqNXpdue7gNj7kD8rVo267C23yOrMYB4scxHM3N6SVa+6bSqnR2CVIlQ8ATIiYn34wyJ642zNF1JZoVlAal8TEn8+cMsgpfSHUEgKkeDQaSy0AhwEqGTYSftf/Z",
+                    "palette": {
+                      "_type": "sanity.imagePalette",
+                      "darkMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#4a2529",
+                        "foreground": "#fff",
+                        "population": 1.75,
+                        "title": "#fff"
+                      },
+                      "darkVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#138455",
+                        "foreground": "#fff",
+                        "population": 4.55,
+                        "title": "#fff"
+                      },
+                      "dominant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#f7042b",
+                        "foreground": "#fff",
+                        "population": 6.93,
+                        "title": "#fff"
+                      },
+                      "lightMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#c49782",
+                        "foreground": "#000",
+                        "population": 0.53,
+                        "title": "#fff"
+                      },
+                      "lightVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#f786a5",
+                        "foreground": "#000",
+                        "population": 2.06,
+                        "title": "#fff"
+                      },
+                      "muted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#ab9d54",
+                        "foreground": "#000",
+                        "population": 2.8,
+                        "title": "#fff"
+                      },
+                      "vibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#f7042b",
+                        "foreground": "#fff",
+                        "population": 6.93,
+                        "title": "#fff"
+                      }
+                    }
+                  },
+                  "mimeType": "image/jpeg",
+                  "originalFilename": "art-3.jpg",
+                  "path": "images/q16mco74/production/8f4a0f2ff82c9328006381826a5a0e8c2d61c67e-1440x960.jpg",
+                  "sha1hash": "8f4a0f2ff82c9328006381826a5a0e8c2d61c67e",
+                  "size": 241765,
+                  "uploadId": "CMdrghVUTb2s3b5EUD1apSx7uHRcR1Zj",
+                  "url": "https://cdn.sanity.io/images/q16mco74/production/8f4a0f2ff82c9328006381826a5a0e8c2d61c67e-1440x960.jpg",
+                  "id": "image-8f4a0f2ff82c9328006381826a5a0e8c2d61c67e-1440x960-jpg",
+                  "children": [],
+                  "internal": {
+                    "type": "SanityImageAsset",
+                    "contentDigest": "55b287b21b2713a1c36e22be8425e077",
+                    "counter": 99,
+                    "owner": "gatsby-source-sanity"
+                  },
+                  "parent": null
+                },
+                "caption": "Normal image"
+              },
+              {
+                "_key": "9cb9e2569c3a",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "9cb9e2569c3a0",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Phasellus venenatis risus ac erat condimentum, ut varius sapien mollis. Etiam accumsan bibendum quam sed mattis. Donec aliquet libero ut tristique tempor. Fusce massa mauris, fringilla eget hendrerit a, ultrices id nisi. Integer pellentesque, tortor at pretium efficitur, dui urna semper lacus, ac imperdiet eros diam eget sem."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ]
+          },
+          {
+            "title": "Home",
+            "_rawBody": [
+              {
+                "_key": "52534ad79fc4",
+                "_type": "hero",
+                "content": "Baltimore Community Mediation Center teaches and uses conflict resolution skills to provide a framework for people to have difficult conversations and make plans about topics that are important to them.",
+                "images": [
+                  {
+                    "_key": "b5cfd95dcd65",
+                    "_type": "image",
+                    "asset": {
+                      "_id": "image-e45c37e3afb01821d9d4cd57a17fd3406f087e38-1920x1281-jpg",
+                      "_type": "sanity.imageAsset",
+                      "_rev": "6Wczi32drvf6bsRTUIPTmN",
+                      "_createdAt": "2021-03-08T23:54:47Z",
+                      "_updatedAt": "2021-03-08T23:54:47Z",
+                      "assetId": "e45c37e3afb01821d9d4cd57a17fd3406f087e38",
+                      "extension": "jpg",
+                      "metadata": {
+                        "_type": "sanity.imageMetadata",
+                        "dimensions": {
+                          "_type": "sanity.imageDimensions",
+                          "aspectRatio": 1.4988290398126465,
+                          "height": 1281,
+                          "width": 1920
+                        },
+                        "hasAlpha": false,
+                        "isOpaque": true,
+                        "lqip": "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAANABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAYHBf/EACMQAAIBAwMEAwAAAAAAAAAAAAECAwAEBQYREgcTIUExYYH/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AVOsE/e6j5WNVEjMygD89UuXCpa6rxEkQMMUZQyAjbf7pp1nh4sHlWn7kl1cPxQSSnyN/dZ+ou7M1nHcSCQKQEPAAqKCp6ozAbJK0Dh42iUqwPg0VIsxnLvG3YtIm5pGgALfNFB//2Q==",
+                        "palette": {
+                          "_type": "sanity.imagePalette",
+                          "darkMuted": {
+                            "_type": "sanity.imagePaletteSwatch",
+                            "background": "#444444",
+                            "foreground": "#fff",
+                            "population": 4.16,
+                            "title": "#fff"
+                          },
+                          "darkVibrant": {
+                            "_type": "sanity.imagePaletteSwatch",
+                            "background": "#424242",
+                            "foreground": "#fff",
+                            "population": 0,
+                            "title": "#fff"
+                          },
+                          "dominant": {
+                            "_type": "sanity.imagePaletteSwatch",
+                            "background": "#cbcbcb",
+                            "foreground": "#000",
+                            "population": 9.93,
+                            "title": "#000"
+                          },
+                          "lightMuted": {
+                            "_type": "sanity.imagePaletteSwatch",
+                            "background": "#cbcbcb",
+                            "foreground": "#000",
+                            "population": 9.93,
+                            "title": "#000"
+                          },
+                          "lightVibrant": {
+                            "_type": "sanity.imagePaletteSwatch",
+                            "background": "#bcbcbc",
+                            "foreground": "#000",
+                            "population": 0,
+                            "title": "#fff"
+                          },
+                          "muted": {
+                            "_type": "sanity.imagePaletteSwatch",
+                            "background": "#7e7e7e",
+                            "foreground": "#fff",
+                            "population": 8.47,
+                            "title": "#fff"
+                          },
+                          "vibrant": {
+                            "_type": "sanity.imagePaletteSwatch",
+                            "background": "#7f7f7f",
+                            "foreground": "#fff",
+                            "population": 0,
+                            "title": "#fff"
+                          }
+                        }
+                      },
+                      "mimeType": "image/jpeg",
+                      "originalFilename": "bw-9.jpg",
+                      "path": "images/q16mco74/production/e45c37e3afb01821d9d4cd57a17fd3406f087e38-1920x1281.jpg",
+                      "sha1hash": "e45c37e3afb01821d9d4cd57a17fd3406f087e38",
+                      "size": 328773,
+                      "uploadId": "jF7jRjYfIlS5K0QCaH1K5fNH5EnqoiIT",
+                      "url": "https://cdn.sanity.io/images/q16mco74/production/e45c37e3afb01821d9d4cd57a17fd3406f087e38-1920x1281.jpg",
+                      "id": "image-e45c37e3afb01821d9d4cd57a17fd3406f087e38-1920x1281-jpg",
+                      "children": [],
+                      "internal": {
+                        "type": "SanityImageAsset",
+                        "contentDigest": "515835854da5091e1125b42ed1b419fa",
+                        "counter": 102,
+                        "owner": "gatsby-source-sanity"
+                      },
+                      "parent": null
+                    }
+                  }
+                ],
+                "title": "Real Peacemakers Serving the Baltimore Community"
+              },
+              {
+                "_key": "84ed93644c89",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "56c083c04c50",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "We provide a variety of services to Baltimore City organizations and residents. Some services are grant-supported and free to the community while some are offered on a sliding scale. All services have the ability to transform lives and bring power back to individuals."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "d0cbad2321bc",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "479ff9b845e0",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Mediation"
+                  }
+                ],
+                "markDefs": [],
+                "style": "h2"
+              },
+              {
+                "_key": "d3d1c1d73137",
+                "_type": "figure",
+                "alt": "Person standing at white board in front of three people at a table",
+                "asset": {
+                  "_id": "image-5893e3e4aaa250792af6623e8bae1205f2ea1b16-1920x1281-jpg",
+                  "_type": "sanity.imageAsset",
+                  "_rev": "6Wczi32drvf6bsRTUIQn1f",
+                  "_createdAt": "2021-03-09T00:02:28Z",
+                  "_updatedAt": "2021-03-09T00:02:28Z",
+                  "assetId": "5893e3e4aaa250792af6623e8bae1205f2ea1b16",
+                  "extension": "jpg",
+                  "metadata": {
+                    "_type": "sanity.imageMetadata",
+                    "dimensions": {
+                      "_type": "sanity.imageDimensions",
+                      "aspectRatio": 1.4988290398126465,
+                      "height": 1281,
+                      "width": 1920
+                    },
+                    "hasAlpha": false,
+                    "isOpaque": true,
+                    "lqip": "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAANABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAYHBP/EACMQAAEEAgEDBQAAAAAAAAAAAAECAwQFABEhBhJRExUjMWH/xAAWAQEBAQAAAAAAAAAAAAAAAAADAAL/xAAZEQEAAwEBAAAAAAAAAAAAAAABAAIDIRH/2gAMAwEAAhEDEQA/AJbTWb1n1BFnJPe9HI7m2k8lP55xwhuoETqB27hEvSBqK46kfHv634yMVUmRCll6E8th4DhaDzmiTZT3WJHrTHnAVbPerezg1yC3JNueysxrWiNfCRJWwJDbIQ5pGgSCecMRKWKz7c0pxAcUobKlYZhQYxmpP//Z",
+                    "palette": {
+                      "_type": "sanity.imagePalette",
+                      "darkMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#463c2f",
+                        "foreground": "#fff",
+                        "population": 6.64,
+                        "title": "#fff"
+                      },
+                      "darkVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#6f4715",
+                        "foreground": "#fff",
+                        "population": 0.3,
+                        "title": "#fff"
+                      },
+                      "dominant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#cdd0c5",
+                        "foreground": "#000",
+                        "population": 6.66,
+                        "title": "#000"
+                      },
+                      "lightMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#cdd0c5",
+                        "foreground": "#000",
+                        "population": 6.66,
+                        "title": "#000"
+                      },
+                      "lightVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#efd5ce",
+                        "foreground": "#000",
+                        "population": 0.29,
+                        "title": "#000"
+                      },
+                      "muted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#8d9a66",
+                        "foreground": "#fff",
+                        "population": 2.91,
+                        "title": "#fff"
+                      },
+                      "vibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#cb9631",
+                        "foreground": "#000",
+                        "population": 1.05,
+                        "title": "#fff"
+                      }
+                    }
+                  },
+                  "mimeType": "image/jpeg",
+                  "originalFilename": "img9905.jpg",
+                  "path": "images/q16mco74/production/5893e3e4aaa250792af6623e8bae1205f2ea1b16-1920x1281.jpg",
+                  "sha1hash": "5893e3e4aaa250792af6623e8bae1205f2ea1b16",
+                  "size": 1354901,
+                  "uploadId": "JJUOacxFIzGlXhwHNFr4uGBnd5czyRBY",
+                  "url": "https://cdn.sanity.io/images/q16mco74/production/5893e3e4aaa250792af6623e8bae1205f2ea1b16-1920x1281.jpg",
+                  "id": "image-5893e3e4aaa250792af6623e8bae1205f2ea1b16-1920x1281-jpg",
+                  "children": [],
+                  "internal": {
+                    "type": "SanityImageAsset",
+                    "contentDigest": "a095dea2994ea3ec82defc1ead48d6d2",
+                    "counter": 94,
+                    "owner": "gatsby-source-sanity"
+                  },
+                  "parent": null
+                }
+              },
+              {
+                "_key": "8128a95c9823",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "a93e44ca5863",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Holding a non-judgmental, confidential and voluntary framework for people to have difficult conversations is the heart of our work. Mediators listen, ask questions and clarify what’s important to each participant. We don’t offer advice and we don’t take sides. Every participant makes their own decisions in mediation. Mediation is appropriate for every stage of conflict. It is never too late – or too early – to mediate."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "ef6763d6de06",
+                "_type": "buttonRow",
+                "buttons": [
+                  {
+                    "_key": "650053c0e4df",
+                    "_type": "pageButton",
+                    "link": {
+                      "_id": "3aed6d42-e07d-4af4-997d-94ac6123bbb8",
+                      "_type": "page",
+                      "_rev": "Bo3H2prJdZUj6cv1dbro2g",
+                      "_createdAt": "2020-04-06T22:03:43Z",
+                      "_updatedAt": "2021-03-07T09:17:35Z",
+                      "body": [
+                        {
+                          "_key": "8796afc11ace",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "8796afc11ace0",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel diam vitae metus egestas varius in non mi. "
+                            },
+                            {
+                              "_key": "8796afc11ace1",
+                              "_type": "span",
+                              "marks": [
+                                "6076fb732d34"
+                              ],
+                              "text": "Aliquam sed vulputate"
+                            },
+                            {
+                              "_key": "8796afc11ace2",
+                              "_type": "span",
+                              "marks": [],
+                              "text": " ligula, ut eleifend diam. "
+                            },
+                            {
+                              "_key": "8796afc11ace3",
+                              "_type": "span",
+                              "marks": [
+                                "strong"
+                              ],
+                              "text": "Fusce fringilla"
+                            },
+                            {
+                              "_key": "8796afc11ace4",
+                              "_type": "span",
+                              "marks": [],
+                              "text": " in urna ut faucibus. Vestibulum pulvinar aliquam rhoncus. "
+                            }
+                          ],
+                          "markDefs": [
+                            {
+                              "_key": "6076fb732d34",
+                              "_type": "link",
+                              "blank": true,
+                              "href": "https://www.google.com"
+                            }
+                          ],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "dadf35d2abd9",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "dadf35d2abd90",
+                              "_type": "span",
+                              "marks": [
+                                "code"
+                              ],
+                              "text": "<div>Code example</div>"
+                            }
+                          ],
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "27767ec14476",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "27767ec144760",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Etiam id leo sit amet sapien "
+                            },
+                            {
+                              "_key": "27767ec144761",
+                              "_type": "span",
+                              "marks": [
+                                "em"
+                              ],
+                              "text": "faucibus vulputate"
+                            },
+                            {
+                              "_key": "27767ec144762",
+                              "_type": "span",
+                              "marks": [],
+                              "text": " at quis lacus. Sed tincidunt, elit in vulputate efficitur, dui erat varius magna, sed laoreet dolor arcu quis augue. Suspendisse at augue elementum, dapibus leo eget, aliquam diam. "
+                            }
+                          ],
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "c1a0e30a8742",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "c1a0e30a87420",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Coffee"
+                            }
+                          ],
+                          "level": 1,
+                          "listItem": "bullet",
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "d6bb7db16a7c",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "d6bb7db16a7c0",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Cheese"
+                            }
+                          ],
+                          "level": 1,
+                          "listItem": "bullet",
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "6120715ff5cc",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "6120715ff5cc0",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Cake"
+                            }
+                          ],
+                          "level": 1,
+                          "listItem": "bullet",
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "47d4e87f72d9",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "47d4e87f72d90",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Nulla hendrerit est quis elit porta, sed rutrum nibh auctor. Ut sed convallis erat. Maecenas at metus id ligula accumsan aliquam sit amet ut eros. Maecenas lacinia tellus sed tellus consequat, sed commodo metus aliquam."
+                            }
+                          ],
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "b4283e5ce954",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "b4283e5ce9540",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Suspendisse vel nibh eu felis ullamcorper eleifend nec vel ipsum. Duis elementum, elit a tincidunt vehicula, arcu metus molestie neque, ut efficitur dui odio sed risus. Duis pretium nunc vel risus dapibus, sed varius neque tristique. Mauris fringilla tempus purus a laoreet. Morbi mollis, nibh id rhoncus porta, metus quam commodo tellus, eget tempor ligula sem et lacus. "
+                            }
+                          ],
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "a010a32cf1cc",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "a010a32cf1cc0",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Number one"
+                            }
+                          ],
+                          "level": 1,
+                          "listItem": "number",
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "3d050714d954",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "3d050714d9540",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Number two"
+                            }
+                          ],
+                          "level": 1,
+                          "listItem": "number",
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "18779b87da74",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "18779b87da740",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Number three is a much longer sentence to check wrapping and other things. We will see how this longer sentence looks. It certainly doesn't make much sense."
+                            }
+                          ],
+                          "level": 1,
+                          "listItem": "number",
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "55c6c5c9a700",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "55c6c5c9a7000",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Cras et venenatis quam, non sollicitudin lacus. Phasellus varius eget augue et pharetra. Nunc quam sem, consectetur mattis porttitor tristique, commodo varius elit. Suspendisse ullamcorper faucibus posuere. Cras mattis rhoncus metus eget tincidunt. Suspendisse porttitor efficitur malesuada. Proin vel sollicitudin justo. Morbi aliquet, mauris mattis commodo varius, turpis odio congue lorem, ut ultrices metus nisl ac nunc. Fusce consequat imperdiet elit, a rhoncus dui ornare quis."
+                            }
+                          ],
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "9c18fcc1e4a5",
+                          "_type": "figureWide",
+                          "alt": "Art",
+                          "asset": {
+                            "_ref": "image-d83c56fa38349f29d68b68dfa86fe5957a144555-1440x965-jpg",
+                            "_type": "reference"
+                          },
+                          "caption": "Wide image"
+                        },
+                        {
+                          "_key": "9833748313dd",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "9833748313dd0",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Ut facilisis dolor at ex tincidunt auctor. Pellentesque maximus tincidunt urna, quis sollicitudin urna. Etiam sit amet ex dignissim, ornare orci nec, mollis urna. Sed imperdiet neque mollis risus ullamcorper varius. Donec id eleifend odio. Mauris tortor purus, rutrum nec pellentesque sit amet, volutpat non risus. Donec blandit risus sollicitudin urna porttitor consectetur. Donec rhoncus dui at ante tristique, eu pretium turpis fringilla. Cras suscipit augue et velit suscipit rhoncus et a nulla. "
+                            }
+                          ],
+                          "markDefs": [],
+                          "style": "normal"
+                        },
+                        {
+                          "_key": "e35f39308670",
+                          "_type": "figure",
+                          "alt": "Art",
+                          "asset": {
+                            "_ref": "image-8f4a0f2ff82c9328006381826a5a0e8c2d61c67e-1440x960-jpg",
+                            "_type": "reference"
+                          },
+                          "caption": "Normal image"
+                        },
+                        {
+                          "_key": "9cb9e2569c3a",
+                          "_type": "block",
+                          "children": [
+                            {
+                              "_key": "9cb9e2569c3a0",
+                              "_type": "span",
+                              "marks": [],
+                              "text": "Phasellus venenatis risus ac erat condimentum, ut varius sapien mollis. Etiam accumsan bibendum quam sed mattis. Donec aliquet libero ut tristique tempor. Fusce massa mauris, fringilla eget hendrerit a, ultrices id nisi. Integer pellentesque, tortor at pretium efficitur, dui urna semper lacus, ac imperdiet eros diam eget sem."
+                            }
+                          ],
+                          "markDefs": [],
+                          "style": "normal"
+                        }
+                      ],
+                      "featuredImage": {
+                        "_type": "figure",
+                        "alt": "Abstract art",
+                        "asset": {
+                          "_ref": "image-5e41b78bd384d910dcd1e5e347d0a54d062420b9-1440x1082-jpg",
+                          "_type": "reference"
+                        }
+                      },
+                      "slug": {
+                        "_type": "slug",
+                        "current": "page-1"
+                      },
+                      "title": "Page 1",
+                      "id": "-0353bb85-3a33-54cf-9a57-d0fccd8c9c12",
+                      "children": [],
+                      "internal": {
+                        "type": "SanityPage",
+                        "contentDigest": "146cbce21429b52847187a4d2f76b663",
+                        "counter": 81,
+                        "owner": "gatsby-source-sanity"
+                      },
+                      "parent": null,
+                      "__gatsby_resolved": {
+                        "slug": {
+                          "current": "page-1"
+                        }
+                      }
+                    },
+                    "text": "Learn More",
+                    "type": "primary"
+                  },
+                  {
+                    "_key": "5f8ff571fc93",
+                    "_type": "urlButton",
+                    "link": "https://github.com",
+                    "text": "Tada!",
+                    "type": "secondary"
+                  }
+                ]
+              },
+              {
+                "_key": "2c0c5c52e572",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "110c2c78659c",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Training"
+                  }
+                ],
+                "markDefs": [],
+                "style": "h2"
+              },
+              {
+                "_key": "e1f2b897689c",
+                "_type": "figure",
+                "alt": "Person writing at a desk",
+                "asset": {
+                  "_id": "image-842ab22cc353a62461868c1ef3435c1d08b5e386-1920x1281-jpg",
+                  "_type": "sanity.imageAsset",
+                  "_rev": "SEYxD0Ei7i06R0lwAWcmVg",
+                  "_createdAt": "2021-03-09T00:03:32Z",
+                  "_updatedAt": "2021-03-09T00:03:32Z",
+                  "assetId": "842ab22cc353a62461868c1ef3435c1d08b5e386",
+                  "extension": "jpg",
+                  "metadata": {
+                    "_type": "sanity.imageMetadata",
+                    "dimensions": {
+                      "_type": "sanity.imageDimensions",
+                      "aspectRatio": 1.4988290398126465,
+                      "height": 1281,
+                      "width": 1920
+                    },
+                    "hasAlpha": false,
+                    "isOpaque": true,
+                    "lqip": "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAANABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQFBgcI/8QAJBAAAQQBAwQDAQAAAAAAAAAAAgEDBAUABxESBhMiQSExYZH/xAAWAQEBAQAAAAAAAAAAAAAAAAAEAAL/xAAbEQACAwEBAQAAAAAAAAAAAAABAgADETESIf/aAAwDAQACEQMRAD8AlNJLiup9M0l2L4RxR0kEj9r+Y5o91BHsr22cdlMvPPHyEFL5JE97ZVr3pqPbCsRXTYhiXcFltPFFX7xQKqN0fZx58AebykIjv48f5kVoKCwk7NoXZsA+GdAznAN/cWhRNvSYZmc7USy7o8GGRTimGDPnexIqfOT/2Q==",
+                    "palette": {
+                      "_type": "sanity.imagePalette",
+                      "darkMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#4a3827",
+                        "foreground": "#fff",
+                        "population": 2.66,
+                        "title": "#fff"
+                      },
+                      "darkVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#0b2467",
+                        "foreground": "#fff",
+                        "population": 4.17,
+                        "title": "#fff"
+                      },
+                      "dominant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#cdc0a1",
+                        "foreground": "#000",
+                        "population": 5.37,
+                        "title": "#fff"
+                      },
+                      "lightMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#cdc0a1",
+                        "foreground": "#000",
+                        "population": 5.37,
+                        "title": "#fff"
+                      },
+                      "lightVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#edc39c",
+                        "foreground": "#000",
+                        "population": 0.02,
+                        "title": "#000"
+                      },
+                      "muted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#6859a8",
+                        "foreground": "#fff",
+                        "population": 0.01,
+                        "title": "#fff"
+                      },
+                      "vibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#3257c1",
+                        "foreground": "#fff",
+                        "population": 2.51,
+                        "title": "#fff"
+                      }
+                    }
+                  },
+                  "mimeType": "image/jpeg",
+                  "originalFilename": "img1745.jpg",
+                  "path": "images/q16mco74/production/842ab22cc353a62461868c1ef3435c1d08b5e386-1920x1281.jpg",
+                  "sha1hash": "842ab22cc353a62461868c1ef3435c1d08b5e386",
+                  "size": 1292471,
+                  "uploadId": "6BZB5ko1iAxuqusLwyJ5UynE2yKsMwYV",
+                  "url": "https://cdn.sanity.io/images/q16mco74/production/842ab22cc353a62461868c1ef3435c1d08b5e386-1920x1281.jpg",
+                  "id": "image-842ab22cc353a62461868c1ef3435c1d08b5e386-1920x1281-jpg",
+                  "children": [],
+                  "internal": {
+                    "type": "SanityImageAsset",
+                    "contentDigest": "49170e9565501f347549e8d3b6995746",
+                    "counter": 97,
+                    "owner": "gatsby-source-sanity"
+                  },
+                  "parent": null
+                }
+              },
+              {
+                "_key": "81fcab1e47ed",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "fdc806220065",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "We teach people how to understand and resolve conflict. In addition to extensive training for our volunteer mediators, we offer customized trainings to community groups, businesses, and every type of organization. Topics include inclusive listening skills, de-escalating conflict, and more."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "a275a42e851c",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "b44ec03d9387",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Facilitation"
+                  }
+                ],
+                "markDefs": [],
+                "style": "h2"
+              },
+              {
+                "_key": "72160f95f0b8",
+                "_type": "figure",
+                "alt": "Group of people sitting at a desk together",
+                "asset": {
+                  "_id": "image-8aad668f64c0a05288d8cad96406147948a3f935-1920x1281-jpg",
+                  "_type": "sanity.imageAsset",
+                  "_rev": "6U776YGagbOk6d0XAas0Dd",
+                  "_createdAt": "2021-03-09T00:04:42Z",
+                  "_updatedAt": "2021-03-09T00:04:42Z",
+                  "assetId": "8aad668f64c0a05288d8cad96406147948a3f935",
+                  "extension": "jpg",
+                  "metadata": {
+                    "_type": "sanity.imageMetadata",
+                    "dimensions": {
+                      "_type": "sanity.imageDimensions",
+                      "aspectRatio": 1.4988290398126465,
+                      "height": 1281,
+                      "width": 1920
+                    },
+                    "hasAlpha": false,
+                    "isOpaque": true,
+                    "lqip": "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAANABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAQFBgf/xAAmEAACAgIBAwIHAAAAAAAAAAABAgMEAAUGERIhBzETIiQyUVJi/8QAFQEBAQAAAAAAAAAAAAAAAAAABAX/xAAcEQACAgIDAAAAAAAAAAAAAAABAgAxAxEEIVH/2gAMAwEAAhEDEQA/AKdodXtU3Nm5RgkenbjYqf2U/gY/quJRrrKyzWPq6c5n7SPlP8nGuIbp34bXmkiDTV2Ko3cQOg9vGOL6hWLUkLPrKYZ0PxOg+4qfBwK9FlexHNhUhXx0fZAXORbmtYeOPj7NH16qUUkEYZtWs3r26EMzVoVLKPAHthixwE1UmNnXdT//2Q==",
+                    "palette": {
+                      "_type": "sanity.imagePalette",
+                      "darkMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#6f4633",
+                        "foreground": "#fff",
+                        "population": 3.24,
+                        "title": "#fff"
+                      },
+                      "darkVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#814316",
+                        "foreground": "#fff",
+                        "population": 0.53,
+                        "title": "#fff"
+                      },
+                      "dominant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#df906b",
+                        "foreground": "#000",
+                        "population": 8.33,
+                        "title": "#fff"
+                      },
+                      "lightMuted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#b1bec8",
+                        "foreground": "#000",
+                        "population": 1.27,
+                        "title": "#fff"
+                      },
+                      "lightVibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#df906b",
+                        "foreground": "#000",
+                        "population": 8.33,
+                        "title": "#fff"
+                      },
+                      "muted": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#989f66",
+                        "foreground": "#000",
+                        "population": 6.27,
+                        "title": "#fff"
+                      },
+                      "vibrant": {
+                        "_type": "sanity.imagePaletteSwatch",
+                        "background": "#db141a",
+                        "foreground": "#fff",
+                        "population": 0.1,
+                        "title": "#fff"
+                      }
+                    }
+                  },
+                  "mimeType": "image/jpeg",
+                  "originalFilename": "img1871.jpg",
+                  "path": "images/q16mco74/production/8aad668f64c0a05288d8cad96406147948a3f935-1920x1281.jpg",
+                  "sha1hash": "8aad668f64c0a05288d8cad96406147948a3f935",
+                  "size": 1559100,
+                  "uploadId": "zg5VJNVM37sWkCeTSVXoUrR2i5Tu6jVL",
+                  "url": "https://cdn.sanity.io/images/q16mco74/production/8aad668f64c0a05288d8cad96406147948a3f935-1920x1281.jpg",
+                  "id": "image-8aad668f64c0a05288d8cad96406147948a3f935-1920x1281-jpg",
+                  "children": [],
+                  "internal": {
+                    "type": "SanityImageAsset",
+                    "contentDigest": "46eb27be2fa4504ec5875820eeaa186a",
+                    "counter": 98,
+                    "owner": "gatsby-source-sanity"
+                  },
+                  "parent": null
+                }
+              },
+              {
+                "_key": "109036b84e27",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "0fe3cef65a90",
+                    "_type": "span",
+                    "marks": [
+                      "strong"
+                    ],
+                    "text": "Large group facilitations are currently suspended due to COVID-19"
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              },
+              {
+                "_key": "cd434ca80d66",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "8240ae20bce9",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Our large-group facilitation can help transform systems and institutions. Recent research has shown that our pioneering Youth / Police Dialogue circle, bringing together youth and officers to unpack implicit bias and humanize one group to another, change participants’ attitudes."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "extensions": {}
+  }
