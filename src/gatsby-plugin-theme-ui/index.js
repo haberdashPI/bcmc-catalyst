@@ -109,6 +109,6 @@ export default merge(BaseTheme, {
     },
     heroContent: {
       color: "#eee"
-    }
+    },
   },
 })

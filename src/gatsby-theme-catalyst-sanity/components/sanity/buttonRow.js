@@ -1,23 +1,51 @@
 /** @jsx jsx */
-import { jsx, Styled } from "theme-ui"
+import { jsx, Styled, Button } from "theme-ui"
+import { useStaticQuery, graphql, Link } from "gatsby"
 
-// TODO: create a static query that list of all available page slugs
-// and use that to resolve the reference
+const ButtonRow = ({ node }) => {
+    const result = useStaticQuery(graphql`
+        query PageSlugQuery {
+            allSanityPage {
+                nodes {
+                    _rawSlug
+                    _id
+                }
+            }
+        }
+    `)
+    var slugs = {}
 
-export default ({ node }) => {
-    return (<div>
+    result.allSanityPage.nodes.forEach(node => {
+        slugs[node._id] = node._rawSlug.current.replace(/^\/*/, `/`)
+    })
+
+    return (
+        <div sx={{display: "block", minHeight: "2.5em"}}>
+    <div sx={
+        node.align === "left" ? {display: "block", float: "left"} :
+        node.align === "right" ? {display: "block", float: "right"} :
+        node.align === "center" ? {
+            display: "block",
+            marginLeft: "auto",
+            marginRight: "auto",
+        } : {float: "left"}}>
         {node.buttons.map(b =>
-            b._type === "urlButton" ? (
-                <Styled.a sx={{variant: "button-"+(b.type || "primary")}}
+            <Button sx={{px: "1em", my: "0.25em", mx: "0.5em", bg: b.type || "primary"}}>
+            {b._type === "urlButton" ? (
+                <Styled.a sx={{color: "white", textDecoration: "none", variant: "buttonLink", ":hover": {textDecoration: "none"}}}
                     href={b.link}>
                     {b.text}
                 </Styled.a>
             ) : (
-                <Styled.a sx={{variant: "button-"+(b.type || "primary")}}
-                    href={"/"+b.link._ref}>
+                <Link sx={{color: "white", textDecoration: "none", variant: "buttonLink"}}
+                    to={slugs[b.link._ref]}>
                     {b.text}
-                </Styled.a>
-            )
+                </Link>
+            )}
+            </Button>
         )}
+        </div>
     </div>)
 }
+
+export default ButtonRow
