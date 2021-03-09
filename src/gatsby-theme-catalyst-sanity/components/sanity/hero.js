@@ -55,7 +55,7 @@ export default ({ node }) => {
                 right: "50%",
                 zIndex: 1,
                 height: "100%",
-                background: "radial-gradient(circle at 50%, rgba(50,50,50,0.5), rgba(50,50,50,1) 400px)"
+                background: "radial-gradient(circle at 50%, rgba(50,50,50,0.7), rgba(50,50,50,1) 400px)"
         }}>
         </div>
         <div
