@@ -31,7 +31,7 @@ export default ({ node }) => {
     <figure
       sx={{
         marginLeft: position === "right" ? "2.5em": "0em",
-        marginRight: position === "right" ? "0em": "1em",
+        marginRight: position === "right" ? "0em": "-0.5em",
         float: position === "right" ? "right" : "left",
         width: "50%",
         position: "relative",
