@@ -80,9 +80,20 @@ export default merge(BaseTheme, {
       fontFamily: "body",
       fontWeight: "normal",
     },
+    navLinkActive: { color: theme.primary },
+    navLinkPrimary: {
+      ":hover, :focus, :active": {
+        color: theme.secondary,
+      }
+    },
+    navLinkActivePrimary: { color: theme.secondary },
     navLinkSecondary: {
       color: theme.secondary,
+      ":hover, :focus, :active": {
+        color: "white",
+      }
     },
+    navLinkActiveSecondary: { color: "white" },
 
     navLinksDropdown: {
       fontFamily: "body",

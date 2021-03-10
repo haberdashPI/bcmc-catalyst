@@ -27,7 +27,7 @@ const NavLi = ({ children, hasSubmenu, linkKind }) => {
         a: {
           position: "relative",
           fontFamily: "body",
-          fontWeight: "bold",
+          fontWeight: "normal",
           py: "0.5em",
           px: "0.5em",
           color: isNavOpen ? "header.textOpen" : "header.text",
@@ -37,7 +37,7 @@ const NavLi = ({ children, hasSubmenu, linkKind }) => {
           ":hover, :focus, :active": {
             textDecoration: "none",
             textDecorationThickness: "0.125em",
-            color: "inherit",
+            color: "primary",
           },
           variant: "variants.navLink"+suffix,
         },
