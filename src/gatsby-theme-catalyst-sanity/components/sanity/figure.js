@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import Img from "gatsby-image"
-import { getFluidGatsbyImage } from "gatsby-source-sanity"
+import { getFluidGatsbyImage, getFixedGatsbyImage } from "gatsby-source-sanity"
 import { useSanityConfig } from "gatsby-theme-catalyst-sanity"
 
 export default ({ node }) => {
@@ -12,9 +12,14 @@ export default ({ node }) => {
   const { sanityProjectId, sanityDataset } = useSanityConfig()
   const sanityConfig = { projectId: sanityProjectId, dataset: sanityDataset }
 
-  const fluidProps = getFluidGatsbyImage(
+  const circleWidth = 200
+  const imgProps = node.shape !== "circle" ? getFluidGatsbyImage(
     node.asset._ref,
     { maxWidth: 1440 },
+    sanityConfig
+  ) : getFixedGatsbyImage(
+    node.asset._ref,
+    { width: circleWidth, height: circleWidth },
     sanityConfig
   )
 
@@ -27,24 +32,55 @@ export default ({ node }) => {
   const defaultPosition = ["left", "right"][positionNum]
   const position = node.position ? node.position : defaultPosition
 
+  const rightsx = {
+    float: "right",
+    position: "relative",
+    ...(node.shape === "circle" ? { shapeOutside: "circle(50%)" } : {
+      marginLeft: "2.5em",
+      marginRight: "0em",
+      marginBottom: "1em",
+    }),
+    width: node.shape === "circle" ? circleWidth+"px" : "50%",
+  }
+
+  const leftsx = {
+      ...(node.shape === "circle" ? { shapeOutside: "circle(50%)" } : {
+      marginLeft: "0em",
+      marginRight: "-0.5em",
+      marginBottom: "1em",
+    }),
+    float: "left",
+    position: "relative",
+    width: node.shape === "circle" ? circleWidth+"px" : "50%",
+  }
+
+  const centersx = {
+    ...(node.shape === "circle" ? { shapeOutside: "circle(50%)" } : {
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginBottom: "1em",
+    }),
+    // float: "left",
+    position: "relative",
+    width: node.shape === "circle" ? circleWidth+"px" : "50%",
+  }
+
   return (
-    <figure
-      sx={{
-        marginLeft: position === "right" ? "2.5em": "0em",
-        marginRight: position === "right" ? "0em": "-0.5em",
-        float: position === "right" ? "right" : "left",
-        width: "50%",
-        position: "relative",
-      }}
-    >
+    <figure sx={
+      position === "right" ? rightsx :
+      position === "left" ? leftsx :
+      position === "center" ? centersx :
+      rightsx
+    }>
         <div sx={node.border === "none" ? {} : {
           position: "absolute",
-          top: "0%",
-          left: "-5%",
-          width: "90%",
+          top: node.shape === "circle" ? "-12px" : "0%",
+          left: node.shape === "circle" ? "-12px" : "-5%",
+          width: node.shape === "circle" ? "100%" : "90%",
           height: node.caption ? "85%" : "100%",
           transform: position === "right" ? "rotate(-5deg)" : "rotate(5deg)",
           zIndex: 0,
+          clipPath: node.shape === "circle" ? "circle()" : "none",
           backgroundColor: node.border === "primary" ? "primary" :
             node.border === "secondary" ? "secondary" :
             node.border === "tertiary" ? "tertiary" :
@@ -59,11 +95,15 @@ export default ({ node }) => {
               paddingRight: position === "right" ? "5%" : "0%",
               width: "80%",
               height: "80%",
-              zIndex: 1
-            })
+              zIndex: 1,
+              clipPath: node.shape === "circle" ? "circle()" : "none"
+            }),
+            // ...(position !== "center" ? {} : {
+            //   height: "300px"
+            // })
           }}
-          fluid={fluidProps}
           alt={node.alt}
+          {...(node.shape !== "circle" ? {fluid: imgProps} : {fixed: imgProps})}
         />
         <div sx={{zIndex: 3}}>
         {node.caption && (

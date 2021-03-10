@@ -34,7 +34,8 @@ export default {
         isHighlighted: true,
         list: [
           { title: "Left", value: "left" },
-          { title: "Right", value: "right" }
+          { title: "Right", value: "right" },
+          { title: "Center", value: "center" }
         ]
       }
     },
@@ -52,12 +53,25 @@ export default {
           { title: "Tertiary", value: "tertiary" }
         ]
       }
+    },
+    {
+      name: "shape",
+      type: "string",
+      title: "Shape",
+      options: {
+        isHighlighted: true,
+        list: [
+          { title: "Square", value: "square" },
+          { title: "Circle", value: "circle" }
+        ]
+      }
     }
   ],
   preview: {
     select: {
       imageUrl: "asset.url",
       title: "alt",
+      media: "media",
     },
   },
 }
