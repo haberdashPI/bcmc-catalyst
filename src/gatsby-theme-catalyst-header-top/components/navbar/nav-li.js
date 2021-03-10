@@ -19,9 +19,9 @@ const NavLi = ({ children, hasSubmenu, linkKind }) => {
         letterSpacing: "normal",
           cursor: "pointer",
         ".active": {
-          textDecoration: "underline",
+          textDecoration: "none",
           textDecorationThickness: "0.125em",
-          color: "primary",
+          color: "inherit",
           variant: "variants.navLinkActive"+suffix,
         },
         a: {
@@ -35,15 +35,15 @@ const NavLi = ({ children, hasSubmenu, linkKind }) => {
           letterSpacing: "spacing",
           zIndex: 2,
           ":hover, :focus, :active": {
-            textDecoration: "underline",
+            textDecoration: "none",
             textDecorationThickness: "0.125em",
-            color: "primary",
+            color: "inherit",
           },
           variant: "variants.navLink"+suffix,
         },
 
-        variant: "variants.navLi"+suffix
-      }}
+        variant: "variants.navLi"+suffix,
+    }}
     >
       {children}
     </li>
