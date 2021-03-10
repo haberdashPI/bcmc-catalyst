@@ -3,6 +3,9 @@ import { jsx, Styled } from "theme-ui"
 import Img from "gatsby-image"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import { useSanityConfig } from "gatsby-theme-catalyst-sanity/src/components/sanity/use-sanity-config"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // TODO: create the hero component
 export default ({ node }) => {
@@ -13,12 +16,11 @@ export default ({ node }) => {
   const { sanityProjectId, sanityDataset } = useSanityConfig()
   const sanityConfig = { projectId: sanityProjectId, dataset: sanityDataset }
 
-  const fluidProps = getFluidGatsbyImage(
-    node.images[0].asset._ref,
-
+  const fluidProps = node.images.map(image => getFluidGatsbyImage(
+    image.asset._ref,
     { maxWidth: 1440 },
     sanityConfig
-  )
+  ))
 
   return (
     <div sx={{
@@ -44,7 +46,9 @@ export default ({ node }) => {
                 right: "50%",
                 zIndex: 0,
             }}>
-            <Img fluid={fluidProps}/>
+          <Slider dots={false} infinite={true} fade={true} speed={2000} arrows={false} autoplay={true} autoplaySpeed={5000}>
+            {fluidProps.map(props => <Img fluid={props}/>)}
+          </Slider>
         </div>
         <div sx={{
                 position: "absolute",
