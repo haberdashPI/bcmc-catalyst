@@ -13,6 +13,8 @@ import hero from "./hero"
 import buttonRow from "./buttonRow"
 import pageButton from "./pageButton"
 import urlButton from "./urlButton"
+import imageList from "./imageList"
+import imageListItem from "./imageListItem"
 import siteSettings from "./siteSettings"
 import menuLink from "./menuLink"
 import socialLink from "./socialLink"
@@ -38,6 +40,8 @@ export default createSchema({
     // in the studio.
     blockContent,
     hero,
+    imageList,
+    imageListItem,
     buttonRow,
     pageButton,
     urlButton,

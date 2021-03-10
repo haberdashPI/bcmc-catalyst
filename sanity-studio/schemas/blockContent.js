@@ -91,6 +91,10 @@ export default {
     {
       type: "buttonRow",
       title: "Buttons",
+    },
+    {
+      type: "imageList",
+      title: "Image List"
     }
   ],
 }
