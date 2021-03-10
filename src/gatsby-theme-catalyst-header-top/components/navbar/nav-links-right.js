@@ -23,6 +23,7 @@ const NavLinksRight = () => {
       sx={{
         listStyle: "none",
         m: 0,
+        marginLeft: "1em",
         p: 0,
         display: "flex",
         flexDirection: ["column", null, "row", null, null],

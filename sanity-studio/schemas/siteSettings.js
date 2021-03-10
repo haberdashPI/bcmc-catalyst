@@ -52,6 +52,13 @@ export default {
         "The default sharing image for places like Twitter and Facebook when sharing a link to your website.",
       validation: (Rule) => Rule.required(),
     },
+    // TODO: should be in a separate page, I think
+    {
+      title: "Footer Content",
+      name: "footer",
+      type: "blockContent",
+      description: "Content present at the bottom of every page."
+    },
     {
       name: "siteUrl",
       type: "url",
