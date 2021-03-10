@@ -29,7 +29,7 @@ const ButtonRow = ({ node }) => {
             marginLeft: "auto",
             marginRight: "auto",
         } : {float: "left"}}>
-        {node.buttons.map(b =>
+        {node.buttons && node.buttons.map(b =>
             <Button sx={{px: "1em", my: "0.25em", mx: "0.5em", bg: b.type || "primary"}}>
             {b._type === "urlButton" ? (
                 <Styled.a sx={{color: "white", textDecoration: "none", variant: "buttonLink", ":hover": {textDecoration: "none"}}}
@@ -38,7 +38,7 @@ const ButtonRow = ({ node }) => {
                 </Styled.a>
             ) : (
                 <Link sx={{color: "white", textDecoration: "none", variant: "buttonLink"}}
-                    to={slugs[b.link._ref]}>
+                    to={b.link && slugs[b.link._ref]}>
                     {b.text}
                 </Link>
             )}
