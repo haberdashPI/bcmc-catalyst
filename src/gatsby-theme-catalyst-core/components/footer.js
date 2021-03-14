@@ -5,6 +5,8 @@ import {
   useCatalystConfig,
   SocialFooter,
 } from "gatsby-theme-catalyst-core"
+import { useStaticQuery, graphql } from "gatsby"
+import { SanityContent } from "gatsby-theme-catalyst-sanity"
 import { IconContext } from "react-icons"
 
 const SiteFooter = () => {
@@ -15,7 +17,14 @@ const SiteFooter = () => {
   const isRight = footerContentLocation === "right"
   const isCenter = footerContentLocation === "center"
 
-
+  const footerData = useStaticQuery(graphql`
+    query SanityFooterContent {
+      sanityFooterPage(_id: {eq: "footerDocument"}) {
+        id
+        _rawBody
+      }
+    }
+  `)
 
   return (
     <footer
@@ -63,8 +72,11 @@ const SiteFooter = () => {
             <SocialFooter />
           </IconContext.Provider>
         </div>
+        {/* {JSON.stringify(footerData.sanityFooterPage._rawBody)} */}
+        <SanityContent data={footerData.sanityFooterPage._rawBody}/>
         <p sx={{ m: 0 }}>
-          © {new Date().getFullYear()} {title}
+          © {new Date().getFullYear()} {title}<br/>
+          <a href="https://baltimore-community-mediation.sanity.studio/">Edit this website</a>
         </p>
       </div>
     </footer>

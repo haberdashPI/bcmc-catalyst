@@ -5,8 +5,11 @@ import {
   MdList,
   MdInfo,
   MdPerson,
-  MdDashboard,
+  MdDashboard
 } from "react-icons/md"
+import {
+  CgDockBottom as FooterIcon,
+} from "react-icons/cg"
 
 const hiddenDocTypes = (listItem) =>
   ![
@@ -43,9 +46,18 @@ export default () =>
                     .documentId("siteSettings")
                 ),
               S.listItem()
-                .title("Authors")
-                .icon(MdPerson)
-                .child(S.documentTypeList("author").title("Author")),
+                .title("Footer")
+                .icon(FooterIcon)
+                .child(
+                  S.document()
+                    .title("Footer")
+                    .schemaType("footerPage")
+                    .documentId("footerDocument")
+                ),
+              // S.listItem()
+              //   .title("Authors")
+              //   .icon(MdPerson)
+              //   .child(S.documentTypeList("author").title("Author")),
               S.listItem()
                 .title("Navigation Links")
                 .icon(MdList)
@@ -56,15 +68,15 @@ export default () =>
                 .title("Social Links")
                 .icon(MdShare)
                 .child(S.documentTypeList("socialLink").title("Social Links")),
-              S.listItem()
-                .title("Theme-UI")
-                .icon(MdDashboard)
-                .child(
-                  S.document()
-                    .schemaType("theme")
-                    .documentId("theme")
-                    .title("Theme-UI Theme")
-                ),
+              // S.listItem()
+              //   .title("Theme-UI")
+              //   .icon(MdDashboard)
+              //   .child(
+              //     S.document()
+              //       .schemaType("theme")
+              //       .documentId("theme")
+              //       .title("Theme-UI Theme")
+              //   ),
             ])
         ),
       // Add a visual divider (optional)
@@ -72,11 +84,11 @@ export default () =>
       S.listItem()
         .title("Pages")
         .child(S.documentTypeList("page").title("Pages")),
-      S.listItem()
-        .title("Events")
-        .child(S.documentTypeList("post").title("Events")),
-      S.listItem()
-        .title("Services")
-        .child(S.documentTypeList("project").title("Services")),
-      ...S.documentTypeListItems().filter(hiddenDocTypes),
+      // S.listItem()
+      //   .title("Events")
+      //   .child(S.documentTypeList("post").title("Events")),
+      // S.listItem()
+      //   .title("Services")
+      //   .child(S.documentTypeList("project").title("Services")),
+      // ...S.documentTypeListItems().filter(hiddenDocTypes),
     ])

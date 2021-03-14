@@ -28,6 +28,7 @@ import themeColors from "./themeColors"
 import footerColors from "./footerColors"
 import headerColors from "./headerColors"
 import category from "./category"
+import footer from './footer'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -51,6 +52,7 @@ export default createSchema({
     menuLink,
     socialLink,
     page,
+    footer,
     post,
     project,
     excerptBlockContent,
