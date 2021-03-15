@@ -15,7 +15,7 @@ export default ({ node }) => {
   const circleWidth = 200
   const imgProps = node.shape !== "circle" ? getFluidGatsbyImage(
     node.asset._ref,
-    { maxWidth: 1440 },
+    { maxWidth: 900 },
     sanityConfig
   ) : getFixedGatsbyImage(
     node.asset._ref,

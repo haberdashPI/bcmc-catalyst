@@ -18,7 +18,7 @@ export default ({ node }) => {
 
   const fluidProps = node.images.map(image => getFluidGatsbyImage(
     image.asset._ref,
-    { maxWidth: 1440 },
+    { maxWidth: 900 },
     sanityConfig
   ))
 
