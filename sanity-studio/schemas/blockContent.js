@@ -72,21 +72,13 @@ export default {
     // You can add additional types here. Note that you can't use
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
-    {
-      type: "code",
-      title: "Code Block",
-    },
+    // {
+    //   type: "code",
+    //   title: "Code Block",
+    // },
     {
       type: "figure",
       title: "Figure"
-    },
-    {
-      type: "figureWide",
-      title: "Wide Figure"
-    },
-    {
-      type: "hero",
-      title: "Hero Section"
     },
     {
       type: "buttonRow",
@@ -95,6 +87,18 @@ export default {
     {
       type: "imageList",
       title: "Image List"
+    },
+    // {
+    //   type: "figureWide",
+    //   title: "Wide Figure"
+    // },
+    {
+      type: "hero",
+      title: "Hero Section"
+    },
+    {
+      type: "mediationRequest",
+      title: "Mediation Request Form"
     }
   ],
 }

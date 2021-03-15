@@ -6,6 +6,7 @@ import Code from "gatsby-theme-catalyst-sanity/src/components/sanity/code"
 import Hero from "./hero"
 import ButtonRow from "./buttonRow.js"
 import ImageList from "./imageList.js"
+import MediationRequestForm from "./mediationRequest.js"
 
 const headerId = (id) => {
   return id
@@ -23,6 +24,7 @@ const serializers = {
     hero: Hero,
     buttonRow: ButtonRow,
     imageList: ImageList,
+    mediationRequest: MediationRequestForm,
     block(props) {
       switch (props.node.style) {
         case "h1":
