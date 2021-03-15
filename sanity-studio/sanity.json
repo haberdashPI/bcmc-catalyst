@@ -14,7 +14,9 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "@sanity/color-input",
-    "@sanity/code-input"
+    "@sanity/code-input",
+    "@sanity/dashboard",
+    "dashboard-widget-gatsby"
   ],
   "parts": [
     {
@@ -24,6 +26,10 @@
     {
       "name": "part:@sanity/desk-tool/structure",
       "path": "./structure/deskStructure.js"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./dashboardConfig.js"
     }
   ]
 }
