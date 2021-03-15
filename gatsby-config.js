@@ -67,9 +67,9 @@ module.exports = {
       resolve: `gatsby-theme-catalyst-sanity`,
       options: {
         // Example for an env variable
-        // sanityProjectId: process.env.SANITY_PROJECT_ID,
-        // sanityDataset: process.env.SANITY_DATASET,
-        // sanityToken: process.env.SANITY_TOKEN,
+        sanityProjectId: process.env.SANITY_PROJECT_ID,
+        sanityDataset: process.env.SANITY_DATASET,
+        sanityToken: process.env.SANITY_TOKEN,
         //
         // Default options are:
         // sanityDataset: "production"
