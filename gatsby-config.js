@@ -75,7 +75,7 @@ module.exports = {
         // sanityDataset: "production"
         // sanityToken: null
         // sanityWatchMode: true
-        // sanityOverlayDrafts: false // Token is required for this
+        sanityOverlayDrafts: process.env.SANITY_OVERLAY_DRAFTS ? true : false,
         // sanityCreatePages: true
         // sanityCreatePosts: true
         // sanityCreatePostsList: true
