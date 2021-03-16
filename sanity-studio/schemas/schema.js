@@ -30,6 +30,8 @@ import footerColors from "./footerColors"
 import headerColors from "./headerColors"
 import category from "./category"
 import footer from './footer'
+import shortQuestion from "./shortQuestion"
+import longQuestion from "./longQuestion"
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -41,6 +43,8 @@ export default createSchema({
     // The following are document types which will appear
     // in the studio.
     mediationRequest,
+    shortQuestion,
+    longQuestion,
     blockContent,
     hero,
     imageList,
