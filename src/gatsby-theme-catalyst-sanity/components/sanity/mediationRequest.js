@@ -22,45 +22,45 @@ const PersonSubForm = ({ index }) => (<>
     <Grid gap={4} sx={{mb: "1rem"}} columns={'1fr 1fr'}>
         <Box>
             <Label htmlFor={'first_name_'+index}>First Name</Label>
-            <Input name={'first_name_'+index}/>
+            <Input sx={{bg: "background"}} name={'first_name_'+index}/>
         </Box>
         <Box>
             <Label htmlFor={'last_name_'+index}>Last Name</Label>
-            <Input name={'last_name_'+index}/>
+            <Input sx={{bg: "background"}} name={'last_name_'+index}/>
         </Box>
     </Grid>
     <Grid gap={4} sx={{mt: "1rem"}} columns={'1fr 2fr'}>
         <Box>
             <Label htmlFor={'phone_'+index}>Phone</Label>
-            <Input name={'phone_'+index}/>
+            <Input sx={{bg: "background"}} name={'phone_'+index}/>
         </Box>
         <Box>
             <Label htmlFor={'email_'+index}>Email</Label>
-            <Input name={'email_'+index}/>
+            <Input sx={{bg: "background"}} name={'email_'+index}/>
         </Box>
     </Grid>
-    <Box sx={{mt: "2rem", borderRadius: "4px", bg: "#ddd", p: "1rem"}}>
+    <Box sx={{mt: "2rem", borderRadius: "4px", bg: "background", p: "1rem"}}>
         <Heading as='h4' sx={{fontVariant: "small-caps"}}>Address</Heading>
         <Label htmlFor={'street_'+index}>Street</Label>
-        <Input name={'street_'+index}></Input>
+        <Input sx={{bg: "background"}} name={'street_'+index}></Input>
         <Label htmlFor={'line2_'+index}>Line 2</Label>
-        <Input name={'line2_'+index}></Input>
+        <Input sx={{bg: "background"}} name={'line2_'+index}></Input>
         <Grid gap={4} columns={'1fr 4em 0.5fr'}>
             <Box>
                 <Label htmlFor={'city_'+index}>City</Label>
-                <Input name={'city_'+index}/>
+                <Input sx={{bg: "background"}} name={'city_'+index}/>
             </Box>
             <Box>
                 <Label htmlFor={'state_'+index}>State</Label>
-                <Input name={'state_'+index}/>
+                <Input sx={{bg: "background"}} name={'state_'+index}/>
             </Box>
             <Box>
                 <Label htmlFor={'zip_'+index}>Zip</Label>
-                <Input name={'zip_'+index}/>
+                <Input sx={{bg: "background"}} name={'zip_'+index}/>
             </Box>
         </Grid>
         <Label htmlFor='Country'>Country</Label>
-        <Input name={'country_'+index}/>
+        <Input sx={{bg: "background"}} name={'country_'+index}/>
     </Box>
 </>)
 
@@ -71,9 +71,9 @@ const MediationRequestionForm = ({ node }) => {
 
     return (<><Box as='form'>
         <Heading as='h2' sx={{mb: "1rem", fontVariant: "small-caps"}}>My Information</Heading>
-        <Box sx={{border: "solid 1px", borderRadius: "4px", p: "1em"}}>
+        <Box sx={{borderRadius: "4px", p: "1em", bg: "secondary"}}>
             <Label htmlFor='contactby' >Please reach me by</Label>
-            <Select defaultValue='Phone' name='contactby'>
+            <Select sx={{bg: "background"}} defaultValue='Phone' name='contactby'>
                 <option>Email</option>
                 <option>Phone</option>
                 <option>Mail</option>
@@ -83,7 +83,7 @@ const MediationRequestionForm = ({ node }) => {
         <Heading as='h2' sx={{mt: "1rem", fontVariant: "small-caps"}}>Other Participants</Heading>
         <p>Who would you like to schedule a mediation with?</p>
         {_.range(count).map(i => <>
-            <Box sx={{border: "solid 1px", borderRadius: "4px", my: "1em", p: "1em"}}>
+            <Box sx={{bg: "secondary", borderRadius: "4px", my: "1em", p: "1em"}}>
                 <Heading as='h3' sx={{mb: "0.5rem", fontVariant: "small-caps"}}>Person {i+2}</Heading>
                 <PersonSubForm index={i+2}/>
             </Box>

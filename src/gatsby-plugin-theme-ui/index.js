@@ -4,8 +4,8 @@ import { tailwind, baseColors } from "@theme-ui/preset-tailwind"
 
 const theme = {
   primary: "#498046",
-  secondary: "#d5b959",
-  tertiary: "#c45b4a",
+  secondary: "#80c180",
+  tertiary: "#d5b959",
 }
 
 export default merge(BaseTheme, {
@@ -83,10 +83,10 @@ export default merge(BaseTheme, {
     navLinkActive: { color: theme.primary },
     navLinkPrimary: {
       ":hover, :focus, :active": {
-        color: theme.secondary,
+        color: theme.primary,
       }
     },
-    navLinkActivePrimary: { color: theme.secondary },
+    navLinkActivePrimary: { color: theme.primary },
     navLinkSecondary: {
       color: theme.secondary,
       ":hover, :focus, :active": {
