@@ -32,16 +32,6 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-          fonts: [
-              `EB Garamond:400,700`,
-              `Raleway:400,700,1000`,
-          ],
-          display: "swap",
-      },
-    },
-    {
       resolve: `gatsby-theme-catalyst-core`,
       options: {
         // Default options are:

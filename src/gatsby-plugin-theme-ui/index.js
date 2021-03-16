@@ -1,6 +1,10 @@
 import { merge } from "theme-ui"
 import { BaseTheme } from "gatsby-theme-catalyst-core"
 import { tailwind, baseColors } from "@theme-ui/preset-tailwind"
+import "@fontsource/eb-garamond/400.css"
+import "@fontsource/eb-garamond/700.css"
+import "@fontsource/raleway/400.css"
+import "@fontsource/raleway/700.css"
 
 const theme = {
   primary: "#498046",
