@@ -12,15 +12,17 @@ export default {
         },
         {
             title: "Additional Questions",
-            description: "Additional questions to include in the form can be specified here.",
+            description: "Additional questions to include in the form.",
+            name: "info_questions",
             type: "array",
-            of: [{type: "shortQuestion"}, {type: "longQuestion"}]
+            of: [{type: "question"}]
         },
         {
             title: "Additional Participant Questions",
-            description: "Additional quesitons you would like asked about each additional participant included in the form can be specified here.",
+            description: "Additional quesitons you would like asked for each additional participant.",
+            name: "part_questions",
             type: "array",
-            of: [{type: "shortQuestion"}, {type: "longQuestion"}]
+            of: [{type: "question"}]
         }
     ]
 }

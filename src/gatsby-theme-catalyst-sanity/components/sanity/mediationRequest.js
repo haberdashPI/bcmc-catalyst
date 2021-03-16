@@ -18,7 +18,7 @@ import {
     Slider,
   } from 'theme-ui'
 
-const PersonSubForm = ({ index }) => (<>
+const PersonSubForm = ({ index, questions }) => (<>
     <Grid gap={4} sx={{mb: "1rem"}} columns={'1fr 1fr'}>
         <Box>
             <Label htmlFor={'first_name_'+index}>First Name</Label>
@@ -39,7 +39,7 @@ const PersonSubForm = ({ index }) => (<>
             <Input sx={{bg: "background"}} name={'email_'+index}/>
         </Box>
     </Grid>
-    <Box sx={{mt: "2rem", borderRadius: "4px", bg: "background", p: "1rem"}}>
+    <Box sx={{mt: "2rem", borderRadius: "4px", border: "solid 1px", p: "1rem"}}>
         <Heading as='h4' sx={{fontVariant: "small-caps"}}>Address</Heading>
         <Label htmlFor={'street_'+index}>Street</Label>
         <Input sx={{bg: "background"}} name={'street_'+index}></Input>
@@ -62,6 +62,15 @@ const PersonSubForm = ({ index }) => (<>
         <Label htmlFor='Country'>Country</Label>
         <Input sx={{bg: "background"}} name={'country_'+index}/>
     </Box>
+    {questions && questions.map(q =>
+        q.length !== "long" ? <>
+            <Label sx={{mt: "1rem"}} htmlFor={q.id}>{q.text}</Label>
+            <Input sx={{bg: "background"}} name={q.id}/>
+        </> : <>
+            <Label sx={{mt: "1rem"}} htmlFor={q.id}>{q.text}</Label>
+            <Textarea rows={8} sx={{bg: "background"}} name={q.id}/>
+        </>
+    )}
 </>)
 
 const MediationRequestionForm = ({ node }) => {
@@ -71,21 +80,21 @@ const MediationRequestionForm = ({ node }) => {
 
     return (<><Box as='form'>
         <Heading as='h2' sx={{mb: "1rem", fontVariant: "small-caps"}}>My Information</Heading>
-        <Box sx={{borderRadius: "4px", p: "1em", bg: "secondary"}}>
+        <Box sx={{borderRadius: "4px", p: "1em", border: "solid 1px"}}>
             <Label htmlFor='contactby' >Please reach me by</Label>
-            <Select sx={{bg: "background"}} defaultValue='Phone' name='contactby'>
+            <Select sx={{bg: "background", mb: "1rem"}} defaultValue='Phone' name='contactby'>
                 <option>Email</option>
                 <option>Phone</option>
                 <option>Mail</option>
             </Select>
-            <PersonSubForm index={1}/>
+            <PersonSubForm index={1} questions={node.info_questions}/>
         </Box>
         <Heading as='h2' sx={{mt: "1rem", fontVariant: "small-caps"}}>Other Participants</Heading>
         <p>Who would you like to schedule a mediation with?</p>
         {_.range(count).map(i => <>
-            <Box sx={{bg: "secondary", borderRadius: "4px", my: "1em", p: "1em"}}>
+            <Box sx={{border: "solid 1px", borderRadius: "4px", my: "1em", p: "1em"}}>
                 <Heading as='h3' sx={{mb: "0.5rem", fontVariant: "small-caps"}}>Person {i+2}</Heading>
-                <PersonSubForm index={i+2}/>
+                <PersonSubForm index={i+2} questions={node.part_questions}/>
             </Box>
         </>)}
 
