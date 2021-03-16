@@ -7,6 +7,17 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+/* Randomize array in-place using Durstenfeld shuffle algorithm */
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
+  return array
+}
+
 // TODO: create the hero component
 export default ({ node }) => {
 //   if (!node.asset) {
@@ -16,7 +27,7 @@ export default ({ node }) => {
   const { sanityProjectId, sanityDataset } = useSanityConfig()
   const sanityConfig = { projectId: sanityProjectId, dataset: sanityDataset }
 
-  const fluidProps = node.images.map(image => getFluidGatsbyImage(
+  const fluidProps = shuffleArray(node.images).map(image => getFluidGatsbyImage(
     image.asset._ref,
     { maxWidth: 900 },
     sanityConfig
@@ -46,7 +57,7 @@ export default ({ node }) => {
                 right: "50%",
                 zIndex: 0,
             }}>
-          <Slider dots={false} infinite={true} fade={true} speed={2000} arrows={false} autoplay={true} autoplaySpeed={5000}>
+          <Slider dots={false} infinite={true} lazyLoad={'ondemand'} fade={true} speed={2000} arrows={false} autoplay={true} autoplaySpeed={5000}>
             {fluidProps.map(props => <Img fluid={props}/>)}
           </Slider>
         </div>
