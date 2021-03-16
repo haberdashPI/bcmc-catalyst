@@ -12,7 +12,7 @@ const NavLi = ({ children, hasSubmenu, linkKind }) => {
     <li
       sx={{
         my: [2, null, 0, null, null],
-        mr: [0, null, 3, null, null],
+        mr: [1, null, 3, null, null],
         borderWidth: "2px",
         borderStyle: "solid",
         borderRadius: "0.5rem",

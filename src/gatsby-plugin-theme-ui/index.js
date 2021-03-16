@@ -9,6 +9,7 @@ const theme = {
 }
 
 export default merge(BaseTheme, {
+  breakpoints: ["480px", "768px", "1024px", "1440px"],
   fonts: {
     ...tailwind.fonts,
     body:
@@ -76,7 +77,7 @@ export default merge(BaseTheme, {
       my: 0
     },
     siteTitle: {
-      fontSize: [1, 2, null, 3, null],
+      fontSize: [1, 1, null, 2, null],
       fontFamily: "body",
       fontWeight: "normal",
     },
@@ -104,14 +105,17 @@ export default merge(BaseTheme, {
     },
 
     navLi: {
-      borderColor: "transparent"
+      borderColor: "transparent",
+      fontSize: [1, 1, null, 2, null]
     },
     navLiPrimary: {
       background: theme.tertiary,
       borderColor: theme.tertiary,
+      fontSize: [1, 1, null, 2, null]
     },
     navLiSecondary: {
       borderColor: theme.secondary,
+      fontSize: [1, 1, null, 2, null]
     },
     heroTitle: {
       fontSize: [4, 5, null, 6, null],
