@@ -24,6 +24,24 @@ import {
 } from 'theme-ui'
 import { lighten } from '@theme-ui/color';
 
+function flatten(obj, roots = [], sep = '.'){
+  return Object
+  // find props of given object
+  .keys(obj)
+  // return an object by iterating props
+  .reduce((memo, prop) => Object.assign(
+    // create a new object
+    {},
+    // include previously returned object
+    memo,
+    Object.prototype.toString.call(obj[prop]) === '[object Object]'
+      // keep working if value is an object
+      ? flatten(obj[prop], roots.concat([prop]))
+      // include current prop and value and prefix prop with the roots
+      : {[roots.concat([prop]).join(sep)]: obj[prop]}
+  ), {})
+}
+
 const FormikContext = React.createContext({});
 
 const Input = ({name, ...props}) => {
@@ -152,8 +170,6 @@ const MediationRequestionForm = ({ node }) => {
             } :
             { phone: yup.string().required("Missing phone number").matches(/^[0-9-]*$/,"Must be a number") }
 
-        console.dir(firstPersonSchema)
-
         const personError = values.person.map((p,i) => {
             let schema = i === 0 ? {...personSchema, ...firstPersonSchema} :
                 personSchema
@@ -182,15 +198,30 @@ const MediationRequestionForm = ({ node }) => {
             person: [ person(node.info_questions) ],
         }}
         validate = {debounce(validate, 500)}
-        onSubmit = { (values, actions) => {
-            alert(JSON.stringify(values, null, 2))
-            actions.setSubmitting(false);
+        onSubmit = { async (values, actions) => {
+            // TODO: define a reasonable react-ish response
+            // to complete the form (showing a message, etc...)
+            let message = {
+                accessKey: 'f302bda2-f9c0-4506-9220-e6dcbd672a1b',
+                replyTo: values.person[0].email,
+                ['$data']: values
+            }
+            console.dir(message)
+            let res = await fetch('https://api.staticforms.xyz/submit', {
+                method :'POST',
+                body: JSON.stringify(message),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const json = await res.json();
+            if(json.success){
+                alert("Your form has been submitted!")
+            } else {
+                alert(json.message)
+            }
         }}>
             {formik => (
-                // <pre>{JSON.stringify(formik, null, 2)}</pre>
                 <FormikContext.Provider value={formik}>
                     <Box sx={{/* height: "500px", overflowY: "auto" */}}>
-                        <pre>{JSON.stringify(deletedPersons, null, 2)}</pre>
                     <Box as='form' onSubmit={formik.handleSubmit}>
                         <Heading as='h2' sx={{mb: "1rem", fontVariant: "small-caps"}}>My Information</Heading>
                         <Box sx={{borderRadius: "4px", p: "1em", border: "solid 1px"}}>
@@ -261,9 +292,10 @@ const MediationRequestionForm = ({ node }) => {
                             </Button>}
                             </>)}
                         </FieldArray>
-                        <Button
+                        <Button type="submit"
                             disabled = {!formik.isValid}
                             sx={{float: "right", mt: "1rem", mx: "0.5rem"}}> Submit </Button>
+                        <Input name={`honeypot`} sx={{display: "none"}}></Input>
                     </Box>
                     {/* <pre>{JSON.stringify(formik.errors, null, 2)}</pre> */}
                     </Box>
