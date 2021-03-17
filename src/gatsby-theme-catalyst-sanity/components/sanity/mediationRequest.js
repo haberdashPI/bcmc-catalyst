@@ -130,9 +130,9 @@ const MediationRequestionForm = ({ node }) => {
     const personSchema = {
         first: yup.string(),
         last: yup.string(),
+        phone: yup.string().matches(/^[0-9-]*$/,"Must be a number"),
         email: yup.string().email("Must be an email"),
-        phone: yup.string().matches(/[09-]*/,"Must be a number"),
-        zip: yup.string().matches(/[0-9]*/, "Must be a number")
+        zip: yup.string().matches(/^[0-9]*$/, "Must be a number")
     }
 
     const validate = (values) => {
@@ -143,12 +143,12 @@ const MediationRequestionForm = ({ node }) => {
                 street: yup.string().required("Missing street"),
                 city: yup.string().required("Missing city"),
                 state: yup.string().required("Missing state"),
-                zip: yup.string().required("Missing zip").matches(/[0-9]*/, "Must be a number"),
+                zip: yup.string().required("Missing zip").matches(/^[0-9]*$/, "Must be a number"),
             } :
-            { phone: yup.string().required("Missing phone number").matches(/[09-]*/,"Must be a number") }
+            { phone: yup.string().required("Missing phone number").matches(/^[0-9-]*$/,"Must be a number") }
         firstPersonSchema = {...firstPersonSchema, ...{
-            first: yup.string().required("Missing name"),
-            last: yup.string().required("Missing name")
+            first: yup.string().required("Missing first name"),
+            last: yup.string().required("Missing last name")
         }}
 
         console.dir(firstPersonSchema)
@@ -171,8 +171,8 @@ const MediationRequestionForm = ({ node }) => {
             }
 
             return {}
-        }).filter(x => !isEmpty(x))
-        return isEmpty(personError) ? {} : { person: personError }
+        })
+        return personError.every(isEmpty) ? {} : { person: personError }
     }
 
     return (<><Formik
@@ -207,6 +207,13 @@ const MediationRequestionForm = ({ node }) => {
                             range(formik.values.person.length-1).map(i => <span key={"person"+i}>
                                 <Box sx={{border: "solid 1px",
                                         borderRadius: "4px", my: "1em", p: "1em"}}>
+                                    {formik.values.person.length > 2 && <Button
+                                        type='button'
+                                        variant='tertiary'
+                                        sx={{float: "right"}}
+                                        onClick={() => helpers.remove(i+1)}>
+                                        Remove
+                                    </Button>}
                                     <Heading as='h3'
                                         sx={{mb: "0.5rem", fontVariant: "small-caps"}}>
                                         Person {i+2}
@@ -214,13 +221,6 @@ const MediationRequestionForm = ({ node }) => {
                                     <PersonSubForm index={i+1}
                                         questions={node.part_questions}
                                         formik={formik}/>
-                                    {formik.values.person.length > 2 && <Button
-                                        type='button'
-                                        variant='tertiary'
-                                        sx={{m: "0.5rem"}}
-                                        onClick={() => helpers.remove(i+1)}>
-                                        Remove This Person
-                                    </Button>}
                                 </Box>
                                 {i+1 == formik.values.person.length-1 && <Button
                                     type='button'
@@ -235,7 +235,7 @@ const MediationRequestionForm = ({ node }) => {
                             disabled = {!formik.isValid}
                             sx={{float: "right", mt: "1rem", mx: "0.5rem"}}> Submit </Button>
                     </Box>
-                    <pre>{JSON.stringify(formik.errors, null, 2)}</pre>
+                    {/* <pre>{JSON.stringify(formik.errors, null, 2)}</pre> */}
                 </FormikContext.Provider>
             )}
         </Formik>
