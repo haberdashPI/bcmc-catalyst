@@ -254,7 +254,7 @@ const MediationRequestionForm = ({ node }) => {
                                                 deletedPersons.splice(i, 1)
                                                 setDeletedPersons(deletedPersons)
                                             }}>
-                                                Cofirm
+                                                Confirm
                                             </Button>
                                         </Message>
                                     )}
