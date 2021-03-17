@@ -4,6 +4,7 @@ import { Formik, FieldArray } from "formik"
 import * as yup from 'yup'
 import debounce from 'debounce-promise'
 
+
 import { jsx, Styled } from "theme-ui"
 import React, { useState, useContext } from 'react'
 import { get, merge, range, set, isEmpty } from 'lodash'
@@ -16,10 +17,12 @@ import {
     Select as ThemeUISelect,
     Button,
     Textarea as ThemeUITextarea,
+    Message
     // Radio,
     // Checkbox,
     // Slider,
 } from 'theme-ui'
+import { lighten } from '@theme-ui/color';
 
 const FormikContext = React.createContext({});
 
@@ -128,12 +131,14 @@ const MediationRequestionForm = ({ node }) => {
     setConfig({ pureSFC: true });
 
     const personSchema = {
-        first: yup.string(),
-        last: yup.string(),
+        first: yup.string().required("Missing first name"),
+        last: yup.string().required("Missing last name"),
         phone: yup.string().matches(/^[0-9-]*$/,"Must be a number"),
         email: yup.string().email("Must be an email"),
         zip: yup.string().matches(/^[0-9]*$/, "Must be a number")
     }
+
+    let [deletedPersons, setDeletedPersons] = useState([])
 
     const validate = (values) => {
 
@@ -146,10 +151,6 @@ const MediationRequestionForm = ({ node }) => {
                 zip: yup.string().required("Missing zip").matches(/^[0-9]*$/, "Must be a number"),
             } :
             { phone: yup.string().required("Missing phone number").matches(/^[0-9-]*$/,"Must be a number") }
-        firstPersonSchema = {...firstPersonSchema, ...{
-            first: yup.string().required("Missing first name"),
-            last: yup.string().required("Missing last name")
-        }}
 
         console.dir(firstPersonSchema)
 
@@ -178,7 +179,7 @@ const MediationRequestionForm = ({ node }) => {
     return (<><Formik
         initialValues = {{
             contactby: "Phone",
-            person: [ person(node.info_questions), person(node.part_questions) ],
+            person: [ person(node.info_questions) ],
         }}
         validate = {debounce(validate, 500)}
         onSubmit = { (values, actions) => {
@@ -188,6 +189,8 @@ const MediationRequestionForm = ({ node }) => {
             {formik => (
                 // <pre>{JSON.stringify(formik, null, 2)}</pre>
                 <FormikContext.Provider value={formik}>
+                    <Box sx={{/* height: "500px", overflowY: "auto" */}}>
+                        <pre>{JSON.stringify(deletedPersons, null, 2)}</pre>
                     <Box as='form' onSubmit={formik.handleSubmit}>
                         <Heading as='h2' sx={{mb: "1rem", fontVariant: "small-caps"}}>My Information</Heading>
                         <Box sx={{borderRadius: "4px", p: "1em", border: "solid 1px"}}>
@@ -203,39 +206,67 @@ const MediationRequestionForm = ({ node }) => {
                         <Heading as='h2' sx={{mt: "1rem", fontVariant: "small-caps"}}>Other Participants</Heading>
                         <p>Who would you like to schedule a mediation with?</p>
                         <FieldArray key="additionpeople" name="person">
-                            {helpers => (
-                            range(formik.values.person.length-1).map(i => <span key={"person"+i}>
-                                <Box sx={{border: "solid 1px",
-                                        borderRadius: "4px", my: "1em", p: "1em"}}>
-                                    {formik.values.person.length > 2 && <Button
-                                        type='button'
-                                        variant='tertiary'
-                                        sx={{float: "right"}}
-                                        onClick={() => helpers.remove(i+1)}>
-                                        Remove
-                                    </Button>}
-                                    <Heading as='h3'
-                                        sx={{mb: "0.5rem", fontVariant: "small-caps"}}>
-                                        Person {i+2}
-                                    </Heading>
-                                    <PersonSubForm index={i+1}
-                                        questions={node.part_questions}
-                                        formik={formik}/>
-                                </Box>
-                                {i+1 == formik.values.person.length-1 && <Button
-                                    type='button'
-                                    variant='secondary'
-                                    sx={{m: "0.5rem"}}
-                                    onClick={() => helpers.push(person(node.part_questions))}>
-                                    Add Person
-                                </Button>}
-                            </span>))}
+                            {helpers => (<>
+                                {deletedPersons && <Box sx={{position: "fixed", zIndex: 999, bottom: "1rem", right: "1rem"}}>
+                                    {deletedPersons.map((p, i) =>
+                                        <Message sx={{m: "0.5rem", display: "flex", justifyContent: "center", alignItems: "center", height: "4rem", bg: "header.background", color: "header.text"}}>
+                                            You removed {(!p.first && !p.last) ? "a person" :
+                                                (p.first+" " || "")+(p.last)}.
+                                            <Button sx={{m: "0.5rem", float: "right", fontSize: 1, p: "0.2em"}} variant="tertiary" onClick={() => {
+                                                helpers.push(p)
+                                                deletedPersons.splice(i, 1)
+                                                setDeletedPersons(deletedPersons)
+                                            }}>
+                                                Undo
+                                            </Button>
+                                            <Button sx={{m: "0.5rem", float: "right", fontSize: 1, p: "0.2em"}} variant="tertiary" onClick={() => {
+                                                deletedPersons.splice(i, 1)
+                                                setDeletedPersons(deletedPersons)
+                                            }}>
+                                                Cofirm
+                                            </Button>
+                                        </Message>
+                                    )}
+                                </Box>}
+
+                                {range(formik.values.person.length-1).map(i => <span key={"person"+i}>
+                                    <Box sx={{border: "solid 1px",
+                                            borderRadius: "4px", my: "1em", p: "1em"}}>
+                                        <Button
+                                            type='button'
+                                            variant='tertiary'
+                                            sx={{float: "right", ml: "1em", mb: "1em"}}
+                                            onClick={() => {
+                                                deletedPersons.push(formik.values.person[i+1])
+                                                setDeletedPersons(deletedPersons)
+                                                helpers.remove(i+1)
+                                            }}>
+                                            Remove
+                                        </Button>
+                                        {/* <Heading as='h3'
+                                            sx={{mb: "0.5rem", fontVariant: "small-caps"}}>
+                                            Person {i+2}
+                                        </Heading> */}
+                                        <PersonSubForm index={i+1}
+                                            questions={node.part_questions}
+                                            formik={formik}/>
+                                    </Box>
+                                </span>)}
+                            {<Button
+                                type='button'
+                                variant='secondary'
+                                sx={{m: "0.5rem"}}
+                                onClick={() => helpers.push(person(node.part_questions))}>
+                                Add Person
+                            </Button>}
+                            </>)}
                         </FieldArray>
                         <Button
                             disabled = {!formik.isValid}
                             sx={{float: "right", mt: "1rem", mx: "0.5rem"}}> Submit </Button>
                     </Box>
                     {/* <pre>{JSON.stringify(formik.errors, null, 2)}</pre> */}
+                    </Box>
                 </FormikContext.Provider>
             )}
         </Formik>
