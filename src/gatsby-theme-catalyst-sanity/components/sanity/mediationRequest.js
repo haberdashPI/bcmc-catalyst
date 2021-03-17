@@ -243,14 +243,14 @@ const MediationRequestionForm = ({ node }) => {
                                         <Message sx={{m: "0.5rem", display: "flex", justifyContent: "center", alignItems: "center", height: "4rem", bg: "header.background", color: "header.text"}}>
                                             You removed {(!p.first && !p.last) ? "a person" :
                                                 (p.first+" " || "")+(p.last)}.
-                                            <Button sx={{m: "0.5rem", float: "right", fontSize: 1, p: "0.2em"}} variant="tertiary" onClick={() => {
+                                            <Button type='button' sx={{m: "0.5rem", float: "right", fontSize: 1, p: "0.2em"}} variant="tertiary" onClick={() => {
                                                 helpers.push(p)
                                                 deletedPersons.splice(i, 1)
                                                 setDeletedPersons(deletedPersons)
                                             }}>
                                                 Undo
                                             </Button>
-                                            <Button sx={{m: "0.5rem", float: "right", fontSize: 1, p: "0.2em"}} variant="tertiary" onClick={() => {
+                                            <Button type='button' sx={{m: "0.5rem", float: "right", fontSize: 1, p: "0.2em"}} variant="tertiary" onClick={() => {
                                                 deletedPersons.splice(i, 1)
                                                 setDeletedPersons(deletedPersons)
                                             }}>
