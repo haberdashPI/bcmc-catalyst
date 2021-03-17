@@ -123,7 +123,7 @@ const PersonSubForm = ({ index, questions }) => (<>
     </Box>
     {questions && questions.map((q, i) =>
         q.length !== "long" ? <div key={"addq"+i}>
-            <Label sx={{mt: "1rem"}}>{q.text}></Label>
+            <Label sx={{mt: "1rem"}}>{q.text}</Label>
             <Input name={`person.${index}.${q.id}`}/>
         </div> : <div key={"addq"+i}>
             <Label sx={{mt: "1rem"}}>{q.text}</Label>
@@ -206,7 +206,7 @@ const MediationRequestionForm = ({ node }) => {
                 replyTo: values.person[0].email,
                 ['$data']: values
             }
-            console.dir(message)
+            // console.dir(message)
             let res = await fetch('https://api.staticforms.xyz/submit', {
                 method :'POST',
                 body: JSON.stringify(message),
