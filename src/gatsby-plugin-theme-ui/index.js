@@ -5,6 +5,7 @@ import "@fontsource/eb-garamond/400.css"
 import "@fontsource/eb-garamond/700.css"
 import "@fontsource/raleway/400.css"
 import "@fontsource/raleway/700.css"
+import { darken, lighten } from "@theme-ui/color"
 
 const theme = {
   primary: "#498046",
@@ -76,7 +77,42 @@ export default merge(BaseTheme, {
       },
     },
   },
+  buttonLink: {
+    primary: { color: "white" },
+    secondary: { color: "black" },
+    tertiary: { color: "black" }
+  },
+  buttons: {
+    primary: {
+      color: "white",
+      bg: theme.primary,
+      boxShadow: "2px 2px 3px black",
+      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" },
+      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px" }
+    },
+    secondary: {
+      color: "black",
+      bg: theme.secondary,
+      boxShadow: "2px 2px 3px black",
+      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" }
+    },
+    tertiary: {
+      color: "black",
+      bg: theme.tertiary,
+      boxShadow: "2px 2px 3px black",
+      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" }
+    },
+  },
   variants: {
+    formValidation: {
+      color: darken(theme.tertiary, 0.2),
+      fontWeight: "bold",
+      fontSize: "1rem",
+      height: "1rem",
+    },
+    formError: {
+      bg: theme.tertiary
+    },
     main: {
       my: 0
     },
