@@ -80,16 +80,21 @@ export default ({ node }) => {
           height: node.caption ? "85%" : "100%",
           transform: position === "right" ? "rotate(-5deg)" : "rotate(5deg)",
           zIndex: 0,
+          ...(node.shape === "circle" ? {} : {boxShadow: "1px 1px 2px"}),
           clipPath: node.shape === "circle" ? "circle()" : "none",
           backgroundColor: node.border === "primary" ? "primary" :
             node.border === "secondary" ? "secondary" :
             node.border === "tertiary" ? "tertiary" :
             defaultColor,
         }}></div>
+        <div sx={node.shape === "circle" ?
+          {filter: "drop-shadow(2px 2px 2px)"} :
+          {}}>
         <Img
           sx={{
             minHeight: ["300px", "auto", null, null, null],
             variant: "variants.sanityFigure",
+            ...(node.shape === "circle" ? {} : {boxShadow: "2px 2px 2px"}),
             ...(node.border === "none" ? {} : {
               paddingLeft: position === "right" ? "0%" : "5%",
               paddingRight: position === "right" ? "5%" : "0%",
@@ -105,6 +110,7 @@ export default ({ node }) => {
           alt={node.alt}
           {...(node.shape !== "circle" ? {fluid: imgProps} : {fixed: imgProps})}
         />
+        </div>
         <div sx={{zIndex: 3}}>
         {node.caption && (
           <figcaption
