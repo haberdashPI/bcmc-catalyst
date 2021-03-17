@@ -2,6 +2,7 @@
 import { setConfig, cold } from 'react-hot-loader';
 import { Formik, FieldArray } from "formik"
 import * as yup from 'yup'
+import debounce from 'debounce-promise'
 
 import { jsx, Styled } from "theme-ui"
 import React, { useState, useContext } from 'react'
@@ -124,7 +125,6 @@ function person(quests){
 }
 const MediationRequestionForm = ({ node }) => {
 
-    let [count, setCount] = useState(1)
     setConfig({ pureSFC: true });
 
     const personSchema = {
@@ -136,41 +136,43 @@ const MediationRequestionForm = ({ node }) => {
     }
 
     const validate = (values) => {
-        return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
-            let firstPersonSchema = values.contactby === "Email" ?
-                { email: yup.string().email().required("Missing email") } :
-                values.contactby === "Mail" ? {
-                    street: yup.string().required("Missing street"),
-                    city: yup.string().required("Missing city"),
-                    state: yup.string().required("Missing state"),
-                    zip: yup.string().required("Missing zip").matches(/[0-9]*/, "Must be a number"),
-                } :
-                { phone: yup.string().required("Missing phone number").matches(/[09-]*/,"Must be a number") }
-            firstPersonSchema = merge(firstPersonSchema, {
-                first: yup.string().required("Missing name"),
-                last: yup.string().required("Missing name")
-            })
 
-            const personError = values.person.map((p,i) => {
-                let schema = /* i === 0 ? merge(personSchema, firstPersonSchema) :  */personSchema
-                try {
-                    yup.object().shape(schema).validateSync(p, {
-                        abortEarly: false,
-                    });
-                } catch (error) {
-                    if (error.name !== "ValidationError") {
-                        throw error;
-                    }
-                    return error.inner.reduce((errors, currentError) => {
-                        errors = set(errors, currentError.path, currentError.message);
-                        return errors
-                    }, {})
+        let firstPersonSchema = values.contactby === "Email" ?
+            { email: yup.string().email().required("Missing email") } :
+            values.contactby === "Mail" ? {
+                street: yup.string().required("Missing street"),
+                city: yup.string().required("Missing city"),
+                state: yup.string().required("Missing state"),
+                zip: yup.string().required("Missing zip").matches(/[0-9]*/, "Must be a number"),
+            } :
+            { phone: yup.string().required("Missing phone number").matches(/[09-]*/,"Must be a number") }
+        firstPersonSchema = {...firstPersonSchema, ...{
+            first: yup.string().required("Missing name"),
+            last: yup.string().required("Missing name")
+        }}
+
+        console.dir(firstPersonSchema)
+
+        const personError = values.person.map((p,i) => {
+            let schema = i === 0 ? {...personSchema, ...firstPersonSchema} :
+                personSchema
+            try {
+                yup.object().shape(schema).validateSync(p, {
+                    abortEarly: false,
+                });
+            } catch (error) {
+                if (error.name !== "ValidationError") {
+                    throw error;
                 }
+                return error.inner.reduce((errors, currentError) => {
+                    errors = set(errors, currentError.path, currentError.message);
+                    return errors
+                }, {})
+            }
 
-                return {}
-            }).filter(x => !isEmpty(x))
-            return isEmpty(personError) ? {} : { person: personError }
-        })
+            return {}
+        }).filter(x => !isEmpty(x))
+        return isEmpty(personError) ? {} : { person: personError }
     }
 
     return (<><Formik
@@ -178,7 +180,7 @@ const MediationRequestionForm = ({ node }) => {
             contactby: "Phone",
             person: [ person(node.info_questions), person(node.part_questions) ],
         }}
-        validate = {validate}
+        validate = {debounce(validate, 500)}
         onSubmit = { (values, actions) => {
             alert(JSON.stringify(values, null, 2))
             actions.setSubmitting(false);
