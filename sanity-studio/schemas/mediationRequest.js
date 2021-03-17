@@ -5,10 +5,10 @@ export default {
     description: "By default the form includes fields for each person's phone, email and address, and it asks how the person would prefer to be contacted (which defaults to a phone call).",
     fields: [
         {
-            title: "Email form to: ",
+            title: "Access key: ",
             name: "sendto",
             type: "string",
-            description: "Form results will be sent to this email address."
+            description: "Go to https://www.staticforms.xyz/ to create an acess key, and type it in here."
         },
         {
             title: "Additional Questions",

@@ -202,7 +202,7 @@ const MediationRequestionForm = ({ node }) => {
             // TODO: define a reasonable react-ish response
             // to complete the form (showing a message, etc...)
             let message = {
-                accessKey: 'f302bda2-f9c0-4506-9220-e6dcbd672a1b',
+                accessKey: node.sendto,
                 replyTo: values.person[0].email,
                 ['$data']: values
             }
