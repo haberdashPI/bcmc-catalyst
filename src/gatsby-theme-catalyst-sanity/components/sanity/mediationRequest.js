@@ -21,7 +21,7 @@ import {
     // Checkbox,
     // Slider,
 } from 'theme-ui'
-import { darken, lighten } from '@theme-ui/color';
+import { darken } from '@theme-ui/color';
 
 function flatten(obj, roots = [], sep = '.'){
   return Object
@@ -258,7 +258,7 @@ function DeletedList( {children, deleted, helpers, setDeleted} ){
     </Box>)
 }
 
-const MediationRequestionForm = ({ node }) => {
+const MediationRequestForm = ({ node }) => {
 
     let [deletedPersons, setDeletedPersons] = useState(List())
 
@@ -343,4 +343,4 @@ const MediationRequestionForm = ({ node }) => {
     </>)
 }
 
-export default MediationRequestionForm
+export default MediationRequestForm
