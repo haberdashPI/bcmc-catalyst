@@ -40,7 +40,7 @@ export default ({ node }) => {
       marginRight: "0em",
       marginBottom: "1em",
     }),
-    width: node.shape === "circle" ? circleWidth+"px" : "50%",
+    width: node.shape === "circle" ? circleWidth+"px" : ["100%", null, "50%", null, null]
   }
 
   const leftsx = {
@@ -51,7 +51,7 @@ export default ({ node }) => {
     }),
     float: "left",
     position: "relative",
-    width: node.shape === "circle" ? circleWidth+"px" : "50%",
+    width: node.shape === "circle" ? circleWidth+"px" : ["100%", null, "50%", null, null],
   }
 
   const centersx = {
@@ -62,7 +62,7 @@ export default ({ node }) => {
     }),
     // float: "left",
     position: "relative",
-    width: node.shape === "circle" ? circleWidth+"px" : "50%",
+    width: node.shape === "circle" ? circleWidth+"px" : ["100%", null, "50%", null, null],
   }
 
   return (

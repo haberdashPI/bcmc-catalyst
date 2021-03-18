@@ -16,7 +16,7 @@ const ImageList = ({ node }) => {
         gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
         gridGap: "1rem"
     }}>
-        {node.items.map(item => <div>
+        {node.items.map((item, i) => <div key={"item"+i}>
             {item.image && <Figure node={item.image}/>}
             {item.title && <Styled.h5 sx={{variant: "imageListTitle", fontFamily: "body", fontWeight: "bold"}}>
                 {item.title}

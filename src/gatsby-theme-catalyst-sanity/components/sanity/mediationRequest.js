@@ -218,7 +218,7 @@ function DeletedList( {children, deleted, helpers, setDeleted} ){
         bottom: "1rem",
         right: "1rem"}}>
         {deleted.map((p, i) =>
-            <Message sx={{
+            <Message key={"message"+i} sx={{
                 m: "0.5rem",
                 display: "flex",
                 justifyContent: "center",

@@ -29,8 +29,8 @@ const ButtonRow = ({ node }) => {
             marginLeft: "auto",
             marginRight: "auto",
         } : {float: "left"}}>
-        {node.buttons && node.buttons.map(b =>
-            <Button sx={{px: "1em", my: "0.25em", mx: "0.5em", bg: (b.type || "primary")}}>
+        {node.buttons && node.buttons.map((b, i) =>
+            <Button key={"button"+i} sx={{px: "1em", my: "0.5em", mx: "0.5em", bg: (b.type || "primary")}}>
             {b._type === "urlButton" ? (
                 <Styled.a sx={{variant: "buttonLink."+(b.type || "primary"), textDecoration: "none", ":hover": {textDecoration: "none"}}}
                     href={b.link}>
