@@ -57,7 +57,7 @@ export default ({ node }) => {
                 right: "50%",
                 zIndex: 0,
             }}>
-          <Slider dots={false} infinite={true} lazyLoad={'ondemand'} fade={true} speed={2000} arrows={false} autoplay={true} autoplaySpeed={5000}>
+          <Slider dots={false} infinite={true} lazyLoad={'ondemand'} fade={true} cssEase="ease-in" speed={2000} arrows={false} autoplay={true} autoplaySpeed={6000}>
             {fluidProps.map(props => <Img fluid={props}/>)}
           </Slider>
         </div>
