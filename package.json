@@ -16,6 +16,7 @@
     "gatsby-theme-catalyst-header-side": "^2.0.4",
     "gatsby-theme-catalyst-header-top": "^1.5.9",
     "gatsby-theme-catalyst-sanity": "^4.0.10",
+    "immutable": "^4.0.0-rc.12",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-slick": "^0.28.1",

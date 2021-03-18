@@ -1,9 +1,8 @@
 /** @jsx jsx */
-import { setConfig, cold } from 'react-hot-loader';
 import { Formik, FieldArray } from "formik"
 import * as yup from 'yup'
 import debounce from 'debounce-promise'
-
+import { List } from 'immutable'
 
 import { jsx, Styled } from "theme-ui"
 import React, { useState, useContext } from 'react'
@@ -144,22 +143,17 @@ function person(quests){
 
     return result
 }
-const MediationRequestionForm = ({ node }) => {
 
-    setConfig({ pureSFC: true });
+const personSchema = {
+    first: yup.string().required("Missing first name"),
+    last: yup.string().required("Missing last name"),
+    phone: yup.string().matches(/^[0-9-]*$/,"Must be a number"),
+    email: yup.string().email("Must be an email"),
+    zip: yup.string().matches(/^[0-9]*$/, "Must be a number")
+}
 
-    const personSchema = {
-        first: yup.string().required("Missing first name"),
-        last: yup.string().required("Missing last name"),
-        phone: yup.string().matches(/^[0-9-]*$/,"Must be a number"),
-        email: yup.string().email("Must be an email"),
-        zip: yup.string().matches(/^[0-9]*$/, "Must be a number")
-    }
-
-    let [deletedPersons, setDeletedPersons] = useState([])
-
-    const validate = (values) => {
-
+function validateFn(node){
+    return (values) => {
         let firstPersonSchema = values.contactby === "Email" ?
             { email: yup.string().email().required("Missing email") } :
             values.contactby === "Mail" ? {
@@ -191,39 +185,96 @@ const MediationRequestionForm = ({ node }) => {
         })
         return personError.every(isEmpty) ? {} : { person: personError }
     }
+}
+
+function onSubmitFn(node){
+    return async (values) => {
+        // TODO: define a reasonable react-ish response
+        // to complete the form (showing a message, etc...)
+        let message = {
+            accessKey: node.sendto,
+            replyTo: values.person[0].email,
+            ['$data']: values
+        }
+        // console.dir(message)
+        let res = await fetch('https://api.staticforms.xyz/submit', {
+            method :'POST',
+            body: JSON.stringify(message),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const json = await res.json();
+        if(json.success){
+            alert("Your form has been submitted!")
+        } else {
+            alert(json.message)
+        }
+    }
+}
+
+function DeletedList( {children, deleted, helpers, setDeleted} ){
+    return (<Box sx={{
+        position: "fixed",
+        zIndex: 999,
+        bottom: "1rem",
+        right: "1rem"}}>
+        {deleted.map((p, i) =>
+            <Message sx={{
+                m: "0.5rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "4rem",
+                bg: "background",
+                boxShadow: "0px 0px 4px",
+                color: "text"}}>
+
+                {children(p, i)}
+                <Button type='button' sx={{
+                        m: "0.5rem",
+                        float: "right",
+                        fontSize: 1,
+                        p: "0.2em"
+                    }}
+                    variant="secondary"
+                    onClick={() => {
+                        helpers.push(p)
+                        setDeleted(deleted.delete(i))
+                }}>
+                    Undo
+                </Button>
+                <Button type='button' sx={{
+                        m: "0.5rem",
+                        float: "right",
+                        fontSize: 1,
+                        p: "0.2em"}}
+                    variant="secondary"
+                    onClick={() => {
+                        setDeleted(deleted.delete(i))
+                }}>
+                    Confirm
+                </Button>
+            </Message>)}
+    </Box>)
+}
+
+const MediationRequestionForm = ({ node }) => {
+
+    let [deletedPersons, setDeletedPersons] = useState(List())
 
     return (<><Formik
         initialValues = {{
             contactby: "Phone",
             person: [ person(node.info_questions) ],
         }}
-        validate = {debounce(validate, 500)}
-        onSubmit = { async (values, actions) => {
-            // TODO: define a reasonable react-ish response
-            // to complete the form (showing a message, etc...)
-            let message = {
-                accessKey: node.sendto,
-                replyTo: values.person[0].email,
-                ['$data']: values
-            }
-            // console.dir(message)
-            let res = await fetch('https://api.staticforms.xyz/submit', {
-                method :'POST',
-                body: JSON.stringify(message),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const json = await res.json();
-            if(json.success){
-                alert("Your form has been submitted!")
-            } else {
-                alert(json.message)
-            }
-        }}>
+        validate = {debounce(validateFn(node), 500)}
+        onSubmit = {onSubmitFn(node)}>
             {formik => (
                 <FormikContext.Provider value={formik}>
                     <Box sx={{/* height: "500px", overflowY: "auto" */}}>
                     <Box as='form' onSubmit={formik.handleSubmit}>
-                        <Heading as='h2' sx={{mb: "1rem", fontVariant: "small-caps"}}>My Information</Heading>
+                        <Heading as='h2' sx={{mb: "1rem", fontVariant: "small-caps"}}>
+                            My Information
+                        </Heading>
                         <Box sx={{borderRadius: "4px", p: "1em", border: "solid 1px"}}>
                             <Label>Please reach me by</Label>
                             <Select name='contactby'>
@@ -234,32 +285,18 @@ const MediationRequestionForm = ({ node }) => {
                             <PersonSubForm key="personfrist" index={0}
                                 questions={node.info_questions} formik={formik}/>
                         </Box>
-                        <Heading as='h2' sx={{mt: "1rem", fontVariant: "small-caps"}}>Other Participants</Heading>
+                        <Heading as='h2' sx={{mt: "1rem", fontVariant: "small-caps"}}>
+                            Other Participants
+                        </Heading>
                         <p>Who would you like to schedule a mediation with?</p>
                         <FieldArray key="additionpeople" name="person">
                             {helpers => (<>
-                                {deletedPersons && <Box sx={{position: "fixed", zIndex: 999, bottom: "1rem", right: "1rem"}}>
-                                    {deletedPersons.map((p, i) =>
-                                        <Message sx={{m: "0.5rem", display: "flex", justifyContent: "center", alignItems: "center", height: "4rem", bg: "header.background", color: "header.text"}}>
-                                            You removed {(!p.first && !p.last) ? "a person" :
-                                                (p.first+" " || "")+(p.last)}.
-                                            <Button type='button' sx={{m: "0.5rem", float: "right", fontSize: 1, p: "0.2em"}} variant="tertiary" onClick={() => {
-                                                helpers.push(p)
-                                                deletedPersons.splice(i, 1)
-                                                setDeletedPersons(deletedPersons)
-                                            }}>
-                                                Undo
-                                            </Button>
-                                            <Button type='button' sx={{m: "0.5rem", float: "right", fontSize: 1, p: "0.2em"}} variant="tertiary" onClick={() => {
-                                                deletedPersons.splice(i, 1)
-                                                setDeletedPersons(deletedPersons)
-                                            }}>
-                                                Confirm
-                                            </Button>
-                                        </Message>
-                                    )}
-                                </Box>}
-
+                                {deletedPersons.size > 0 &&
+                                <DeletedList helpers={helpers} deleted={deletedPersons}
+                                    setDeleted={setDeletedPersons}>
+                                    {p => <span>You removed {(!p.first && !p.last) ? "a person" :
+                                        (p.first+" " || "")+(p.last)}.</span>}
+                                </DeletedList>}
                                 {range(formik.values.person.length-1).map(i => <span key={"person"+i}>
                                     <Box sx={{border: "solid 1px",
                                             borderRadius: "4px", my: "1em", p: "1em"}}>
@@ -268,8 +305,8 @@ const MediationRequestionForm = ({ node }) => {
                                             variant='tertiary'
                                             sx={{float: "right", ml: "1em", mb: "1em"}}
                                             onClick={() => {
-                                                deletedPersons.push(formik.values.person[i+1])
-                                                setDeletedPersons(deletedPersons)
+                                                setDeletedPersons(deletedPersons.push(
+                                                    formik.values.person[i+1]))
                                                 helpers.remove(i+1)
                                             }}>
                                             Remove
@@ -304,6 +341,5 @@ const MediationRequestionForm = ({ node }) => {
         </Formik>
     </>)
 }
-cold(MediationRequestionForm)
 
 export default MediationRequestionForm
