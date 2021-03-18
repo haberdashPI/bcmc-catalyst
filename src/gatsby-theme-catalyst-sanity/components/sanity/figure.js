@@ -62,7 +62,7 @@ export default ({ node }) => {
     }),
     // float: "left",
     position: "relative",
-    width: node.shape === "circle" ? circleWidth+"px" : ["100%", null, "50%", null, null],
+    width: node.shape === "circle" ? circleWidth+"px" : ["100%", null, "75%", null, null],
   }
 
   return (
@@ -77,7 +77,7 @@ export default ({ node }) => {
           top: node.shape === "circle" ? "-12px" : "0%",
           left: node.shape === "circle" ? "-12px" : "-5%",
           width: node.shape === "circle" ? "100%" : "90%",
-          height: node.caption ? "85%" : "100%",
+          height: node.caption ? "calc(100% - 4rem)" : "100%",
           transform: position === "right" ? "rotate(-5deg)" : "rotate(5deg)",
           zIndex: 0,
           ...(node.shape === "circle" ? {} : {boxShadow: "1px 1px 2px"}),
@@ -117,9 +117,9 @@ export default ({ node }) => {
             sx={{
               color: "grey",
               fontSize: "small",
-              textAlign: "center",
+              textAlign: "left",
               zIndex: 3,
-              mt: "5%",
+              mt: "2rem",
               pr: "15%",
             }}
           >
