@@ -21,7 +21,7 @@ import {
     // Checkbox,
     // Slider,
 } from 'theme-ui'
-import { lighten } from '@theme-ui/color';
+import { darken, lighten } from '@theme-ui/color';
 
 function flatten(obj, roots = [], sep = '.'){
   return Object
@@ -224,7 +224,8 @@ function DeletedList( {children, deleted, helpers, setDeleted} ){
                 justifyContent: "center",
                 alignItems: "center",
                 height: "4rem",
-                bg: "background",
+                bg: "tertiary",
+                borderLeftColor: darken("tertiary", 0.25),
                 boxShadow: "0px 0px 4px",
                 color: "text"}}>
 
@@ -235,7 +236,7 @@ function DeletedList( {children, deleted, helpers, setDeleted} ){
                         fontSize: 1,
                         p: "0.2em"
                     }}
-                    variant="secondary"
+                    variant="tertiary"
                     onClick={() => {
                         helpers.push(p)
                         setDeleted(deleted.delete(i))
@@ -247,7 +248,7 @@ function DeletedList( {children, deleted, helpers, setDeleted} ){
                         float: "right",
                         fontSize: 1,
                         p: "0.2em"}}
-                    variant="secondary"
+                    variant="tertiary"
                     onClick={() => {
                         setDeleted(deleted.delete(i))
                 }}>

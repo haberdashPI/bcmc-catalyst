@@ -55,8 +55,7 @@ export default merge(BaseTheme, {
         background: "#222",
         text: baseColors.gray[1],
         textGray: "#666",
-        primary: theme.primary,
-        secondary: theme.secondary,
+        ...theme,
         accent: baseColors.gray[8],
         highlight: baseColors.orange[5],
         muted: baseColors.gray[8],
@@ -88,20 +87,22 @@ export default merge(BaseTheme, {
       bg: theme.primary,
       boxShadow: "2px 2px 3px black",
       ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" },
-      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px" }
-    },
+      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px" },
+      },
     secondary: {
       color: "black",
       bg: theme.secondary,
       boxShadow: "2px 2px 3px black",
-      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" }
-    },
+      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" },
+      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px" },
+      },
     tertiary: {
       color: "black",
       bg: theme.tertiary,
       boxShadow: "2px 2px 3px black",
-      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" }
-    },
+      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" },
+      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px" },
+      },
   },
   variants: {
     formValidation: {
