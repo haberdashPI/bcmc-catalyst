@@ -8,6 +8,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type"
 import blockContent from "./blockContent"
 import excerptBlockContent from "./excerptBlockContent"
 import mediationRequest from "./mediationRequest"
+import volunteerForm from "./volunteerForm"
 import figure from "./figure"
 import figureWide from "./figureWide"
 import hero from "./hero"
@@ -42,6 +43,7 @@ export default createSchema({
     // The following are document types which will appear
     // in the studio.
     mediationRequest,
+    volunteerForm,
     question,
     blockContent,
     hero,
