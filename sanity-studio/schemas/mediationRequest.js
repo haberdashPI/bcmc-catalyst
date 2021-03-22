@@ -13,6 +13,7 @@ export default {
         {
             title: "Submit Goes To",
             name: "success_page",
+            description: "Once the visitor has succesfully hit submit, this is the page the viewer sees.",
             type: "reference",
             to: [{type: "page"}]
         },
