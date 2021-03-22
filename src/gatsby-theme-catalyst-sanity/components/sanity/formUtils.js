@@ -47,9 +47,11 @@ export const Form = ({ children, ...props }) => {
                     <Input name={`honeypot`} sx={{display: "none"}}></Input>
                     {children}
                     <Button type="button" sx={{visibility: "hidden", my: "1rem"}} disabled={true}>Submit</Button>
+                    <Box sx={{position: "absolute", right: "0", bottom: "1rem"}}>
                     <Button sx={{my: "1rem"}} type="submit"
                         disabled = {!formik.isValid}
-                        sx={{position: "absolute", right: "0", bottom: "1rem", mt: "1rem", mx: "0.5rem"}}> Submit </Button>
+                        sx={{mt: "1rem", mx: "0.5rem"}}> Submit </Button>
+                    </Box>
                 </Box>
             </FormikContext.Provider>
         </>)}
