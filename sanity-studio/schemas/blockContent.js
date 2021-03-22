@@ -99,6 +99,10 @@ export default {
     {
       type: "mediationRequest",
       title: "Mediation Request Form"
+    },
+    {
+      type: "volunteerForm",
+      title: "Volunteer Form"
     }
   ],
 }

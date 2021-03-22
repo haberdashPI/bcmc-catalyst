@@ -40,19 +40,19 @@ export const personSchema = {
 }
 
 export const Form = ({ children, ...props }) => {
-    return(<Formik {...props}>
+    return(<Box sx={{my: "1rem"}}><Formik {...props}>
         {formik => (<>
             <FormikContext.Provider value={formik}>
                 <Box as='form' onSubmit={formik.handleSubmit}>
+                    <Input name={`honeypot`} sx={{display: "none"}}></Input>
                     {children}
+                    <Button type="submit"
+                        disabled = {!formik.isValid}
+                        sx={{float: "right", mt: "1rem", mx: "0.5rem"}}> Submit </Button>
                 </Box>
             </FormikContext.Provider>
-            <Button type="submit"
-                disabled = {!formik.isValid}
-                sx={{float: "right", mt: "1rem", mx: "0.5rem"}}> Submit </Button>
-            <Input name={`honeypot`} sx={{display: "none"}}></Input>
         </>)}
-    </Formik>)
+    </Formik></Box>)
 }
 
 export const ListOf = ({name, children, defaultItem, deleteMessageFn}) => {
@@ -99,12 +99,18 @@ export const Input = ({name, ...props}) => {
 
 export const Textarea = ({name, ...props}) => {
     const formik = useContext(FormikContext)
+    const error = get(formik.touched, name) && get(formik.errors, name)
     return <>
         <ThemeUITextarea name={name} id={name} onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={get(formik.values, name)} {...props}/>
-        <Box variant="formValidation">{get(formik.errors, name)}</Box>
+        <Box variant="formValidation">{error}</Box>
     </>
+}
+
+export const ShowFormikData = () => {
+    const formik = useContext(FormikContext)
+    return (<pre>{JSON.stringify(formik, null, 2)}</pre>)
 }
 
 export const Select = ({name, ...props}) => {
