@@ -59,7 +59,7 @@ export default ({ node }) => {
             }}>
           {fluidProps &&
           <Slider dots={false} infinite={true} lazyLoad={'ondemand'} fade={true} cssEase="ease-in" speed={2000} arrows={false} autoplay={true} autoplaySpeed={6000}>
-            {fluidProps.map(props => <Img fluid={props}/>)}
+            {fluidProps.map((props, i) => <Img key={"image"+i} fluid={props}/>)}
           </Slider>}
         </div>
         <div sx={{
