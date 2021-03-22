@@ -7,7 +7,7 @@ import Hero from "./hero"
 import ButtonRow from "./buttonRow.js"
 import ImageList from "./imageList.js"
 import { LoadableMediationForm, LoadableVolunteerForm } from "./loadableForms.js"
-import VolunteerForm from "./volunteerForm.js"
+// import VolunteerForm from "./volunteerForm.js"
 
 const headerId = (id) => {
   return id
@@ -26,7 +26,7 @@ const serializers = {
     buttonRow: ButtonRow,
     imageList: ImageList,
     mediationRequest: LoadableMediationForm,
-    volunteerForm: VolunteerForm,
+    volunteerForm: LoadableVolunteerForm,
     block(props) {
       switch (props.node.style) {
         case "h1":
