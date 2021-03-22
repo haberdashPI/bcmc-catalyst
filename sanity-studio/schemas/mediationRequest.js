@@ -11,6 +11,12 @@ export default {
             description: "Go to https://www.staticforms.xyz/ to create an acess key, and type it in here."
         },
         {
+            title: "Submit Goes To",
+            name: "success_page",
+            type: "reference",
+            to: [{type: "page"}]
+        },
+        {
             title: "Additional Questions",
             description: "Additional questions to include in the form.",
             name: "info_questions",
@@ -23,6 +29,6 @@ export default {
             name: "part_questions",
             type: "array",
             of: [{type: "question"}]
-        }
+        },
     ]
 }

@@ -6,6 +6,7 @@ import { Select, PersonSubForm, Form, ListOf, person, personSchema } from "./for
 import { jsx, Styled } from "theme-ui"
 import React from 'react'
 import { set, isEmpty } from 'lodash'
+import { navigate } from 'gatsby'
 import {
     Box,
     Label,
@@ -13,8 +14,9 @@ import {
     Button,
 } from 'theme-ui'
 import { darken } from '@theme-ui/color';
+import { useSlugIndex } from './util'
 
-function validateFn(node){
+function validateFn(node, slugs){
     return (values) => {
         let firstPersonSchema = values.contactby === "Email" ?
             { email: yup.string().email().required("Missing email") } :
@@ -56,15 +58,17 @@ function renameKeys(obj, renamefn){
     }), {})
 }
 
-function onSubmitFn(node){
+function onSubmitFn(node, slugs){
     return async (values) => {
-        // TODO: define a reasonable react-ish response
-        // to complete the form (showing a message, etc...)
+        if(values.honeypot){
+            return
+        }
         let message = {
             accessKey: node.sendto,
             replyTo: values.person[0].email,
+            ['$formType']: "Mediation Request",
             ...(values.person.
-                map((p, i) => renameKeys(p, str => `Person ${i+1}: \$${str}`)).
+                map((p, i) => renameKeys(p, str => `\$Person ${i+1}: ${str}`)).
                 reduce((result, item) => {return {...result, ...item}}))
         }
         // console.dir(message)
@@ -75,7 +79,8 @@ function onSubmitFn(node){
         });
         const json = await res.json();
         if(json.success){
-            alert("Your form has been submitted!")
+            node.success_page && node.success_page._ref &&
+                navigate(slugs[node.success_page._ref])
         } else {
             alert(json.message)
         }
@@ -83,13 +88,15 @@ function onSubmitFn(node){
 }
 
 const MediationRequestForm = ({ node }) => {
+    const slugs = useSlugIndex()
+
     return (<Form
         initialValues = {{
             contactby: "Phone",
             person: [ person(node.info_questions) ],
         }}
         validate = {debounce(validateFn(node), 250)}
-        onSubmit = {onSubmitFn(node)}>
+        onSubmit = {onSubmitFn(node, slugs)}>
             <ListOf name="person" defaultItem={person(node.part_questions)}
                     deletedMessageFn={p => <span>
                         You removed {(!p.first && !p.last) ? "a person" :

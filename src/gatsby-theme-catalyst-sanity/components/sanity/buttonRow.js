@@ -1,23 +1,10 @@
 /** @jsx jsx */
 import { jsx, Styled, Button } from "theme-ui"
 import { useStaticQuery, graphql, Link } from "gatsby"
+import { useSlugIndex } from "./util"
 
 const ButtonRow = ({ node }) => {
-    const result = useStaticQuery(graphql`
-        query PageSlugQuery {
-            allSanityPage {
-                nodes {
-                    _rawSlug
-                    _id
-                }
-            }
-        }
-    `)
-    var slugs = {}
-
-    result.allSanityPage.nodes.forEach(node => {
-        slugs[node._id] = node._rawSlug.current.replace(/^\/*/, `/`)
-    })
+    const slugs = useSlugIndex()
 
     return (
         <div sx={{display: "block", minHeight: "2.5em"}}>
