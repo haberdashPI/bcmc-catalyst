@@ -49,6 +49,13 @@ function validateFn(node){
     }
 }
 
+function renameKeys(obj, renamefn){
+    return Object.keys(obj).reduce((result, key) => ({
+        ...result,
+        ...{ [renamefn(key)]: obj[key] }
+    }), {})
+}
+
 function onSubmitFn(node){
     return async (values) => {
         // TODO: define a reasonable react-ish response
@@ -56,7 +63,9 @@ function onSubmitFn(node){
         let message = {
             accessKey: node.sendto,
             replyTo: values.person[0].email,
-            ['$data']: values
+            ...(values.person.
+                map((p, i) => renameKeys(p, str => `Person ${i+1}: \$${str}`)).
+                reduce((result, item) => {return {...result, ...item}}))
         }
         // console.dir(message)
         let res = await fetch('https://api.staticforms.xyz/submit', {
@@ -86,7 +95,7 @@ const MediationRequestForm = ({ node }) => {
                         You removed {(!p.first && !p.last) ? "a person" :
                             (p.first+" " || "")+(p.last)}.</span>}>
 
-                {(person, i, deleteFn) => (<span key={"person"+1}>
+                {(person, i, deleteFn) => (<span key={"person"+i}>
                     {i === 0 && <>
                         <Heading as='h2' sx={{mb: "1rem", fontVariant: "small-caps"}}>
                             My Information
