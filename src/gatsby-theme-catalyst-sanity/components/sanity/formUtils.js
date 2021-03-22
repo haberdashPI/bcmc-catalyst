@@ -228,3 +228,9 @@ function DeletedList( {children, deleted, onAdd, setDeleted} ){
     </Box>)
 }
 
+export function renameKeys(obj, renamefn){
+    return Object.keys(obj).reduce((result, key) => ({
+        ...result,
+        ...{ [renamefn(key)]: obj[key] }
+    }), {})
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import debounce from 'debounce-promise'
-import { Form, Select, PersonSubForm, person, personSchema, ShowFormikData } from "./formUtils"
+import { Form, Select, PersonSubForm, person, personSchema, ShowFormikData, renameKeys } from "./formUtils"
 import { set, isEmpty } from 'lodash'
 import * as yup from 'yup'
 import {
@@ -49,6 +49,7 @@ function onSubmitFn(node, slugs){
         let message = {
             accessKey: node.sendto,
             replyTo: values.person.email,
+            formType: "Volunteer Form",
             ...(renameKeys(values.person, str => `\$${str}`))
         }
         // console.dir(message)
@@ -66,7 +67,6 @@ function onSubmitFn(node, slugs){
         }
     }
 }
-
 
 const VolunteerForm = ({ node }) => {
     const slugs = useSlugIndex()

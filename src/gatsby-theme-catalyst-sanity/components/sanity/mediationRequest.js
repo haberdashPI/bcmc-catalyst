@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import * as yup from 'yup'
 import debounce from 'debounce-promise'
-import { Select, PersonSubForm, Form, ListOf, person, personSchema } from "./formUtils"
+import { Select, PersonSubForm, Form, ListOf, person, personSchema, renameKeys } from "./formUtils"
 
 import { jsx, Styled } from "theme-ui"
 import React from 'react'
@@ -51,12 +51,6 @@ function validateFn(node, slugs){
     }
 }
 
-function renameKeys(obj, renamefn){
-    return Object.keys(obj).reduce((result, key) => ({
-        ...result,
-        ...{ [renamefn(key)]: obj[key] }
-    }), {})
-}
 
 function onSubmitFn(node, slugs){
     return async (values) => {
