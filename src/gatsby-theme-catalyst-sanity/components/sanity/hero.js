@@ -27,7 +27,7 @@ export default ({ node }) => {
   const { sanityProjectId, sanityDataset } = useSanityConfig()
   const sanityConfig = { projectId: sanityProjectId, dataset: sanityDataset }
 
-  const fluidProps = shuffleArray(node.images).map(image => getFluidGatsbyImage(
+  const fluidProps = node.images && shuffleArray(node.images).map(image => getFluidGatsbyImage(
     image.asset._ref,
     { maxWidth: 900 },
     sanityConfig
@@ -57,9 +57,10 @@ export default ({ node }) => {
                 right: "50%",
                 zIndex: 0,
             }}>
+          {fluidProps &&
           <Slider dots={false} infinite={true} lazyLoad={'ondemand'} fade={true} cssEase="ease-in" speed={2000} arrows={false} autoplay={true} autoplaySpeed={6000}>
             {fluidProps.map(props => <Img fluid={props}/>)}
-          </Slider>
+          </Slider>}
         </div>
         <div sx={{
                 position: "absolute",
