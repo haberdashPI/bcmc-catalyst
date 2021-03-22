@@ -40,19 +40,20 @@ export const personSchema = {
 }
 
 export const Form = ({ children, ...props }) => {
-    return(<Box sx={{my: "1rem"}}><Formik {...props}>
+    return(<Formik {...props}>
         {formik => (<>
             <FormikContext.Provider value={formik}>
-                <Box as='form' onSubmit={formik.handleSubmit}>
+                <Box sx={{position: "relative"}} as='form' onSubmit={formik.handleSubmit}>
                     <Input name={`honeypot`} sx={{display: "none"}}></Input>
                     {children}
-                    <Button type="submit"
+                    <Button type="button" sx={{visibility: "hidden", my: "1rem"}} disabled={true}>Submit</Button>
+                    <Button sx={{my: "1rem"}} type="submit"
                         disabled = {!formik.isValid}
-                        sx={{float: "right", mt: "1rem", mx: "0.5rem"}}> Submit </Button>
+                        sx={{position: "absolute", right: "0", bottom: "1rem", mt: "1rem", mx: "0.5rem"}}> Submit </Button>
                 </Box>
             </FormikContext.Provider>
         </>)}
-    </Formik></Box>)
+    </Formik>)
 }
 
 export const ListOf = ({name, children, defaultItem, deleteMessageFn}) => {

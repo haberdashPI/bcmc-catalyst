@@ -25,9 +25,8 @@ const ButtonRow = ({ node }) => {
         node.align === "left" ? {display: "block", float: "left"} :
         node.align === "right" ? {display: "block", float: "right"} :
         node.align === "center" ? {
-            display: "block",
-            marginLeft: "auto",
-            marginRight: "auto",
+            display: "flex",
+            justifyContent: "center",
         } : {float: "left"}}>
         {node.buttons && node.buttons.map((b, i) =>
             <Button key={"button"+i} sx={{px: "1em", my: "0.5em", mx: "0.5em", bg: (b.type || "primary")}}>
