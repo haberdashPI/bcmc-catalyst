@@ -9,6 +9,8 @@ import {
     Heading,
     Button,
 } from 'theme-ui'
+import { navigate } from 'gatsby-link'
+import { useSlugIndex } from './util'
 
 function validate(values){
     let schema = values.contactby === "Email" ?
@@ -39,14 +41,15 @@ function validate(values){
     return {}
 }
 
-function onSubmitFn(node){
+function onSubmitFn(node, slugs){
     return async (values) => {
-        // TODO: define a reasonable react-ish response
-        // to complete the form (showing a message, etc...)
+        if(values.honeypot){
+            return
+        }
         let message = {
             accessKey: node.sendto,
             replyTo: values.person.email,
-            ['$data']: values
+            ...(renameKeys(values.person, str => `\$${str}`))
         }
         // console.dir(message)
         let res = await fetch('https://api.staticforms.xyz/submit', {
@@ -56,7 +59,8 @@ function onSubmitFn(node){
         });
         const json = await res.json();
         if(json.success){
-            alert("Your form has been submitted!")
+            node.success_page && node.success_page._ref &&
+                navigate(slugs[node.success_page._ref])
         } else {
             alert(json.message)
         }
@@ -65,13 +69,15 @@ function onSubmitFn(node){
 
 
 const VolunteerForm = ({ node }) => {
+    const slugs = useSlugIndex()
+
     return (<Form
         initialValues = {{
             contactby: "Phone",
             person: person(node.info_questions),
         }}
         validate = {debounce(validate, 250)}
-        onSubmit = {onSubmitFn(node)}>
+        onSubmit = {onSubmitFn(node, slugs)}>
             {/* <ShowFormikData/> */}
             <Label>Please reach me by</Label>
             <Select name='contactby'>
