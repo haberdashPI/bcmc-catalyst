@@ -9,12 +9,14 @@ import {
     Select as ThemeUISelect,
     Button,
     Textarea as ThemeUITextarea,
-    Message
+    Message,
+    Close
 } from 'theme-ui'
 import { List } from 'immutable'
 import { get } from 'lodash'
 import * as yup from 'yup'
 import { Formik, FieldArray } from "formik"
+import { darken } from '@theme-ui/color'
 
 const FormikContext = React.createContext({});
 
@@ -58,13 +60,13 @@ export const Form = ({ children, ...props }) => {
     </Formik>)
 }
 
-export const ListOf = ({name, children, defaultItem, deleteMessageFn}) => {
+export const ListOf = ({name, children, defaultItem, deletedMessageFn}) => {
     let [deletedItems, setDeletedItems] = useState(List())
     const formik = useContext(FormikContext)
     const items = get(formik.values, name)
     function buildDeleteFn(helpers){ return (i) => {
         setDeletedItems(deletedItems.push(items[i]))
-        helpers.remove(i+1)
+        helpers.remove(i)
     }}
 
     return (<FieldArray name={name}>
@@ -72,7 +74,7 @@ export const ListOf = ({name, children, defaultItem, deleteMessageFn}) => {
             {deletedItems.size > 0 &&
             <DeletedList onAdd={p => helpers.push(p)}
                 deleted={deletedItems} setDeleted={setDeletedItems}>
-                {p => deleteMessageFn(p)}
+                {p => deletedMessageFn(p)}
             </DeletedList>}
             {items.map((item, i) => children(item, i, buildDeleteFn(helpers)))}
             <Button
@@ -213,17 +215,11 @@ function DeletedList( {children, deleted, onAdd, setDeleted} ){
                 }}>
                     Undo
                 </Button>
-                <Button type='button' sx={{
-                        m: "0.5rem",
-                        float: "right",
-                        fontSize: 1,
-                        p: "0.2em"}}
-                    variant="tertiary"
-                    onClick={() => {
-                        setDeleted(deleted.delete(i))
-                }}>
-                    Confirm
-                </Button>
+                <Close sx={{m: "0", p: "0",
+                    float: "right",
+                    fontSize: 1,
+                    p: "0.2em"}}
+                    onClick={() => {setDeleted(deleted.delete(i))}}/>
             </Message>)}
     </Box>)
 }

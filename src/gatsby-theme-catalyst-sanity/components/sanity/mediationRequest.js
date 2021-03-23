@@ -11,6 +11,7 @@ import {
     Box,
     Label,
     Heading,
+    Close,
     Button,
 } from 'theme-ui'
 import { darken } from '@theme-ui/color';
@@ -110,14 +111,9 @@ const MediationRequestForm = ({ node }) => {
                     </>}
                     <Box sx={{border: "solid 1px",
                         borderRadius: "4px", my: "1em", p: "1em"}}>
-                        {i > 1 && <Button
-                            type='button'
-                            variant='tertiary'
-                            sx={{float: "right", ml: "1em", mb: "1em"}}
-                            onClick={() => {
-                            }}>
-                            Remove
-                        </Button>}
+                        {i > 0 && <Close
+                            sx={{p: "0", float: "right", m: "0"}}
+                            onClick={() => deleteFn(i)}/>}
                         {i === 0 && <>
                             <Label>Please reach me by</Label>
                             <Select name='contactby'>

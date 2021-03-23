@@ -82,6 +82,9 @@ export default merge(BaseTheme, {
     tertiary: { color: "black" }
   },
   buttons: {
+    close: {
+      m: "0", p: "0", boxShadow: "none", width: "2rem", height: "2rem"
+    },
     primary: {
       color: "white",
       bg: theme.primary,
