@@ -50,16 +50,20 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
         }
         let message = valuesToSubmit(values)
 
-        let res = await fetch('https://api.staticforms.xyz/submit', {
-            method :'POST',
-            body: JSON.stringify(message),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        const json = await res.json();
-        if(json.success){
-            showAlert(submitMessage)
-        } else {
-            showAlert(json.message, true)
+        try{
+            let res = await fetch('https://api.staticforms.xyz/submit', {
+                method :'POST',
+                body: JSON.stringify(message),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const json = await res.json();
+            if(json.success){
+                showAlert(submitMessage)
+            } else {
+                showAlert(json.message, true)
+            }
+        } catch (e) {
+            showAlert("Internal error: "+e.message, true)
         }
     }
 }
@@ -110,9 +114,12 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                 </Button>
             </Box>}
         </Box>
-        <Formik onSubmit={onSubmitFn(submitValues, (str, error) => (setAlertMessage({
-            on: true, text: str, error: error
-        })), submitMessage)} {...props}>
+        <Formik onSubmit={v => {
+            setAlertMessage({on: true, loading: true});
+            const fn = onSubmitFn(submitValues,
+                (str, error) => (setAlertMessage({ on: true, text: str, error: error })),
+                submitMessage)
+            fn(v)}} {...props}>
             {formik => (<>
                 <FormikContext.Provider value={formik}>
                     <Box sx={{position: "relative"}} as='form' onSubmit={formik.handleSubmit}>
@@ -122,7 +129,7 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                         <Box sx={{position: "absolute", right: "0", bottom: "1rem"}}>
                         <Button sx={{my: "1rem"}} type="submit"
                             disabled = {!formik.isValid || formik.isSubmitting}
-                            onClick = {() => {setAlertMessage({on: true, loading: true}); formik.submitForm}}
+                            onClick = {formik.submitForm}
                             sx={{mt: "1rem", mx: "0.5rem"}}> Submit </Button>
                         </Box>
                     </Box>
