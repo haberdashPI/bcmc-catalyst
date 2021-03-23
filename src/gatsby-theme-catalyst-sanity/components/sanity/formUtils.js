@@ -103,7 +103,7 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                 display: "flex", flexWrap: "wrap",
                 justifyContent: "center", alignContent: "top",
                 position: "fixed",
-                boxShadow: "2px 2px 2px",
+                boxShadow: "2px 2px 2px black",
             }}>
                 <Styled.p style={{margin: "0"}}>{alertMessage.text}</Styled.p>
                 <Box sx={{flexBasis: "100%", height: 0, width: "100%"}}/>
@@ -277,7 +277,7 @@ function DeletedList( {children, deleted, onAdd, setDeleted} ){
                 height: "4rem",
                 bg: "tertiary",
                 borderLeftColor: darken("tertiary", 0.25),
-                boxShadow: "0px 0px 4px",
+                boxShadow: "0px 0px 4px black",
                 color: "text"}}>
 
                 {children(p, i)}

@@ -80,7 +80,7 @@ export default ({ node }) => {
           height: node.caption ? "calc(100% - 4rem)" : "100%",
           transform: position === "right" ? "rotate(-5deg)" : "rotate(5deg)",
           zIndex: 0,
-          ...(node.shape === "circle" ? {} : {boxShadow: "1px 1px 2px"}),
+          ...(node.shape === "circle" ? {} : {boxShadow: "1px 1px 2px black"}),
           clipPath: node.shape === "circle" ? "circle()" : "none",
           backgroundColor: node.border === "primary" ? "primary" :
             node.border === "secondary" ? "secondary" :
@@ -88,13 +88,13 @@ export default ({ node }) => {
             defaultColor,
         }}></div>
         <div sx={node.shape === "circle" ?
-          {filter: "drop-shadow(2px 2px 2px)"} :
+          {filter: "drop-shadow(2px 2px 2px black)"} :
           {}}>
         <Img
           sx={{
             minHeight: ["300px", "auto", null, null, null],
             variant: "variants.sanityFigure",
-            ...(node.shape === "circle" ? {} : {boxShadow: "2px 2px 2px"}),
+            ...(node.shape === "circle" ? {} : {boxShadow: "2px 2px 2px black"}),
             ...(node.border === "none" ? {} : {
               paddingLeft: position === "right" ? "0%" : "5%",
               paddingRight: position === "right" ? "5%" : "0%",

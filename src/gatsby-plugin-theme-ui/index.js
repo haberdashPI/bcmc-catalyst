@@ -52,7 +52,7 @@ export default merge(BaseTheme, {
     // You can delete dark mode by removing the "modes" object and setting useColorMode to false in gatsby-theme-catalyst-core
     modes: {
       dark: {
-        background: "#222",
+        background: "#334832",
         text: baseColors.gray[1],
         textGray: "#666",
         ...theme,
@@ -89,22 +89,22 @@ export default merge(BaseTheme, {
       color: "white",
       bg: theme.primary,
       boxShadow: "2px 2px 3px black",
-      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" },
-      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px" },
+      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px black" },
+      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px black" },
       },
     secondary: {
       color: "black",
       bg: theme.secondary,
       boxShadow: "2px 2px 3px black",
-      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" },
-      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px" },
+      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px black" },
+      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px black" },
       },
     tertiary: {
       color: "black",
       bg: theme.tertiary,
       boxShadow: "2px 2px 3px black",
-      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px" },
-      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px" },
+      ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px black" },
+      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px black" },
       },
   },
   variants: {
