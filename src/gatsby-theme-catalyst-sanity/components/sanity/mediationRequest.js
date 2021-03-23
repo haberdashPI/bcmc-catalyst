@@ -73,6 +73,7 @@ const MediationRequestForm = ({ node }) => {
             person: [ person(node.info_questions) ],
         }}
         validate = {debounce(validateFn(node), 250)}
+        submitMessage = {node.submit}
         submitValues = {submitValuesFn(node)}>
             <ListOf name="person" defaultItem={person(node.part_questions)}
                     deletedMessageFn={p => <span>

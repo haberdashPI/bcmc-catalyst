@@ -11,11 +11,10 @@ export default {
             description: "Go to https://www.staticforms.xyz/ to create an acess key, and type it in here."
         },
         {
-            title: "Submit Goes To",
-            name: "success_page",
-            description: "Once the visitor has succesfully hit submit, this is the page the viewer sees.",
-            type: "reference",
-            to: [{type: "page"}]
+            title: "Submit message",
+            name: "submit",
+            description: "Message to display on a succesful submission.",
+            type: "string",
         },
         {
             title: "Additional Questions",

@@ -57,6 +57,7 @@ const VolunteerForm = ({ node }) => {
             person: person(node.info_questions),
         }}
         validate = {debounce(validate, 250)}
+        submitMessage = {node.submit}
         submitValues = {submitValuesFn}>
             {/* <ShowFormikData/> */}
             <Label>Please reach me by</Label>

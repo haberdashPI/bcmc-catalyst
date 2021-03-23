@@ -42,14 +42,16 @@ export const personSchema = {
     zip: yup.string().matches(/^[0-9]*$/, "Must be a number")
 }
 
-function onSubmitFn(valuesToSubmit, showAlert){
+function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
     return async (values) => {
         if(values.honeypot){
             return
         }
         let message = valuesToSubmit(values)
         console.dir(message)
-        showAlert()
+        showAlert(submitMessage)
+        // showAlert("Fake Error", true)
+
         // let res = await fetch('https://api.staticforms.xyz/submit', {
         //     method :'POST',
         //     body: JSON.stringify(message),
@@ -63,36 +65,41 @@ function onSubmitFn(valuesToSubmit, showAlert){
     }
 }
 
-export const Form = ({ children, submitValues, ...props }) => {
-    const [showAlert, setShowAlert] = useState(false)
+export const Form = ({ submitMessage, children, submitValues, ...props }) => {
+    const [alertMessage, setAlertMessage] = useState({on: false})
+    const alertClick = () => alertMessage.error ? setAlertMessage({on: false}) : navigate('/')
     return(<>
 
         <Box sx={{position: "absolute",
-            display: showAlert ? "block" : "none",
+            display: alertMessage.on ? "block" : "none",
             zIndex: 1000, top: "0", left: "0"}}>
             <Box sx={{
                 position: "fixed", top: "0", left: "0", width: "100vw", height: "100vh",
                 opacity: 0.7, zIndex: 1000, bg: "text",
                 backdropFilter: "blur(20px)"}}
-                onClick={() => navigate('/')}
+                onClick={alertClick}
             />
             <Box sx={{bg: "background", position: "absolute", zIndex: 1001,
-                top: "50%", left: "50%", mx: "max(-50vw, -10rem)", my: "max(-50vh, -2.5rem)",
-                width: "min(100vw, 30rem)", height: "min(100vh, 10rem)",
-                p: "0.5rem", borderRadius: "0.5rem", opacity: 1, display: "block",
+                left: "50%", top: "50%", transform: "translate(-50%, -50%)" ,
+                width: "min(100vw, 30em)", height: "min(100vh, 15em)",
+                p: "1rem", borderRadius: "0.5rem", opacity: 1, display: "block",
                 display: "flex", flexWrap: "wrap",
-                justifyContent: "center", alignContent: "center",
+                justifyContent: "center", alignContent: "top",
                 position: "fixed", p: "1rem",
                 boxShadow: "2px 2px 2px",
             }}>
-                <p>Form Submitted</p>
+                <p>{alertMessage.text}</p>
                 <Box sx={{flexBasis: "100%", height: 0, width: "100%"}}/>
-                <Button sx={{m: "1rem", justifySelf: "end"}} type='button' variant="primary" onClick={() => navigate('/')}>
+                <Button sx={{m: "1rem", justifySelf: "end", alignSelf: "end"}}
+                    type='button' variant="primary"
+                    onClick={alertClick}>
                     Ok
                 </Button>
             </Box>
         </Box>
-        <Formik onSubmit={onSubmitFn(submitValues, () => (setShowAlert(true)))} {...props}>
+        <Formik onSubmit={onSubmitFn(submitValues, (str, error) => (setAlertMessage({
+            on: true, text: str, error: error
+        })), submitMessage)} {...props}>
             {formik => (<>
                 <FormikContext.Provider value={formik}>
                     <Box sx={{position: "relative"}} as='form' onSubmit={formik.handleSubmit}>
