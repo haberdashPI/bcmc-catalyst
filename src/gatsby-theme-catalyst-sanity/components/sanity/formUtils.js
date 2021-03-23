@@ -49,19 +49,18 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
         }
         let message = valuesToSubmit(values)
         console.dir(message)
-        showAlert(submitMessage)
-        // showAlert("Fake Error", true)
 
-        // let res = await fetch('https://api.staticforms.xyz/submit', {
-        //     method :'POST',
-        //     body: JSON.stringify(message),
-        //     headers: { 'Content-Type': 'application/json' } // });
-        // const json = await res.json();
-        // if(json.success){
-        //     navitate('/')
-        // } else {
-        //     alert(json.message)
-        // }
+        let res = await fetch('https://api.staticforms.xyz/submit', {
+            method :'POST',
+            body: JSON.stringify(message),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const json = await res.json();
+        if(json.success){
+            showAlert(submitMessage)
+        } else {
+            showAlert(json.message, true)
+        }
     }
 }
 
