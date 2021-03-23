@@ -49,21 +49,18 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
             return
         }
         let message = valuesToSubmit(values)
-        console.dir(message)
-        await new Promise(r => setTimeout(r, 1000))
-        showAlert(submitMessage)
 
-        // let res = await fetch('https://api.staticforms.xyz/submit', {
-        //     method :'POST',
-        //     body: JSON.stringify(message),
-        //     headers: { 'Content-Type': 'application/json' }
-        // });
-        // const json = await res.json();
-        // if(json.success){
-        //     showAlert(submitMessage)
-        // } else {
-        //     showAlert(json.message, true)
-        // }
+        let res = await fetch('https://api.staticforms.xyz/submit', {
+            method :'POST',
+            body: JSON.stringify(message),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const json = await res.json();
+        if(json.success){
+            showAlert(submitMessage)
+        } else {
+            showAlert(json.message, true)
+        }
     }
 }
 
