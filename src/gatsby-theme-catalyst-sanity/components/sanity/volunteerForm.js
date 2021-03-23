@@ -41,43 +41,23 @@ function validate(values){
     return {}
 }
 
-function onSubmitFn(node, slugs){
-    return async (values) => {
-        if(values.honeypot){
-            return
-        }
-        let message = {
-            accessKey: node.sendto,
-            replyTo: values.person.email,
-            formType: "Volunteer Form",
-            ...(renameKeys(values.person, str => `\$${str}`))
-        }
-        // console.dir(message)
-        let res = await fetch('https://api.staticforms.xyz/submit', {
-            method :'POST',
-            body: JSON.stringify(message),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        const json = await res.json();
-        if(json.success){
-            node.success_page && node.success_page._ref &&
-                navigate(slugs[node.success_page._ref])
-        } else {
-            alert(json.message)
-        }
-    }
+function submitValuesFn(node) {
+    return values => ({
+        accessKey: node.sendto,
+        replyTo: values.person.email,
+        ['$formType']: "Volunteer Form",
+        ...renameKeys(values.person, str => `\$${str}`)
+    })
 }
 
 const VolunteerForm = ({ node }) => {
-    const slugs = useSlugIndex()
-
     return (<Form
         initialValues = {{
             contactby: "Phone",
             person: person(node.info_questions),
         }}
         validate = {debounce(validate, 250)}
-        onSubmit = {onSubmitFn(node, slugs)}>
+        submitValues = {submitValuesFn}>
             {/* <ShowFormikData/> */}
             <Label>Please reach me by</Label>
             <Select name='contactby'>

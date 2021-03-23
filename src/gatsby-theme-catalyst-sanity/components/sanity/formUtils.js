@@ -17,6 +17,7 @@ import { get } from 'lodash'
 import * as yup from 'yup'
 import { Formik, FieldArray } from "formik"
 import { darken } from '@theme-ui/color'
+import { navigate } from "gatsby"
 
 const FormikContext = React.createContext({});
 
@@ -41,23 +42,73 @@ export const personSchema = {
     zip: yup.string().matches(/^[0-9]*$/, "Must be a number")
 }
 
-export const Form = ({ children, ...props }) => {
-    return(<Formik {...props}>
-        {formik => (<>
-            <FormikContext.Provider value={formik}>
-                <Box sx={{position: "relative"}} as='form' onSubmit={formik.handleSubmit}>
-                    <Input name={`honeypot`} sx={{display: "none"}}></Input>
-                    {children}
-                    <Button type="button" sx={{visibility: "hidden", my: "1rem"}} disabled={true}>Submit</Button>
-                    <Box sx={{position: "absolute", right: "0", bottom: "1rem"}}>
-                    <Button sx={{my: "1rem"}} type="submit"
-                        disabled = {!formik.isValid}
-                        sx={{mt: "1rem", mx: "0.5rem"}}> Submit </Button>
+function onSubmitFn(valuesToSubmit, showAlert){
+    return async (values) => {
+        if(values.honeypot){
+            return
+        }
+        let message = valuesToSubmit(values)
+        console.dir(message)
+        showAlert()
+        // let res = await fetch('https://api.staticforms.xyz/submit', {
+        //     method :'POST',
+        //     body: JSON.stringify(message),
+        //     headers: { 'Content-Type': 'application/json' } // });
+        // const json = await res.json();
+        // if(json.success){
+        //     navitate('/')
+        // } else {
+        //     alert(json.message)
+        // }
+    }
+}
+
+export const Form = ({ children, submitValues, ...props }) => {
+    const [showAlert, setShowAlert] = useState(false)
+    return(<>
+
+        <Box sx={{position: "absolute",
+            display: showAlert ? "block" : "none",
+            zIndex: 1000, top: "0", left: "0"}}>
+            <Box sx={{
+                position: "fixed", top: "0", left: "0", width: "100vw", height: "100vh",
+                opacity: 0.7, zIndex: 1000, bg: "text",
+                backdropFilter: "blur(20px)"}}
+                onClick={() => navigate('/')}
+            />
+            <Box sx={{bg: "background", position: "absolute", zIndex: 1001,
+                top: "50%", left: "50%", mx: "max(-50vw, -10rem)", my: "max(-50vh, -2.5rem)",
+                width: "min(100vw, 30rem)", height: "min(100vh, 10rem)",
+                p: "0.5rem", borderRadius: "0.5rem", opacity: 1, display: "block",
+                display: "flex", flexWrap: "wrap",
+                justifyContent: "center", alignContent: "center",
+                position: "fixed", p: "1rem",
+                boxShadow: "2px 2px 2px",
+            }}>
+                <p>Form Submitted</p>
+                <Box sx={{flexBasis: "100%", height: 0, width: "100%"}}/>
+                <Button sx={{m: "1rem", justifySelf: "end"}} type='button' variant="primary" onClick={() => navigate('/')}>
+                    Ok
+                </Button>
+            </Box>
+        </Box>
+        <Formik onSubmit={onSubmitFn(submitValues, () => (setShowAlert(true)))} {...props}>
+            {formik => (<>
+                <FormikContext.Provider value={formik}>
+                    <Box sx={{position: "relative"}} as='form' onSubmit={formik.handleSubmit}>
+                        <Input name={`honeypot`} sx={{display: "none"}}></Input>
+                        {children}
+                        <Button type="button" sx={{visibility: "hidden", my: "1rem"}} disabled={true}>Submit</Button>
+                        <Box sx={{position: "absolute", right: "0", bottom: "1rem"}}>
+                        <Button sx={{my: "1rem"}} type="submit"
+                            disabled = {!formik.isValid}
+                            sx={{mt: "1rem", mx: "0.5rem"}}> Submit </Button>
+                        </Box>
                     </Box>
-                </Box>
-            </FormikContext.Provider>
-        </>)}
-    </Formik>)
+                </FormikContext.Provider>
+            </>)}
+        </Formik>
+    </>)
 }
 
 export const ListOf = ({name, children, defaultItem, deletedMessageFn}) => {

@@ -53,33 +53,15 @@ function validateFn(node, slugs){
 }
 
 
-function onSubmitFn(node, slugs){
-    return async (values) => {
-        if(values.honeypot){
-            return
-        }
-        let message = {
-            accessKey: node.sendto,
-            replyTo: values.person[0].email,
-            ['$formType']: "Mediation Request",
-            ...(values.person.
-                map((p, i) => renameKeys(p, str => `\$Person ${i+1}: ${str}`)).
-                reduce((result, item) => {return {...result, ...item}}))
-        }
-        // console.dir(message)
-        let res = await fetch('https://api.staticforms.xyz/submit', {
-            method :'POST',
-            body: JSON.stringify(message),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        const json = await res.json();
-        if(json.success){
-            node.success_page && node.success_page._ref &&
-                navigate(slugs[node.success_page._ref])
-        } else {
-            alert(json.message)
-        }
-    }
+function submitValuesFn(node){
+    return values => ({
+        accessKey: node.sendto,
+        replyTo: values.person[0].email,
+        ['$formType']: "Mediation Request",
+        ...(values.person.
+            map((p, i) => renameKeys(p, str => `\$Person ${i+1}: ${str}`)).
+            reduce((result, item) => {return {...result, ...item}}))
+    })
 }
 
 const MediationRequestForm = ({ node }) => {
@@ -91,7 +73,7 @@ const MediationRequestForm = ({ node }) => {
             person: [ person(node.info_questions) ],
         }}
         validate = {debounce(validateFn(node), 250)}
-        onSubmit = {onSubmitFn(node, slugs)}>
+        submitValues = {submitValuesFn(node)}>
             <ListOf name="person" defaultItem={person(node.part_questions)}
                     deletedMessageFn={p => <span>
                         You removed {(!p.first && !p.last) ? "a person" :
