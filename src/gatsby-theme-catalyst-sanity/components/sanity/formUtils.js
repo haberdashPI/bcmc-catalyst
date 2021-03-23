@@ -10,7 +10,8 @@ import {
     Button,
     Textarea as ThemeUITextarea,
     Message,
-    Close
+    Close,
+    Spinner,
 } from 'theme-ui'
 import { List } from 'immutable'
 import { get } from 'lodash'
@@ -49,24 +50,29 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
         }
         let message = valuesToSubmit(values)
         console.dir(message)
+        await new Promise(r => setTimeout(r, 1000))
+        showAlert(submitMessage)
 
-        let res = await fetch('https://api.staticforms.xyz/submit', {
-            method :'POST',
-            body: JSON.stringify(message),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        const json = await res.json();
-        if(json.success){
-            showAlert(submitMessage)
-        } else {
-            showAlert(json.message, true)
-        }
+        // let res = await fetch('https://api.staticforms.xyz/submit', {
+        //     method :'POST',
+        //     body: JSON.stringify(message),
+        //     headers: { 'Content-Type': 'application/json' }
+        // });
+        // const json = await res.json();
+        // if(json.success){
+        //     showAlert(submitMessage)
+        // } else {
+        //     showAlert(json.message, true)
+        // }
     }
 }
 
 export const Form = ({ submitMessage, children, submitValues, ...props }) => {
     const [alertMessage, setAlertMessage] = useState({on: false})
-    const alertClick = () => alertMessage.error ? setAlertMessage({on: false}) : navigate('/')
+    const alertClick = (e) =>
+        alertMessage.error ? setAlertMessage({on: false}) :
+        alertMessage.loading ? e.preventDefault() :
+        navigate('/')
     return(<>
 
         <Box sx={{position: "absolute",
@@ -74,27 +80,38 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
             zIndex: 1000, top: "0", left: "0"}}>
             <Box sx={{
                 position: "fixed", top: "0", left: "0", width: "100vw", height: "100vh",
-                opacity: 0.7, zIndex: 1000, bg: "text",
-                backdropFilter: "blur(20px)"}}
+                opacity: 0.8, zIndex: 1000, bg: "background",
+                backdropFilter: "blur(10px)"}}
                 onClick={alertClick}
             />
-            <Box sx={{bg: "background", position: "absolute", zIndex: 1001,
+            {alertMessage.loading ? <Box sx={{
+                left: "50%",
+                bottom: "50%",
+                transform: "translate(-50%, -50%)",
+                // width: "min(100vw, 15em)", height: "min(100vh, 15em)",
+                // display: "flex", justifyContent: "center", alignContent: "center",
+                opacity: 1, display: "block", position: "fixed",
+                zIndex: 1001}}>
+
+                <Spinner/>
+            </Box> :
+            <Box sx={{bg: "background", zIndex: 1001,
                 left: "50%", top: "50%", transform: "translate(-50%, -50%)" ,
                 width: "min(100vw, 30em)", height: "min(100vh, 15em)",
-                p: "1rem", borderRadius: "0.5rem", opacity: 1, display: "block",
+                p: "2rem", borderRadius: "0.5rem", opacity: 1, display: "block",
                 display: "flex", flexWrap: "wrap",
                 justifyContent: "center", alignContent: "top",
-                position: "fixed", p: "1rem",
+                position: "fixed",
                 boxShadow: "2px 2px 2px",
             }}>
-                <p>{alertMessage.text}</p>
+                <Styled.p style={{margin: "0"}}>{alertMessage.text}</Styled.p>
                 <Box sx={{flexBasis: "100%", height: 0, width: "100%"}}/>
-                <Button sx={{m: "1rem", justifySelf: "end", alignSelf: "end"}}
+                 <Button sx={{m: "1rem", justifySelf: "end", alignSelf: "end"}}
                     type='button' variant="primary"
                     onClick={alertClick}>
-                    Ok
+                    Okay
                 </Button>
-            </Box>
+            </Box>}
         </Box>
         <Formik onSubmit={onSubmitFn(submitValues, (str, error) => (setAlertMessage({
             on: true, text: str, error: error
@@ -107,7 +124,8 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                         <Button type="button" sx={{visibility: "hidden", my: "1rem"}} disabled={true}>Submit</Button>
                         <Box sx={{position: "absolute", right: "0", bottom: "1rem"}}>
                         <Button sx={{my: "1rem"}} type="submit"
-                            disabled = {!formik.isValid}
+                            disabled = {!formik.isValid || formik.isSubmitting}
+                            onClick = {() => {setAlertMessage({on: true, loading: true}); formik.submitForm}}
                             sx={{mt: "1rem", mx: "0.5rem"}}> Submit </Button>
                         </Box>
                     </Box>
