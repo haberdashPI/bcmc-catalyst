@@ -103,6 +103,10 @@ export default {
     {
       type: "volunteerForm",
       title: "Volunteer Form"
+    },
+    {
+      type: "eventCalendar",
+      title: "Event Calendar"
     }
   ],
 }

@@ -9,6 +9,7 @@ import blockContent from "./blockContent"
 import excerptBlockContent from "./excerptBlockContent"
 import mediationRequest from "./mediationRequest"
 import volunteerForm from "./volunteerForm"
+import eventCalendar from "./eventCalendar"
 import figure from "./figure"
 import figureWide from "./figureWide"
 import hero from "./hero"
@@ -42,6 +43,7 @@ export default createSchema({
   types: schemaTypes.concat([
     // The following are document types which will appear
     // in the studio.
+    eventCalendar,
     mediationRequest,
     volunteerForm,
     question,
