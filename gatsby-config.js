@@ -1,5 +1,5 @@
 require("dotenv").config({ path: `.env` })
-process.env.CONTEXT !== "production" &&
+process.env.SITE_BUILD_MODE !== "production" &&
   console.log("\x1b[34minfo\x1b[0m detected a preview build, overlaying document drafts")
 module.exports = {
   siteMetadata: {
@@ -68,7 +68,7 @@ module.exports = {
         // sanityDataset: "production"
         // sanityToken: null
         // sanityWatchMode: true
-        sanityOverlayDrafts: process.env.CONTEXT !== "production",
+        sanityOverlayDrafts: process.env.SITE_BUILD_MODE !== "production",
         // sanityCreatePages: true
         // sanityCreatePosts: true
         // sanityCreatePostsList: true
