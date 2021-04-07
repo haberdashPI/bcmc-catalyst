@@ -6,7 +6,7 @@ export default {
           title: "Website Deployment",
           sites: [
             {
-              title: 'Generate A Preview',
+              title: 'Preview of Draft Documents',
               apiId: "4a637246-0035-4966-9f57-83dd090eb52f",
               buildHookId: "60674163cf6cd6bb588eacca",
               name: 'sanity-preview',
