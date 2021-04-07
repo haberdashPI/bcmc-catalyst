@@ -16,7 +16,7 @@
     "@sanity/color-input",
     "@sanity/code-input",
     "@sanity/dashboard",
-    "dashboard-widget-gatsby"
+    "dashboard-widget-netlify"
   ],
   "parts": [
     {
