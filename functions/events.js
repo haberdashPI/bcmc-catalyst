@@ -1,5 +1,5 @@
+const { endOfYesterday } = require('date-fns')
 const {google} = require('googleapis')
-const {}
 
 const creds = JSON.parse(process.env.GCP_CREDENTIALS)
 
@@ -14,24 +14,32 @@ exports.handler = async function(event, context) {
         auth: auth
     })
 
-    calendar.events.list({
-        calendarId: 'david.frank.little@gmail.com' ,
-        timeMin: (new Date()).toISOString(),
-        maxResults: 10,
-        singleEvents: true,
-        orderBy: 'startTime',
-    }, (err, res) => {
-        if (err) return console.log('The API returned an error: ' + err);
-        const events = res.data.items;
-        if (events.length) {
-            console.log('Upcoming 10 events:');
-            events.map((event, i) => {
-            const start = event.start.dateTime || event.start.date;
-            const loc = event.location || '(none)';
-            console.log(`${start} - ${event.summary} Location: ${loc}`);
-            });
-        } else {
-            console.log('No upcoming events found.');
-        }
-    });
+    return await Promise.resolve(event.body).
+        then(JSON.parse).
+        then(request => calendar.events.list({
+            calendarId: 'david.frank.little@gmail.com' ,
+            timeMin: request.startStr,
+            timeMax: request.endStr,
+            maxResults: 999,
+            singleEvents: true,
+            orderBy: 'startTime',
+            timeZone: request.timeZone == 'local' ? undefined : request.timeZone
+        })).then(events => events.map(event => ({
+            url: event.htmlLink,
+            id: event.id,
+            title: event.summary,
+            start: event.start.dateTime || event.start.date,
+            end: event.end.dateTime || event.end.date,
+            allDay: event.endTimeUnspecified,
+            location: item.location,
+            description: item.description,
+            attachments: item.attachments || [],
+            extendedProps: (item.extendedProperties || {}).shared || {}
+        }))).then(events => ({
+            statusCode: 200,
+            body: JSON.stringify(events)
+        })).catch(err => ({
+            statusCode: 400,
+            body: JSON.stringify({error: err})
+        }))
 }
