@@ -3,7 +3,7 @@ const {google} = require('googleapis')
 
 const creds = JSON.parse(process.env.GCP_CREDENTIALS)
 
-exports.handler = async function(event, context) {
+exports.process = async function(request){
     const auth = new google.auth.GoogleAuth({
         credentials: creds,
         scopes: ['https://www.googleapis.com/auth/calendar']
@@ -14,32 +14,61 @@ exports.handler = async function(event, context) {
         auth: auth
     })
 
-    return await Promise.resolve(event.body).
-        then(JSON.parse).
-        then(request => calendar.events.list({
-            calendarId: 'david.frank.little@gmail.com' ,
+    let rawEvents
+    try{
+        rawEvents = await calendar.events.list({
+            calendarId: request.id ,
             timeMin: request.startStr,
             timeMax: request.endStr,
             maxResults: 999,
             singleEvents: true,
             orderBy: 'startTime',
             timeZone: request.timeZone == 'local' ? undefined : request.timeZone
-        })).then(events => events.map(event => ({
+        })
+    }catch(e){
+        return {
+            statusCode: 502,
+            body: JSON.stringify({error: e.message})
+        }
+    }
+
+    let parsedEvents
+    try {
+        parsedEvents = rawEvents.data.items.map(event => ({
             url: event.htmlLink,
             id: event.id,
             title: event.summary,
             start: event.start.dateTime || event.start.date,
             end: event.end.dateTime || event.end.date,
             allDay: event.endTimeUnspecified,
-            location: item.location,
-            description: item.description,
-            attachments: item.attachments || [],
-            extendedProps: (item.extendedProperties || {}).shared || {}
-        }))).then(events => ({
-            statusCode: 200,
-            body: JSON.stringify(events)
-        })).catch(err => ({
-            statusCode: 400,
-            body: JSON.stringify({error: err})
+            location: event.location,
+            description: event.description,
+            attachments: event.attachments || [],
+            extendedProps: (event.extendedProperties || {}).shared || {}
         }))
+    }catch(e){
+        return {
+            statusCode: 500,
+            body: JSON.stringify({error: e.message})
+        }
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(parsedEvents)
+    }
+}
+
+exports.handler = async function(event, context) {
+    let request
+    try{
+        request = JSON.parse(event.body)
+    }catch(e){
+        return {
+            statusCode: 400,
+            body: JSON.stringify({error: e.message})
+        }
+    }
+
+    return await exports.process(request)
 }
