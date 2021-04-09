@@ -7,6 +7,7 @@ import Hero from "./hero"
 import ButtonRow from "./buttonRow.js"
 import ImageList from "./imageList.js"
 import { LoadableMediationForm, LoadableVolunteerForm, LoadableEventCalendar } from "./loadableForms.js"
+import Newsletter from './newsletter.js'
 // import VolunteerForm from "./volunteerForm.js"
 
 const headerId = (id) => {
@@ -28,6 +29,7 @@ const serializers = {
     mediationRequest: LoadableMediationForm,
     volunteerForm: LoadableVolunteerForm,
     eventCalendar: LoadableEventCalendar,
+    newsletterList: Newsletter,
     block(props) {
       switch (props.node.style) {
         case "h1":

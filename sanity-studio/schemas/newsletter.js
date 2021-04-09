@@ -1,6 +1,6 @@
 export default {
-    name: "eventCalendar",
-    title: "News Letter",
+    name: "newsletter",
+    title: "Mailchimp Newsletter",
     type: "object",
     description: "Display mailchimp messages",
     fields: [

@@ -1,9 +1,4 @@
-- move to a 2 site setup on netlify so that the deploy badge under the preview section
-can represent the status of the preview site: this should turn off automatic
-  builds, create a new webhook and only build when the deploy button is
-clicked on the sanity dashboard
-
-steps:
+source the mailchimp campaigns and create a webhook
 
 Essential for meeting:
 

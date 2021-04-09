@@ -35,6 +35,13 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-source-mailchimp',
+      options: {
+        key: process.env.MAILCHIMP_API_KEY,
+        rootURL: 'https://us9.api.mailchimp.com/3.0'
+      }
+    },
+    {
       resolve: `gatsby-theme-catalyst-core`,
       options: {
         // Default options are:

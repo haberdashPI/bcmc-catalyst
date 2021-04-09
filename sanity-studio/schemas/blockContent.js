@@ -107,6 +107,10 @@ export default {
     {
       type: "eventCalendar",
       title: "Event Calendar"
+    },
+    {
+      type: "newsletter",
+      title: "Mailchimp Newsletter"
     }
   ],
 }
