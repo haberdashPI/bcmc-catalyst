@@ -6,7 +6,7 @@ import Code from "gatsby-theme-catalyst-sanity/src/components/sanity/code"
 import Hero from "./hero"
 import ButtonRow from "./buttonRow.js"
 import ImageList from "./imageList.js"
-import { LoadableMediationForm, LoadableVolunteerForm, LoadableEventCalendar } from "./loadableForms.js"
+import { LoadableMediationForm, LoadableVolunteerForm, LoadableEvents } from "./loadableForms.js"
 import Newsletter from './newsletter.js'
 // import VolunteerForm from "./volunteerForm.js"
 
@@ -28,7 +28,7 @@ const serializers = {
     imageList: ImageList,
     mediationRequest: LoadableMediationForm,
     volunteerForm: LoadableVolunteerForm,
-    eventCalendar: LoadableEventCalendar,
+    eventCalendar: LoadableEvents,
     newsletterList: Newsletter,
     block(props) {
       switch (props.node.style) {

@@ -6,9 +6,9 @@ export default {
     fields: [
         {
             title: "Calendar ID",
-            name: "sendto",
+            name: "calendar",
             type: "string",
-            description: "In your google calendar, open settings (the gear), click on a calendar, and scroll down, to find this ID (under the heading 'Integrate Calendar'). The calendar needs to be made public for it to be visible on the website."
+            description: "To find the calendar ID: in your google calendar, open settings (the gear), click on a calendar, and scroll down to the heading 'Integrate Calendar'. The calendar also needs to be made public for it to be visible on the website."
         },
         {
             title: "Default View",

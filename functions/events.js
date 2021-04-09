@@ -28,6 +28,7 @@ exports.process = async function(request){
     }catch(e){
         return {
             statusCode: 502,
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({error: e.message})
         }
     }
@@ -49,13 +50,15 @@ exports.process = async function(request){
     }catch(e){
         return {
             statusCode: 500,
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({error: e.message})
         }
     }
 
     return {
         statusCode: 200,
-        body: JSON.stringify(parsedEvents)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({events: parsedEvents})
     }
 }
 
@@ -66,6 +69,7 @@ exports.handler = async function(event, context) {
     }catch(e){
         return {
             statusCode: 400,
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({error: e.message})
         }
     }
