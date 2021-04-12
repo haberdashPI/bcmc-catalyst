@@ -45,7 +45,6 @@ exports.process = async function(request){
             location: event.location,
             extendedProps: {description: event.description}
         }))
-        console.dir(parsedEvents)
     }catch(e){
         return {
             statusCode: 500,

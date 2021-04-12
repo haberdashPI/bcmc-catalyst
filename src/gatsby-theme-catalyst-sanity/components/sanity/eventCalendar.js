@@ -2,6 +2,7 @@ import { jsx } from "theme-ui"
 import React, { useState } from 'react'
 import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
+import listMonth from "@fullcalendar/list"
 import req from "superagent";
 import "./eventStyles.css"
 import { format, isSameDay, differenceInHours } from 'date-fns'
@@ -22,6 +23,9 @@ function eventReqStr(info){
 
 const readCalendarEventsFn = node => info => {
     const infoStr = eventReqStr(info)
+    // cache retrieved events (very simple-minded!!) to avoid unncessary function calls
+    // TODO: make the cache stale after a given number of minutes or something
+    // to allow for new events to refresh at some point
     if(eventCache[infoStr]){
         return Promise.resolve(cloneDeep(eventCache[infoStr].value))
     }else {
@@ -87,7 +91,7 @@ const EventDialog = ({event, eventDismiss}) => {
             <Button sx={{m: "1rem", justifySelf: "center", alignSelf: "end"}}
                     type='button' variant="primary"
                     onClick={() => window.open(event.url,'_newtab')}>
-                More Details
+                Open in Google Calendar
             </Button>
         </Box>
     </Box>)
@@ -99,12 +103,12 @@ const EventCalendar = ({node}) => {
     return (<>
         <EventDialog event={eventContent}
             eventDismiss={() => setEventContent({off: true})}/>
-        <FullCalendar plugins = {[ dayGridPlugin ]}
+        <FullCalendar plugins = {[ dayGridPlugin, listMonth ]}
             initialView="dayGridMonth"
+            headerToolbar={{start: 'title', center: 'listMonth, dayGridMonth, dayGridWeek', end: 'today prev,next'}}
             events={readCalendarEventsFn(node)}
             eventClick={info => {
                 info.jsEvent.preventDefault()
-                console.dir(info.event)
                 setEventContent(info.event)
             }}/>
     </>)
