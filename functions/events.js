@@ -43,10 +43,9 @@ exports.process = async function(request){
             end: event.end.dateTime || event.end.date,
             allDay: event.endTimeUnspecified,
             location: event.location,
-            description: event.description,
-            attachments: event.attachments || [],
-            extendedProps: (event.extendedProperties || {}).shared || {}
+            extendedProps: {description: event.description}
         }))
+        console.dir(parsedEvents)
     }catch(e){
         return {
             statusCode: 500,

@@ -17,7 +17,7 @@ import { List } from 'immutable'
 import { get } from 'lodash'
 import * as yup from 'yup'
 import { Formik, FieldArray } from "formik"
-import { darken } from '@theme-ui/color'
+import { alpha, darken } from '@theme-ui/color'
 import { navigate } from "gatsby"
 
 const FormikContext = React.createContext({});
@@ -81,7 +81,7 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
             zIndex: 1000, top: "0", left: "0"}}>
             <Box sx={{
                 position: "fixed", top: "0", left: "0", width: "100vw", height: "100vh",
-                opacity: 0.8, zIndex: 1000, bg: "background",
+                zIndex: 1000, bg: alpha("background", 0.5),
                 backdropFilter: "blur(10px)"}}
                 onClick={alertClick}
             />
@@ -103,7 +103,7 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                 display: "flex", flexWrap: "wrap",
                 justifyContent: "center", alignContent: "top",
                 position: "fixed",
-                boxShadow: "2px 2px 2px black",
+                boxShadow: "2px 2px 6px black",
             }}>
                 <Styled.p style={{margin: "0"}}>{alertMessage.text}</Styled.p>
                 <Box sx={{flexBasis: "100%", height: 0, width: "100%"}}/>

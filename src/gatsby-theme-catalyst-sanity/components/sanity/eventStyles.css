@@ -2,3 +2,7 @@
     font-family: "EB Garamond",Times;
     font-variant: small-caps;
 }
+
+.fc-daygrid-event {
+    font-size: 0.75rem;
+}
