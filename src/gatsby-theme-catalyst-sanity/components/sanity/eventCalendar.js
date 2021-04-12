@@ -4,7 +4,7 @@ import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import req from "superagent";
 import "./eventStyles.css"
-import { format } from 'date-fns'
+import { format, isSameDay, differenceInHours } from 'date-fns'
 import { cloneDeep } from 'lodash'
 import {
     Box,
@@ -69,17 +69,17 @@ const EventDialog = ({event, eventDismiss}) => {
             <h2>{event.title}</h2>
             <dl>
                 {event.allDay ?
-                    (<><dt>Dates</dt> <dd>{format(start, "MMMM do").toString() == format(end, "MMMM do").toString() ?
-                        format(start, "MMMM do") :
-                        <>{format(start, "MMMM do")}&ndash;
-                        {format(start, "MMMM do")}</>}</dd></>) :
+                    ((isSameDay(start, end) || (differenceInHours(end, start) == 24 && start.getHours() === 0)) ?
+                        (<><dt>Date</dt> <dd>{format(start, "MMMM do")}</dd></>) :
+                        (<><dt>Dates</dt> <dd>{format(start, "MMMM do")}&ndash;
+                        {format(end, "MMMM do")}</dd></>)) :
                     (<><dt>Date</dt><dd>{format(start, "MMMM do")}</dd>
                     <dt>Time</dt><dd>{format(start, "h:mm bbb")}&ndash;
                         {format(end,   "h:mm bbb")}</dd></>)}
                 {event.location && <><dt>Location</dt><dd>{event.location}</dd></>}
             </dl>
             <Box sx={{
-                width: "min(calc(100vw - 6em), 40em)", height: "min(calc(75vh - 6em), 30em)",
+                width: "min(calc(100vw - 6em), 40em)", height: "min(calc(50vh - 6em), 15em)",
                 overflowY: "scroll"
             }}>
                 <span dangerouslySetInnerHTML={{ __html: event.extendedProps.description}}/>
