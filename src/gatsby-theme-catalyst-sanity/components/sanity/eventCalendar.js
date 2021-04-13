@@ -22,6 +22,7 @@ function eventReqStr(info){
 }
 
 const readCalendarEventsFn = node => info => {
+    if(!node.calendar){ return Promise.resolve([]) }
     const infoStr = eventReqStr(info)
     // cache retrieved events (very simple-minded!!) to avoid unncessary function calls
     // TODO: make the cache stale after a given number of minutes or something
@@ -131,6 +132,12 @@ const EventDialog = ({event, eventDismiss}) => {
     </Box>)
 }
 
+const viewIds = {
+    "list": "listMonth",
+    "month": "dayGridMonth",
+    "week": "dayGridWeek"
+}
+
 const EventCalendar = ({node}) => {
     const [eventContent, setEventContent] = useState({off: true})
 
@@ -138,8 +145,9 @@ const EventCalendar = ({node}) => {
         <EventDialog event={eventContent}
             eventDismiss={() => setEventContent({off: true})}/>
         <FullCalendar plugins = {[ dayGridPlugin, listMonth ]}
-            initialView="dayGridMonth"
-            headerToolbar={{start: 'title', center: 'listMonth, dayGridMonth, dayGridWeek', end: 'today prev,next'}}
+            defaultView={viewIds[node.default_view]}
+            initialView={viewIds[node.default_view]}
+            headerToolbar={{start: 'title', center: 'listMonth,dayGridMonth,dayGridWeek', end: 'today prev,next'}}
             events={readCalendarEventsFn(node)}
             eventClick={info => {
                 info.jsEvent.preventDefault()
