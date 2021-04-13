@@ -45,9 +45,53 @@ const readCalendarEventsFn = node => info => {
     }
 }
 
-const EventDialog = ({event, eventDismiss}) => {
+const DelList = ({items}) => {
+    return (<dl>
+        {(items.map(item => (<>
+            <dt style={{
+                float: "left",
+                width: "3em",
+                overflow: "hidden",
+                clear: "left",
+                textAlign: "left",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                fontWeight: "bold"
+             }}>
+                 {item.name}
+            </dt>
+            <dd style={{marginLeft: "4em"}}>{item.value}</dd>
+        </>)))}
+    </dl>)
+}
+
+function allDayTimes(start, end){
+    return (isSameDay(start, end) ||
+        (differenceInHours(end, start) == 24 && start.getHours() === 0))
+}
+function eventLabels(event){
     const start = !event.off && new Date(event.start)
     const end = !event.off && new Date(event.end)
+    let labels = []
+
+    if(event.allDay){
+        if(allDayTimes(start, end)){
+            labels.push({name: "Date", value: format(start, "MMMM do")})
+        }else{
+            labels.push({name: "Dates", value: (<>{format(start, "MMMM do")}&ndash;
+                {format(end, "MMMM do")}</>)})
+        }
+    }else{
+        labels.push({name: "Date", value: format(start, "MMMM do")})
+        labels.push({name: "Time", value: (<>{format(start, "h:mm bbb")}&ndash;
+            {format(end,   "h:mm bbb")}</>)})
+    }
+    event.location && labels.push({name: "Location", value: event.location})
+
+    return labels
+}
+
+const EventDialog = ({event, eventDismiss}) => {
     return !event.off && (<Box sx={{
         position: "fixed", top: "0", left: "0", width: "100vw", height: "100vh",
         zIndex: 1000, bg: alpha("background", 0.5),
@@ -71,17 +115,7 @@ const EventDialog = ({event, eventDismiss}) => {
                 p: "0.2em", m: "1em" }}
                 onClick={eventDismiss}/>
             <h2>{event.title}</h2>
-            <dl>
-                {event.allDay ?
-                    ((isSameDay(start, end) || (differenceInHours(end, start) == 24 && start.getHours() === 0)) ?
-                        (<><dt>Date</dt> <dd>{format(start, "MMMM do")}</dd></>) :
-                        (<><dt>Dates</dt> <dd>{format(start, "MMMM do")}&ndash;
-                        {format(end, "MMMM do")}</dd></>)) :
-                    (<><dt>Date</dt><dd>{format(start, "MMMM do")}</dd>
-                    <dt>Time</dt><dd>{format(start, "h:mm bbb")}&ndash;
-                        {format(end,   "h:mm bbb")}</dd></>)}
-                {event.location && <><dt>Location</dt><dd>{event.location}</dd></>}
-            </dl>
+            <DelList items={eventLabels(event)}/>
             <Box sx={{
                 width: "min(calc(100vw - 6em), 40em)", height: "min(calc(50vh - 6em), 15em)",
                 overflowY: "scroll"
