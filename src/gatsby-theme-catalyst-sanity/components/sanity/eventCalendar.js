@@ -27,7 +27,8 @@ const readCalendarEventsFn = node => info => {
     // cache retrieved events (very simple-minded!!) to avoid unncessary function calls
     // TODO: make the cache stale after a given number of minutes or something
     // to allow for new events to refresh at some point
-    if(eventCache[infoStr]){
+    if(eventCache[infoStr] &&
+        differenceInHours(eventCache[infoStr].stored, new Date(Date.now())) < 1){
         return Promise.resolve(cloneDeep(eventCache[infoStr].value))
     }else {
         return req.post('/.netlify/functions/events')
@@ -40,7 +41,10 @@ const readCalendarEventsFn = node => info => {
             .set('Accept', 'application/json')
             .then(response => {
                 if(response.body.error) throw Exception(response.body.error)
-                eventCache[infoStr] = {value: cloneDeep(response.body.events)}
+                eventCache[infoStr] = {
+                    value: cloneDeep(response.body.events),
+                    stored: new Date(Date.now())
+                }
                 return response.body.events
             })
     }
