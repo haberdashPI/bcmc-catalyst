@@ -52,10 +52,10 @@ const readCalendarEventsFn = node => info => {
 
 const DelList = ({items}) => {
     return (<dl>
-        {(items.map(item => (<>
-            <dt style={{
+        {(items.map((item,i) => (<span key={"item"+i+"_span"}>
+            <dt key={"item_"+i} style={{
                 float: "left",
-                width: "3em",
+                width: "5.5em",
                 overflow: "hidden",
                 clear: "left",
                 textAlign: "left",
@@ -65,8 +65,8 @@ const DelList = ({items}) => {
              }}>
                  {item.name}
             </dt>
-            <dd style={{marginLeft: "4em"}}>{item.value}</dd>
-        </>)))}
+            <dd key={"item_"+i+"_value"} style={{marginLeft: "6em"}}>{item.value}</dd>
+        </span>)))}
     </dl>)
 }
 
@@ -96,7 +96,50 @@ function eventLabels(event){
     return labels
 }
 
+function extractLabel(str, entry, labels){
+    const regexstr = "^\\s*"+entry.name+(entry.value || ":(.*)$")
+    const regex = new RegExp(regexstr, "m")
+    const match = str.match(regex)
+    const value = match ? match[1].replace(/^\s+/,"") : ""
+    if(match && (entry.store === undefined || entry.store)){
+        labels.push({name: entry.name, value: value})
+    }
+    const newstr = str.replace(RegExp(regexstr, "mg"), "")
+
+    return [newstr, labels, value]
+}
+
+
+function extractDescription(raw){
+    if(!raw) return {labels: [], zoomLink: "", raw}
+    raw = raw.replace(/^Time:.*$/, "")
+    let labels = []
+
+    let zoomLink = ""
+    let value = ""
+    for(let label of [
+        {name: "Topic", store: false},
+        {name: "Meeting ID"},
+        {name: "Passcode"},
+        {name: "Time", store: false},
+        {name: "Join Zoom Meeting", value: "\\n(https://[^\n]+)\n", store: false}]){
+
+        [raw, labels, value] = extractLabel(raw, label, labels)
+        if(label.name === "Join Zoom Meeting"){
+            zoomLink = value
+        }
+    }
+
+    return {labels, zoomLink, description: raw.
+        replace(/\n{3,}/g, '\n\n').
+        replace(/^\n+/,"").
+        replace(/\n+$/,"").
+        replaceAll("\n", "<br/>")}
+}
+
 const EventDialog = ({event, eventDismiss}) => {
+    if(event.off) return null;
+    let {labels, description, zoomLink} = extractDescription(event.extendedProps.description)
     return !event.off && (<Box sx={{
         position: "fixed", top: "0", left: "0", width: "100vw", height: "100vh",
         zIndex: 1000, bg: alpha("background", 0.5),
@@ -120,18 +163,25 @@ const EventDialog = ({event, eventDismiss}) => {
                 p: "0.2em", m: "1em" }}
                 onClick={eventDismiss}/>
             <h2>{event.title}</h2>
-            <DelList items={eventLabels(event)}/>
-            <Box sx={{
-                width: "min(calc(100vw - 6em), 40em)", height: "min(calc(50vh - 6em), 15em)",
-                overflowY: "scroll"
-            }}>
-                <span dangerouslySetInnerHTML={{ __html: event.extendedProps.description}}/>
+            <DelList items={[...eventLabels(event), ...labels]}/>
+            <Box>
+                <Box sx={{
+                    width: "min(calc(100vw - 6em), 40em)", height: "min(calc(50vh - 6em), 15em)",
+                    overflowY: "scroll"
+                }}>
+                    <span dangerouslySetInnerHTML={{ __html: description }}/>
+                </Box>
+                <Button sx={{m: "1rem", justifySelf: "center", alignSelf: "end"}}
+                        type='button' variant="primary"
+                        onClick={() => window.open(event.url,'_newtab')}>
+                    Open in Google Calendar
+                </Button>
+                {zoomLink && <Button sx={{m: "1rem", justifySelf: "center", alignSelf: "end"}}
+                        type='button' variant="secondary"
+                        onClick={() => window.open(zoomLink,'_blank')}>
+                    Goto Zoom Meeting
+                </Button>}
             </Box>
-            <Button sx={{m: "1rem", justifySelf: "center", alignSelf: "end"}}
-                    type='button' variant="primary"
-                    onClick={() => window.open(event.url,'_newtab')}>
-                Open in Google Calendar
-            </Button>
         </Box>
     </Box>)
 }
@@ -148,15 +198,17 @@ const EventCalendar = ({node}) => {
     return (<>
         <EventDialog event={eventContent}
             eventDismiss={() => setEventContent({off: true})}/>
-        <FullCalendar plugins = {[ dayGridPlugin, listMonth ]}
-            defaultView={viewIds[node.default_view]}
-            initialView={viewIds[node.default_view]}
-            headerToolbar={{start: 'title', center: 'listMonth,dayGridMonth,dayGridWeek', end: 'today prev,next'}}
-            events={readCalendarEventsFn(node)}
-            eventClick={info => {
-                info.jsEvent.preventDefault()
-                setEventContent(info.event)
-            }}/>
+        <Box sx={{m: "1em"}}>
+            <FullCalendar plugins = {[ dayGridPlugin, listMonth ]}
+                defaultView={viewIds[node.default_view]}
+                initialView={viewIds[node.default_view]}
+                headerToolbar={{start: 'title', center: 'listMonth,dayGridMonth,dayGridWeek', end: 'today prev,next'}}
+                events={readCalendarEventsFn(node)}
+                eventClick={info => {
+                    info.jsEvent.preventDefault()
+                    setEventContent(info.event)
+                }}/>
+        </Box>
     </>)
 }
 
