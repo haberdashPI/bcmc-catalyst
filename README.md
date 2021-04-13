@@ -5,4 +5,4 @@
 This is the new website theme for the [Baltimore Community Mediation Center](https://www.communitymediation.org/).
 Built on the [gatsby-catalyst](https://www.gatsbycatalyst.com) theme.
 
-The new website is currently located [here](https://bcmccatalyst.gatsbyjs.io/)
+The new website is currently located [here](https://fervent-ritchie-c19b24.netlify.app/)
