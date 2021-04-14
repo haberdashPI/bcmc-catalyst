@@ -97,6 +97,7 @@ function eventLabels(event){
 }
 
 function extractLabel(str, entry, labels){
+    str = str.replace(/(<br>|<br\/>)/g, "\n")
     const regexstr = "^\\s*"+entry.name+(entry.value || ":(.*)$")
     const regex = new RegExp(regexstr, "m")
     const match = str.match(regex)
@@ -122,7 +123,7 @@ function extractDescription(raw){
         {name: "Meeting ID"},
         {name: "Passcode"},
         {name: "Time", store: false},
-        {name: "Join Zoom Meeting", value: "\\n(https://[^\n]+)\n", store: false}]){
+        {name: "Join Zoom Meeting", value: "\\n.*(https://[^\n<]+).*\n", store: false}]){
 
         [raw, labels, value] = extractLabel(raw, label, labels)
         if(label.name === "Join Zoom Meeting"){
