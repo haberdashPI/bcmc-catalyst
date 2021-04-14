@@ -50,31 +50,31 @@ export default merge(BaseTheme, {
       icons: "#eee"
     },
     // You can delete dark mode by removing the "modes" object and setting useColorMode to false in gatsby-theme-catalyst-core
-    modes: {
-      dark: {
-        background: "#334832",
-        text: baseColors.gray[1],
-        textGray: "#666",
-        ...theme,
-        accent: baseColors.gray[8],
-        highlight: baseColors.orange[5],
-        muted: baseColors.gray[8],
-        header: {
-          text: baseColors.gray[1],
-          textOpen: baseColors.gray[1],
-          background: "#333",
-          backgroundOpen: baseColors.gray[8],
-          icons: baseColors.gray[1],
-          iconsOpen: baseColors.gray[1],
-        },
-        footer: {
-          background: "#444",
-          text: baseColors.gray[1],
-          links: baseColors.gray[1],
-          icons: baseColors.gray[1],
-        },
-      },
-    },
+    // modes: {
+    //   dark: {
+    //     background: "#334832",
+    //     text: baseColors.gray[1],
+    //     textGray: "#666",
+    //     ...theme,
+    //     accent: baseColors.gray[8],
+    //     highlight: baseColors.orange[5],
+    //     muted: baseColors.gray[8],
+    //     header: {
+    //       text: baseColors.gray[1],
+    //       textOpen: baseColors.gray[1],
+    //       background: "#333",
+    //       backgroundOpen: baseColors.gray[8],
+    //       icons: baseColors.gray[1],
+    //       iconsOpen: baseColors.gray[1],
+    //     },
+    //     footer: {
+    //       background: "#444",
+    //       text: baseColors.gray[1],
+    //       links: baseColors.gray[1],
+    //       icons: baseColors.gray[1],
+    //     },
+    //   },
+    // },
   },
   buttonLink: {
     primary: { color: "white" },
