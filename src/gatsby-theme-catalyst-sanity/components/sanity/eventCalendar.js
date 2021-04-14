@@ -1,5 +1,5 @@
 import { jsx } from "theme-ui"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import listMonth from "@fullcalendar/list"
@@ -145,7 +145,7 @@ const EventDialog = ({event, eventDismiss}) => {
         zIndex: 1000, bg: alpha("background", 0.5),
         backdropFilter: "blur(20px)"
     }}
-        onClick={eventDismiss}
+        onClick={e => e.preventDefault()}
     >
         <Box sx={{bg: "background", zIndex: 1010,
             display: "flex", backdropFilter: "none",
@@ -194,13 +194,16 @@ const viewIds = {
 
 const EventCalendar = ({node}) => {
     const [eventContent, setEventContent] = useState({off: true})
+    const html = document.querySelector('html')
+    useEffect(() => {
+        !eventContent.off ? (html.style.overflow = 'hidden') : (html.style.overflow = 'visible')
+    }, [eventContent.off])
 
     return (<>
         <EventDialog event={eventContent}
             eventDismiss={() => setEventContent({off: true})}/>
         <Box sx={{m: "1em"}}>
             <FullCalendar plugins = {[ dayGridPlugin, listMonth ]}
-                defaultView={viewIds[node.default_view]}
                 initialView={viewIds[node.default_view]}
                 headerToolbar={{start: 'title', center: 'listMonth,dayGridMonth,dayGridWeek', end: 'today prev,next'}}
                 events={readCalendarEventsFn(node)}
