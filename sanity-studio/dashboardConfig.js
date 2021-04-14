@@ -11,7 +11,15 @@ export default {
               buildHookId: "606e093a5f7042292bd931ff",
               name: 'sanity-preview',
               url: 'https://compassionate-swartz-da6171.netlify.app/',
+            },
+            {
+              title: 'Published Website',
+              apiId: "4a637246-0035-4966-9f57-83dd090eb52f",
+              buildHookId: "60674707f6b18dba1434ef23",
+              name: 'sanity-production',
+              url: 'https://fervent-ritchie-c19b24.netlify.app/',
             }
+
           ]
         }
       },
