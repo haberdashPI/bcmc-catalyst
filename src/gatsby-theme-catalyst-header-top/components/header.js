@@ -1,17 +1,15 @@
 /** @jsx jsx */
-import { jsx, useThemeUI } from "theme-ui"
+import { jsx } from "theme-ui"
 import { useContext } from "react"
-// import { Branding, Nav, MobileButton } from "gatsby-theme-catalyst-header-top"
-import Branding from "gatsby-theme-catalyst-header-top/src/components/branding/branding"
-import Nav from "gatsby-theme-catalyst-header-top/src/components/navbar/nav"
-import MobileButton from "gatsby-theme-catalyst-header-top/src/components/navbar/nav-mobile-button"
+import Branding from "./branding"
+import Nav from "gatsby-theme-catalyst-header-top/src/components/nav"
+import HamburgerButton from "gatsby-theme-catalyst-header-top/src/components/hamburger-button"
 import { NavContext } from "gatsby-theme-catalyst-core"
-import { useCatalystConfig } from "gatsby-theme-catalyst-core"
+import { useHeaderConfig } from "gatsby-theme-catalyst-header-top/src/utils/use-header-config"
 
 const SiteHeader = () => {
   const [isNavOpen] = useContext(NavContext)
-  const { useStickyHeader } = useCatalystConfig()
-  const { theme } = useThemeUI()
+  const { useStickyHeader } = useHeaderConfig()
   return (
     <header
       sx={{
@@ -37,13 +35,7 @@ const SiteHeader = () => {
           alignSelf: "start",
           display: "grid",
           gridTemplateColumns: "auto 1fr",
-          gridTemplateRows: [
-            theme.sizes.headerHeight + " 1fr",
-            null,
-            theme.sizes.headerHeight,
-            null,
-            null,
-          ],
+          gridTemplateRows: ["auto 1fr", null, "auto", null, null],
           maxWidth: "maxPageWidth",
           width: "100%",
           minHeight: isNavOpen ? "100vh" : "50px",
@@ -54,7 +46,7 @@ const SiteHeader = () => {
       >
         <Branding />
         <Nav />
-        <MobileButton />
+        <HamburgerButton />
       </div>
     </header>
   )

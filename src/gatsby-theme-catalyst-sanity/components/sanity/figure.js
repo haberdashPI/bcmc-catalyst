@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import Img from "gatsby-image"
-import { getFluidGatsbyImage, getFixedGatsbyImage } from "gatsby-source-sanity"
+import { GatsbyImage } from "gatsby-plugin-image"
+import { getGatsbyImageData } from "gatsby-source-sanity"
 import { useSanityConfig } from "gatsby-theme-catalyst-sanity"
 
 export default ({ node }) => {
@@ -13,13 +13,9 @@ export default ({ node }) => {
   const sanityConfig = { projectId: sanityProjectId, dataset: sanityDataset }
 
   const circleWidth = 200
-  const imgProps = node.shape !== "circle" ? getFluidGatsbyImage(
+  const imgProps = getGatsbyImageData(
     node.asset._ref,
-    { maxWidth: 900 },
-    sanityConfig
-  ) : getFixedGatsbyImage(
-    node.asset._ref,
-    { width: circleWidth, height: circleWidth },
+    node.shape !== "circle" ? {} : { width: circleWidth, height: circleWidth },
     sanityConfig
   )
 
@@ -90,7 +86,7 @@ export default ({ node }) => {
         <div sx={node.shape === "circle" ?
           {filter: "drop-shadow(2px 2px 2px black)"} :
           {}}>
-        <Img
+        <GatsbyImage
           sx={{
             minHeight: ["300px", "auto", null, null, null],
             variant: "variants.sanityFigure",
@@ -108,7 +104,7 @@ export default ({ node }) => {
             // })
           }}
           alt={node.alt}
-          {...(node.shape !== "circle" ? {fluid: imgProps} : {fixed: imgProps})}
+          image={imgProps}
         />
         </div>
         <div sx={{zIndex: 3}}>

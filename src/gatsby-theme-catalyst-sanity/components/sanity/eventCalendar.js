@@ -143,7 +143,7 @@ const EventDialog = ({event, eventDismiss}) => {
     let {labels, description, zoomLink} = extractDescription(event.extendedProps.description)
     return !event.off && (<Box sx={{
         position: "fixed", top: "0", left: "0", width: "100vw", height: "100vh",
-        zIndex: 1000, bg: alpha("background", 0.5),
+        zIndex: 1000, bg: 'rgba(1,1,1,0.5)', //alpha("background", 0.5),
         backdropFilter: "blur(20px)"
     }}
         onClick={e => e.preventDefault()}

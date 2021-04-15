@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx, Styled } from "theme-ui"
-import Img from "gatsby-image"
-import { getFluidGatsbyImage } from "gatsby-source-sanity"
+import { jsx, Themed } from "theme-ui"
+import { GatsbyImage } from "gatsby-plugin-image"
+import { getGatsbyImageData } from "gatsby-source-sanity"
 import { useSanityConfig } from "gatsby-theme-catalyst-sanity/src/components/sanity/use-sanity-config"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
@@ -27,9 +27,8 @@ export default ({ node }) => {
   const { sanityProjectId, sanityDataset } = useSanityConfig()
   const sanityConfig = { projectId: sanityProjectId, dataset: sanityDataset }
 
-  const fluidProps = node.images && shuffleArray(node.images).map(image => getFluidGatsbyImage(
-    image.asset._ref,
-    { maxWidth: 900 },
+  const fluidProps = node.images && shuffleArray(node.images).map(image => getGatsbyImageData(
+    image.asset._ref, {},
     sanityConfig
   ))
 
@@ -59,7 +58,7 @@ export default ({ node }) => {
             }}>
           {fluidProps &&
           <Slider dots={false} infinite={true} lazyLoad={'ondemand'} fade={true} cssEase="ease-in" speed={2000} arrows={false} autoplay={true} autoplaySpeed={6000}>
-            {fluidProps.map((props, i) => <Img key={"image"+i} fluid={props}/>)}
+            {fluidProps.map((props, i) => <GatsbyImage key={"image"+i} image={props}/>)}
           </Slider>}
         </div>
         <div sx={{
@@ -82,7 +81,7 @@ export default ({ node }) => {
             marginRight: "auto",
             zIndex: 2,
         }}>
-            <Styled.h1 sx={{textShadow: "2px 2px 8px black", paddingBottom: "2rem", variant: "variants.heroTitle"}}>{node.title}</Styled.h1>
+            <Themed.h1 sx={{textShadow: "2px 2px 8px black", paddingBottom: "2rem", variant: "variants.heroTitle"}}>{node.title}</Themed.h1>
             <p sx={{textShadow: "1px 1px 3px black", color: "#eee", variant: "variants.heroContent"}}>{node.content}</p>
         </div>
     </div>

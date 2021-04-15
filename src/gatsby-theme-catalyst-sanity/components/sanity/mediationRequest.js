@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import debounce from 'debounce-promise'
 import { Select, PersonSubForm, Form, ListOf, person, personSchema, renameKeys } from "./formUtils"
 
-import { jsx, Styled } from "theme-ui"
+import { jsx, Themed } from "theme-ui"
 import React from 'react'
 import { set, isEmpty } from 'lodash'
 import { navigate } from 'gatsby'

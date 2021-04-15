@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { jsx, Styled } from "theme-ui"
+import { jsx, Themed } from "theme-ui"
 import {
     Box,
     Label,
@@ -51,16 +51,21 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
         let message = valuesToSubmit(values)
 
         try{
-            let res = await fetch('https://api.staticforms.xyz/submit', {
-                method :'POST',
-                body: JSON.stringify(message),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const json = await res.json();
-            if(json.success){
+            if(process.env.CONTEXT === "production"){
+                let res = await fetch('https://api.staticforms.xyz/submit', {
+                    method :'POST',
+                    body: JSON.stringify(message),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const json = await res.json();
+                if(json.success){
+                    showAlert(submitMessage)
+                } else {
+                    showAlert(json.message, true)
+                }
+            }else{
+                alert(JSON.stringify(message))
                 showAlert(submitMessage)
-            } else {
-                showAlert(json.message, true)
             }
         } catch (e) {
             showAlert("Internal error: "+e.message, true)
@@ -81,7 +86,7 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
             zIndex: 1000, top: "0", left: "0"}}>
             <Box sx={{
                 position: "fixed", top: "0", left: "0", width: "100vw", height: "100vh",
-                zIndex: 1000, bg: alpha("background", 0.5),
+                zIndex: 1000, bg: "rgba(1,1,1,0.5)", //alpha("background", 0.5),
                 backdropFilter: "blur(10px)"}}
                 onClick={alertClick}
             />
@@ -105,7 +110,7 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                 position: "fixed",
                 boxShadow: "2px 2px 6px black",
             }}>
-                <Styled.p style={{margin: "0"}}>{alertMessage.text}</Styled.p>
+                <Themed.p style={{margin: "0"}}>{alertMessage.text}</Themed.p>
                 <Box sx={{flexBasis: "100%", height: 0, width: "100%"}}/>
                  <Button sx={{m: "1rem", justifySelf: "end", alignSelf: "end"}}
                     type='button' variant="primary"

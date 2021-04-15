@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Styled, Button } from "theme-ui"
+import { jsx, Themed, Button } from "theme-ui"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import { useSlugIndex } from "./util"
 
@@ -18,10 +18,10 @@ const ButtonRow = ({ node }) => {
         {node.buttons && node.buttons.map((b, i) =>
             <Button key={"button"+i} sx={{px: "1em", my: "0.5em", mx: "0.5em", bg: (b.type || "primary")}}>
             {b._type === "urlButton" ? (
-                <Styled.a sx={{variant: "buttonLink."+(b.type || "primary"), textDecoration: "none", ":hover": {textDecoration: "none"}}}
+                <Themed.a sx={{variant: "buttonLink."+(b.type || "primary"), textDecoration: "none", ":hover": {textDecoration: "none"}}}
                     href={b.link}>
                     {b.text}
-                </Styled.a>
+                </Themed.a>
             ) : (
                 <Link sx={{variant: "buttonLink."+(b.type || "primary"), textDecoration: "none"}}
                     to={b.link && slugs[b.link._ref]}>

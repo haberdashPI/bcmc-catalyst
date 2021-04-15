@@ -106,6 +106,23 @@ export default merge(BaseTheme, {
       // ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px black" },
       ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px black" },
       },
+
+    dropdown: {
+      fontFamily: "body",
+      fontWeight: "normal",
+      letterSpacing: "normal",
+      cursor: "pointer",
+      backgroundColor: "header.background",
+      text: "header.text",
+      fontWeight: "bold",
+      px: "0.5em",
+      py: "1px",
+      ":hover, :focus, :active": {
+        textDecoration: "none",
+        textDecorationThickness: "0.125em",
+        color: "primary",
+      },
+    }
   },
   variants: {
     formValidation: {
@@ -146,6 +163,10 @@ export default merge(BaseTheme, {
       letterSpacing: "normal",
       px: "0.5em",
       py: "1px",
+    },
+
+    branding: {
+      width: "300px"
     },
 
     navLi: {

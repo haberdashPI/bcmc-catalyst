@@ -1,11 +1,11 @@
 require("dotenv").config({ path: `.env` })
 module.exports = {
   siteMetadata: {
-    title: `Catalyst Sanity`,
-    description: `Speed up your GatsbyJS development workflow. Designed as a set of opinionated and advanced themes and starters using MDX and Theme-UI. Incorporates gatsby-theme-catalyst-core, gatsby-theme-catalyst-header-top, and gatsby-theme-catalyst-footer.`,
+    title: `Baltimore Community Mediation Cetern Website`,
+    description: `A community center for conflict resolution in Baltimore, MD`,
     keywords: [`gatsby`, `theme`, `react`],
-    author: `Eric Howey`,
-    siteUrl: `https://gatsby-starter-catalyst-sanity.netlify.app`, //Change to you site address, required for sitemap.xml and robots.txt file among other things
+    author: `David Little`,
+    siteUrl: `https://fervent-ritchie-c19b24.netlify.app/`, //Change to you site address, required for sitemap.xml and robots.txt file among other things
     menuLinks: [
       {
         name: `Page 1`,
@@ -32,35 +32,35 @@ module.exports = {
     ],
   },
   plugins: [
-    {
-      resolve: 'gatsby-source-mailchimp',
-      options: {
-        key: process.env.MAILCHIMP_API_KEY,
-        rootURL: 'https://us9.api.mailchimp.com/3.0'
-      }
-    },
+    // {
+    //   resolve: 'gatsby-source-mailchimp',
+    //   options: {
+    //     key: process.env.MAILCHIMP_API_KEY,
+    //     rootURL: 'https://us9.api.mailchimp.com/3.0'
+    //   }
+    // },
     {
       resolve: `gatsby-theme-catalyst-core`,
       options: {
         // Default options are:
         // contentPath: `content/pages`,
         // assetPath: `content/assets`,
-        // displaySiteLogo: true,
-        // displaySiteTitle: true,
-        // displaySiteLogoMobile: true,
-        // displaySiteTitleMobile: true,
         // invertSiteLogo: false,
         useStickyHeader: true,
         // useSocialLinks: true,
-        useColorMode: false,
-        // useKatex: false, // Dark mode is not supported when configuring the theme from SANITY.io dashboard
+        // useColorMode: false, (NO LONGER USED)
         // footerContentLocation: "left", // "left", "right", "center"
         // remarkImagesWidth: 1440,
         // imageQuality: 50,
       },
     },
-    `gatsby-theme-catalyst-header-top`, // Try `gatsby-theme-catalyst-header-side`
-    // `gatsby-theme-catalyst-footer`,
+    {
+      resolve: `gatsby-theme-catalyst-header-top`,
+      options: {
+        useColorMode: false,
+      }
+    },
+    `gatsby-theme-catalyst-footer`,
     {
       resolve: `gatsby-theme-catalyst-sanity`,
       options: {

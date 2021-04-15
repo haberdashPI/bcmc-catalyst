@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Styled } from "theme-ui"
+import { jsx, Themed } from "theme-ui"
 import Figure from "./figure"
 import FigureWide from "gatsby-theme-catalyst-sanity/src/components/sanity/figure-wide"
 import Code from "gatsby-theme-catalyst-sanity/src/components/sanity/code"
@@ -34,61 +34,61 @@ const serializers = {
       switch (props.node.style) {
         case "h1":
           return (
-            <Styled.h1 sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
+            <Themed.h1 sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
-            </Styled.h1>
+            </Themed.h1>
           )
         case "h2":
           return (
-            <Styled.h2 sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
+            <Themed.h2 sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
-            </Styled.h2>
+            </Themed.h2>
           )
         case "h3":
           return (
-            <Styled.h3  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
+            <Themed.h3  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
-            </Styled.h3>
+            </Themed.h3>
           )
         case "h4":
           return (
-            <Styled.h4  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
+            <Themed.h4  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
-            </Styled.h4>
+            </Themed.h4>
           )
         case "h5":
           return (
-            <Styled.h5  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
+            <Themed.h5  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
-            </Styled.h5>
+            </Themed.h5>
           )
         case "h6":
           return (
-            <Styled.h6  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
+            <Themed.h6  sx={{fontVariant: "small-caps"}} id={headerId(props.children)}>
               {props.children}
-            </Styled.h6>
+            </Themed.h6>
           )
         case "small":
-          return <Styled.p sx={{ fontSize: 1 }}>{props.children}</Styled.p>
+          return <Themed.p sx={{ fontSize: 1 }}>{props.children}</Themed.p>
         case "smallest":
-          return <Styled.p sx={{ fontSize: 0 }}>{props.children}</Styled.p>
+          return <Themed.p sx={{ fontSize: 0 }}>{props.children}</Themed.p>
         case "blockquote":
-          return <Styled.blockquote>{props.children}</Styled.blockquote>
+          return <Themed.blockquote>{props.children}</Themed.blockquote>
         default:
-          return <Styled.p>{props.children}</Styled.p>
+          return <Themed.p>{props.children}</Themed.p>
       }
     },
   },
   marks: {
     sup: ({ children }) => <sup>{children}</sup>,
-    code: ({ children }) => <Styled.inlineCode>{children}</Styled.inlineCode>,
+    code: ({ children }) => <Themed.inlineCode>{children}</Themed.inlineCode>,
     link: ({ children, mark }) =>
       mark.blank ? (
-        <Styled.a href={mark.href} target="_blank" rel="noopener noreferer">
+        <Themed.a href={mark.href} target="_blank" rel="noopener noreferer">
           {children}
-        </Styled.a>
+        </Themed.a>
       ) : (
-        <Styled.a href={mark.href}>{children}</Styled.a>
+        <Themed.a href={mark.href}>{children}</Themed.a>
       ),
   },
 }
