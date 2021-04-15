@@ -1,6 +1,4 @@
 require("dotenv").config({ path: `.env` })
-process.env.SITE_BUILD_MODE !== "production" &&
-  console.log("\x1b[34minfo\x1b[0m detected a preview build, overlaying document drafts")
 module.exports = {
   siteMetadata: {
     title: `Catalyst Sanity`,
