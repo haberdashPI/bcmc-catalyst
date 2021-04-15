@@ -53,7 +53,8 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
         let message = valuesToSubmit(values)
 
         try{
-            if(process.env.CONTEXT === "production"){
+            // TODO: Revise this!
+            if(process.env.FORM_SUBMISSION !== "debug"){
                 let res = await fetch('https://api.staticforms.xyz/submit', {
                     method :'POST',
                     body: JSON.stringify(message),
@@ -188,7 +189,7 @@ export const Input = ({label, name, ...props}) => {
             sx={{borderWidth: 0,
                 borderBottomWidth: "2px", borderRadius: 0,
                 borderColor: baseColors.gray[6],
-                px: 0, pb: "2px",
+                px: 0, pb: "2px", pl: "0.25em",
                 bg: error ? "tertiary" : baseColors.gray[1],
                 borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
                 ":focus": {
@@ -201,7 +202,7 @@ export const Input = ({label, name, ...props}) => {
         <ThemeUILabel sx={{
             display: "inline",
             mt: "1px",
-            mr: "1em",
+            mr: "1em", pl: "0.25em",
             fontSize: "smaller",
             color: baseColors.gray[6]}}>
 
@@ -250,7 +251,7 @@ export const Select = ({label, name, ...props}) => {
                 borderWidth: 0,
                 borderBottomWidth: "2px", borderRadius: 0,
                 borderColor: baseColors.gray[6],
-                px: 0, pb: "2px",
+                px: 0, pb: "2px", pl: "0.25rem",
                 bg: baseColors.gray[1],
                 borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
                 ":focus": {
@@ -264,6 +265,7 @@ export const Select = ({label, name, ...props}) => {
             display: "inline",
             mt: "1px",
             mr: "1em",
+            pl: "0.25rem",
             fontSize: "smaller",
             color: baseColors.gray[6]}}>
 
