@@ -92,14 +92,9 @@ const MediationRequestForm = ({ node }) => {
                         </Heading>
                         <p>Who would you like to schedule a mediation with?</p>
                     </>}
-                    <Box sx={{border: "solid 1px",
-                        borderRadius: "4px", my: "1em", p: "1em"}}>
-                        {i > 0 && <Close
-                            sx={{p: "0", float: "right", m: "0"}}
-                            onClick={() => deleteFn(i)}/>}
+                    <Box sx={{mt: "3rem"}}>
                         {i === 0 && <>
-                            <Label>Please reach me by</Label>
-                            <Select name='contactby'>
+                            <Select label='Please reach me by' name='contactby'>
                                 <option key="Email">Email</option>
                                 <option key="Phone">Phone</option>
                                 <option key="Mail">Mail</option>
@@ -107,6 +102,17 @@ const MediationRequestForm = ({ node }) => {
                         </>}
                         <PersonSubForm name={`person.${i}`}
                             questions={i === 0 ? node.info_questions : node.part_questions}/>
+                        {i > 0 && <Box sx={{textAlign: "right"}}><Button variant="tertiary"
+                            sx={{
+                                p: "0",
+                                m: "0",
+                                mb: "1rem",
+                                px: "0.5rem",
+                                display: "inline"
+                            }}
+                            onClick={() => deleteFn(i)}>
+                            Remove {person.first}
+                        </Button></Box>}
                     </Box></span>)}
             </ListOf>
         </Form>)

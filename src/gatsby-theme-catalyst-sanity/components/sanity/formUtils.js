@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
+import { baseColors } from "@theme-ui/preset-tailwind"
 import { jsx, Themed } from "theme-ui"
 import {
     Box,
-    Label,
+    Label as ThemeUILabel,
     Input as ThemeUIInput,
     Grid,
     Heading,
@@ -17,8 +18,9 @@ import { List } from 'immutable'
 import { get } from 'lodash'
 import * as yup from 'yup'
 import { Formik, FieldArray } from "formik"
-import { alpha, darken } from '@theme-ui/color'
+import { alpha, darken, lighten } from '@theme-ui/color'
 import { navigate } from "gatsby"
+import { theme } from '../../../gatsby-plugin-theme-ui/index'
 
 const FormikContext = React.createContext({});
 
@@ -172,26 +174,62 @@ export const ListOf = ({name, children, defaultItem, deletedMessageFn}) => {
     </FieldArray>)
 }
 
+export const Label = ({children}) => {
+    return (<ThemeUILabel sx={{fontSize: "smaller"}}>{children}</ThemeUILabel>)
+}
 
-export const Input = ({name, ...props}) => {
+export const Input = ({label, name, ...props}) => {
     const formik = useContext(FormikContext)
     const error = get(formik.touched, name) && get(formik.errors, name)
     // return <pre>{name}</pre>
     return <>
         <ThemeUIInput name={name} id={name} onChange={formik.handleChange}
             onBlur={formik.handleBlur} variant={error ? "formError" : ""}
-            sx={{bg: error ? "tertiary" : ""}}
+            sx={{borderWidth: 0,
+                borderBottomWidth: "2px", borderRadius: 0,
+                borderColor: baseColors.gray[6],
+                px: 0, pb: "2px",
+                bg: error ? "tertiary" : baseColors.gray[1],
+                borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
+                ":focus": {
+                    borderColor: "primary",
+                    bg: error ? "tertiary" : lighten(theme.primary, 0.5),
+                    outline: 0,
+                }
+            }}
             value={get(formik.values, name)} {...props}/>
-        <Box variant="formValidation">{error}</Box>
+        <ThemeUILabel sx={{
+            display: "inline",
+            mt: "1px",
+            mr: "1em",
+            fontSize: "smaller",
+            color: baseColors.gray[6]}}>
+
+            {label}
+        </ThemeUILabel>
+        <Box sx={{display: "inline"}} variant="formValidation">{error}</Box>
     </>
 }
 
-export const Textarea = ({name, ...props}) => {
+export const Textarea = ({label, name, ...props}) => {
     const formik = useContext(FormikContext)
     const error = get(formik.touched, name) && get(formik.errors, name)
     return <>
+        <Box>{label}</Box>
         <ThemeUITextarea name={name} id={name} onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            sx={{
+                borderRadius: 0,
+                borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
+                bg: baseColors.gray[3],
+                borderWidth: 0, borderBottomWidth: "2px",
+                borderColor: "transparent",
+                outline: 0,
+                ":focus": {
+                    bg: lighten(theme.primary, 0.5),
+                    borderColor: "primary"
+                }
+            }}
             value={get(formik.values, name)} {...props}/>
         <Box variant="formValidation">{error}</Box>
     </>
@@ -202,67 +240,78 @@ export const ShowFormikData = () => {
     return (<pre>{JSON.stringify(formik, null, 2)}</pre>)
 }
 
-export const Select = ({name, ...props}) => {
+export const Select = ({label, name, ...props}) => {
     const formik = useContext(FormikContext)
     return <>
         <ThemeUISelect name={name} id={name} onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={get(formik.values, name)} {...props}/>
-        <Box variant="formValidation">{get(formik.errors, name)}</Box>
+            value={get(formik.values, name)}
+            sx={{
+                borderWidth: 0,
+                borderBottomWidth: "2px", borderRadius: 0,
+                borderColor: baseColors.gray[6],
+                px: 0, pb: "2px",
+                bg: baseColors.gray[1],
+                borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
+                ":focus": {
+                    borderColor: baseColors.gray[9],
+                    bg: baseColors.gray[3],
+                    outline: 0,
+                }
+            }}
+            {...props}/>
+        <ThemeUILabel sx={{
+            display: "inline",
+            mt: "1px",
+            mr: "1em",
+            fontSize: "smaller",
+            color: baseColors.gray[6]}}>
+
+            {label}
+        </ThemeUILabel>
+        {/* <Box sx={{display: "inline"}} variant="formValidation">{error}</Box> */}
     </>
 }
 
 export const PersonSubForm = ({ name, questions }) => (<>
     <Grid gap={4} sx={{mb: "1rem"}} columns={'1fr 1fr'}>
         <Box>
-            <Label>First Name</Label>
-            <Input name={`${name}.first`}/>
+            <Input label={"First Name"} name={`${name}.first`}/>
         </Box>
         <Box>
-            <Label>Last Name</Label>
-            <Input name={`${name}.last`}/>
+            <Input label={"Last Name"} name={`${name}.last`}/>
         </Box>
     </Grid>
     <Grid gap={4} sx={{mt: "1rem"}} columns={'1fr 2fr'}>
         <Box>
-            <Label>Phone</Label>
-            <Input name={`${name}.phone`}/>
+            <Input label={"Phone"} name={`${name}.phone`}/>
         </Box>
         <Box>
-            <Label>Email</Label>
-            <Input type="email" name={`${name}.email`}/>
+            <Input label={"Email"} type="email" name={`${name}.email`}/>
         </Box>
     </Grid>
-    <Box sx={{mt: "2rem", borderRadius: "4px", border: "solid 1px", p: "1rem"}}>
-        <Heading as='h4' sx={{fontVariant: "small-caps"}}>Address</Heading>
-        <Label>Street</Label>
-        <Input name={`${name}.street`}></Input>
-        <Label>Line 2</Label>
-        <Input name={`${name}.line2`}></Input>
+    <Box sx={{my: "0.5rem"}}>
+        {/* <Heading as='h4' sx={{fontVariant: "small-caps"}}>Address</Heading> */}
+        <Input label={"Street"} name={`${name}.street`}></Input>
+        <Input label={"Line 2"} name={`${name}.line2`}></Input>
         <Grid gap={4} columns={'1fr 4em 0.5fr'}>
             <Box>
-                <Label>City</Label>
-                <Input name={`${name}.city`}/>
+                <Input label={"City"} name={`${name}.city`}/>
             </Box>
             <Box>
-                <Label>State</Label>
-                <Input name={`${name}.state`}/>
+                <Input label={"State"} name={`${name}.state`}/>
             </Box>
             <Box>
-                <Label>Zip</Label>
-                <Input name={`${name}.zip`}/>
+                <Input label={"Zip"} name={`${name}.zip`}/>
             </Box>
         </Grid>
-        <Label htmlFor='Country'>Country</Label>
-        <Input name={`${name}.country`}/>
+        <Input label={"Country"} name={`${name}.country`}/>
     </Box>
     {questions && questions.map((q, i) =>
         q.length !== "long" ? <div key={"addq"+i}>
-            <Label sx={{mt: "1rem"}}>{q.text}</Label>
-            <Input name={`${name}.${q.id}`}/>
+            <Input label={q.text} name={`${name}.${q.id}`}/>
         </div> : <div key={"addq"+i}>
-            <Label sx={{mt: "1rem"}}>{q.text}</Label>
-            <Textarea rows={8} name={`${name}.${q.id}`}/>
+            <Textarea label={q.text} rows={8} name={`${name}.${q.id}`}/>
         </div>
     )}
 </>)
@@ -281,7 +330,7 @@ function DeletedList( {children, deleted, onAdd, setDeleted} ){
                 alignItems: "center",
                 height: "4rem",
                 bg: "tertiary",
-                borderLeftColor: darken("tertiary", 0.25),
+                borderLeftColor: darken(theme.tertiary, 0.25),
                 boxShadow: "0px 0px 4px black",
                 color: "text"}}>
 

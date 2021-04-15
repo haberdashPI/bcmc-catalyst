@@ -7,7 +7,7 @@ import "@fontsource/raleway/400.css"
 import "@fontsource/raleway/700.css"
 import { darken, lighten } from "@theme-ui/color"
 
-const theme = {
+export const theme = {
   primary: "#498046",
   secondary: "#80c180",
   tertiary: "#d5b959",
