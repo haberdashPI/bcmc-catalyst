@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { baseColors } from "@theme-ui/preset-tailwind"
 import { jsx, Themed } from "theme-ui"
 import {
@@ -14,7 +14,7 @@ import {
     Close,
     Spinner,
 } from 'theme-ui'
-import { List } from 'immutable'
+import { OrderedSet, Set } from 'immutable'
 import { get } from 'lodash'
 import * as yup from 'yup'
 import { Formik, FieldArray } from "formik"
@@ -155,11 +155,11 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
 }
 
 export const ListOf = ({name, children, defaultItem, deletedMessageFn}) => {
-    let [deletedItems, setDeletedItems] = useState(List())
+    let [deletedItems, setDeletedItems] = useState(new OrderedSet())
     const formik = useContext(FormikContext)
     const items = get(formik.values, name)
     function buildDeleteFn(helpers){ return (i) => {
-        setDeletedItems(deletedItems.push(items[i]))
+        setDeletedItems(deletedItems.add(items[i]))
         helpers.remove(i)
     }}
 
@@ -333,44 +333,65 @@ export const PersonSubForm = ({ name, questions }) => (<>
     )}
 </>)
 
+function DeletedItem({children, item, onClose, onUndo}){
+    const [timers, setTimers] = useState(new Set())
+    useEffect(() => {
+        if(!timers.has(item)){
+            setTimers(timers.add(item))
+            setTimeout(() => onClose(item), 20000)
+        }
+    }, [item])
+    return (<Message sx={{
+        m: "0.5rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "4rem",
+        bg: lighten(theme.tertiary, 0.25),
+        borderLeftColor: darken(theme.tertiary, 0.25),
+        boxShadow: "0px 0px 4px black",
+        color: "text"}}>
+
+        {children}
+        <Button type='button' sx={{
+                m: "0.5rem",
+                float: "right",
+                fontSize: 1,
+                p: "0.2em"
+            }}
+            type="button"
+            variant="tertiary"
+            onClick={e => onUndo(item)}>
+            Undo
+        </Button>
+        <Close sx={{m: "0", p: "0",
+            float: "right",
+            fontSize: 1,
+            p: "0.2em"}}
+            type="button"
+            onClick={e => onClose(item)}/>
+    </Message>)
+}
+
 function DeletedList( {children, deleted, onAdd, setDeleted} ){
+    let key = 0;
     return (<Box sx={{
         position: "fixed",
         zIndex: 999,
         bottom: "1rem",
         right: "1rem"}}>
-        {deleted.map((p, i) =>
-            <Message key={"message"+i} sx={{
-                m: "0.5rem",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "4rem",
-                bg: "tertiary",
-                borderLeftColor: darken(theme.tertiary, 0.25),
-                boxShadow: "0px 0px 4px black",
-                color: "text"}}>
-
-                {children(p, i)}
-                <Button type='button' sx={{
-                        m: "0.5rem",
-                        float: "right",
-                        fontSize: 1,
-                        p: "0.2em"
-                    }}
-                    variant="tertiary"
-                    onClick={() => {
-                        onAdd(p)
-                        setDeleted(deleted.delete(i))
+        {deleted.map((p) =>
+            <DeletedItem
+                key={"deleted_"+(key++)}
+                item={p}
+                deleted={deleted}
+                onClose={(p) => {setDeleted(del => del.delete(p))}}
+                onUndo={(p) => {
+                    onAdd(p)
+                    setDeleted(del => del.delete(p))
                 }}>
-                    Undo
-                </Button>
-                <Close sx={{m: "0", p: "0",
-                    float: "right",
-                    fontSize: 1,
-                    p: "0.2em"}}
-                    onClick={() => {setDeleted(deleted.delete(i))}}/>
-            </Message>)}
+                {children(p, key)}
+            </DeletedItem>)}
     </Box>)
 }
 

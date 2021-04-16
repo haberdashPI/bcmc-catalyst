@@ -110,6 +110,7 @@ const MediationRequestForm = ({ node }) => {
                                 px: "0.5rem",
                                 display: "inline"
                             }}
+                            type="button"
                             onClick={() => deleteFn(i)}>
                             Remove {person.first}
                         </Button></Box>}
