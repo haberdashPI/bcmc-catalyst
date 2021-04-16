@@ -14,14 +14,14 @@ import { useSlugIndex } from './util'
 
 function validate(values){
     let schema = values.contactby === "Email" ?
-        { email: yup.string().email().required("Missing email") } :
+        { email: yup.string().email().required("Required") } :
         values.contactby === "Mail" ? {
-            street: yup.string().required("Missing street"),
-            city: yup.string().required("Missing city"),
-            state: yup.string().required("Missing state"),
-            zip: yup.string().required("Missing zip").matches(/^[0-9]*$/, "Must be a number"),
+            street: yup.string().required("Required"),
+            city: yup.string().required("Required"),
+            state: yup.string().required("Required"),
+            zip: yup.string().required("Required").matches(/^[0-9]*$/, "Must be a number"),
         } :
-        { phone: yup.string().required("Missing phone number").matches(/^[0-9-]*$/,"Must be a number") }
+        { phone: yup.string().required("Required").matches(/^[0-9-]*$/,"Must be a number") }
     schema = {...personSchema, ...schema}
 
     try {
@@ -60,8 +60,7 @@ const VolunteerForm = ({ node }) => {
         submitMessage = {node.submit}
         submitValues = {submitValuesFn(node)}>
             {/* <ShowFormikData/> */}
-            <Label>Please reach me by</Label>
-            <Select name='contactby'>
+            <Select label='Please reach me by' name='contactby'>
                 <option key="Email">Email</option>
                 <option key="Phone">Phone</option>
                 <option key="Mail">Mail</option>

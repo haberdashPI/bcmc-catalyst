@@ -38,10 +38,10 @@ export function person(quests){
 }
 
 export const personSchema = {
-    first: yup.string().required("Missing first name"),
-    last: yup.string().required("Missing last name"),
+    first: yup.string().required("Required"),
+    last: yup.string().required("Required"),
     phone: yup.string().matches(/^[0-9-]*$/,"Must be a number"),
-    email: yup.string().email("Must be an email"),
+    email: yup.string().email("invalid address"),
     zip: yup.string().matches(/^[0-9]*$/, "Must be a number")
 }
 
@@ -130,7 +130,7 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
             fn(v)}} {...props}>
             {formik => (<>
                 {!formik.isValid && <Box sx={{
-                    position: "fixed", bottom: "0", left: "0", width: "100vw", height: "3.5em",
+                    position: "fixed", bottom: "0", left: "0", width: "100vw",
                     zIndex: 500, bg: lighten(theme.tertiary, 0.25), p: "1em", borderWidth: "0", borderLeftWidth: "5px", borderStyle: "solid",
                     borderColor: darken(theme.tertiary, 0.25),
                 }}>

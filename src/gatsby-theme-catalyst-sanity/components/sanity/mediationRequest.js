@@ -20,14 +20,14 @@ import { useSlugIndex } from './util'
 function validateFn(node, slugs){
     return (values) => {
         let firstPersonSchema = values.contactby === "Email" ?
-            { email: yup.string().email().required("Missing email") } :
+            { email: yup.string().email().required("Required") } :
             values.contactby === "Mail" ? {
-                street: yup.string().required("Missing street"),
-                city: yup.string().required("Missing city"),
-                state: yup.string().required("Missing state"),
-                zip: yup.string().required("Missing zip").matches(/^[0-9]*$/, "Must be a number"),
+                street: yup.string().required("Required"),
+                city: yup.string().required("Required"),
+                state: yup.string().required("Required"),
+                zip: yup.string().required("Required").matches(/^[0-9]*$/, "Must be a number"),
             } :
-            { phone: yup.string().required("Missing phone number").matches(/^[0-9-]*$/,"Must be a number") }
+            { phone: yup.string().required("Required").matches(/^[0-9-]*$/,"Must be a number") }
 
         const personError = values.person.map((p,i) => {
             let schema = i === 0 ? {...personSchema, ...firstPersonSchema} :
