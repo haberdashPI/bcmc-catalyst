@@ -131,7 +131,7 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
             {formik => (<>
                 {!formik.isValid && <Box sx={{
                     position: "fixed", bottom: "0", left: "0", width: "100vw", height: "3.5em",
-                    zIndex: 500, bg: theme.tertiary, p: "1em", borderWidth: "0", borderLeftWidth: "5px", borderStyle: "solid",
+                    zIndex: 500, bg: lighten(theme.tertiary, 0.25), p: "1em", borderWidth: "0", borderLeftWidth: "5px", borderStyle: "solid",
                     borderColor: darken(theme.tertiary, 0.25),
                 }}>
                     There are several errors in the form, check all fields before submitting.
