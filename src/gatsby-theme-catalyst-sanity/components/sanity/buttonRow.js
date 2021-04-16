@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx, Themed, Button } from "theme-ui"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { jsx, Themed, Link, Button } from "theme-ui"
+import { useStaticQuery, graphql, Link as GatsbyLink, navigate } from "gatsby"
 import { useSlugIndex } from "./util"
 
 const ButtonRow = ({ node }) => {
@@ -16,20 +16,21 @@ const ButtonRow = ({ node }) => {
             justifyContent: "center",
         } : {float: "left"}}>
         {node.buttons && node.buttons.map((b, i) =>
-            <Button key={"button"+i} sx={{px: "1em", my: "0.5em", mx: "0.5em", bg: (b.type || "primary")}}>
-            {b._type === "urlButton" ? (
-                <Themed.a sx={{variant: "buttonLink."+(b.type || "primary"), textDecoration: "none", ":hover": {textDecoration: "none"}}}
-                    href={b.link}>
+            <Button key={"button"+i}
+                {...(b._type === "urlButton" ? {
+                    as: b._type === "urlButton" ? Themed.a : GatsbyLink,
+                    href: b.link,
+                    target: "_blank",
+                } : {
+                    as: GatsbyLink,
+                    to: b.link && slugs[b.link._ref]
+                })}
+                variant={(b.type || "primary")}
+                sx={{
+                    // bg: (b.type || "primary")
+                }}>
                     {b.text}
-                </Themed.a>
-            ) : (
-                <Link sx={{variant: "buttonLink."+(b.type || "primary"), textDecoration: "none"}}
-                    to={b.link && slugs[b.link._ref]}>
-                    {b.text}
-                </Link>
-            )}
-            </Button>
-        )}
+            </Button>)}
         </div>
     </div>)
 }

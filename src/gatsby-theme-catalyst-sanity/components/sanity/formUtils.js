@@ -129,6 +129,13 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                 submitMessage)
             fn(v)}} {...props}>
             {formik => (<>
+                {!formik.isValid && <Box sx={{
+                    position: "fixed", bottom: "0", left: "0", width: "100vw", height: "3.5em",
+                    zIndex: 500, bg: theme.tertiary, p: "1em", borderWidth: "0", borderLeftWidth: "5px", borderStyle: "solid",
+                    borderColor: darken(theme.tertiary, 0.25),
+                }}>
+                    There are several errors in the form, check all fields before submitting.
+                </Box>}
                 <FormikContext.Provider value={formik}>
                     <Box sx={{position: "relative"}} as='form' onSubmit={formik.handleSubmit}>
                         <Input name={`honeypot`} sx={{display: "none"}}></Input>
@@ -187,13 +194,15 @@ export const Input = ({label, name, ...props}) => {
         <ThemeUIInput name={name} id={name} onChange={formik.handleChange}
             onBlur={formik.handleBlur} variant={error ? "formError" : ""}
             sx={{borderWidth: 0,
-                borderBottomWidth: "2px", borderRadius: 0,
+                borderStyle: "dotted",
+                borderBottomWidth: "1.5px", borderRadius: 0,
                 borderColor: baseColors.gray[6],
                 px: 0, pb: "2px", pl: "0.25em",
                 bg: error ? "tertiary" : baseColors.gray[1],
                 borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
                 ":focus": {
-                    borderColor: "primary",
+                    borderStyle: "solid",
+                    borderColor: error ? darken(theme.tertiary, 0.25) : "primary",
                     bg: error ? "tertiary" : lighten(theme.primary, 0.5),
                     outline: 0,
                 }
@@ -216,19 +225,23 @@ export const Textarea = ({label, name, ...props}) => {
     const formik = useContext(FormikContext)
     const error = get(formik.touched, name) && get(formik.errors, name)
     return <>
-        <Box>{label}</Box>
+        <Box sx={{mt: "0.5em"}}>{label}</Box>
         <ThemeUITextarea name={name} id={name} onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             sx={{
                 borderRadius: 0,
                 borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
-                bg: baseColors.gray[3],
-                borderWidth: 0, borderBottomWidth: "2px",
-                borderColor: "transparent",
+                bg: "white", //baseColors.gray[3],
+                borderWidth: "1px", borderBottomWidth: "2px",
+                borderColor: baseColors.gray[5],
+                borderStyle: "solid",
+                // borderBottomStyle: "dotted",
+                // boxShadow: "inset 0px 1px 1.5px 0.5px #555",
                 outline: 0,
                 ":focus": {
                     bg: lighten(theme.primary, 0.5),
-                    borderColor: "primary"
+                    borderBottomColor: "primary",
+                    // borderStyle: "solid",
                 }
             }}
             value={get(formik.values, name)} {...props}/>
@@ -249,14 +262,16 @@ export const Select = ({label, name, ...props}) => {
             value={get(formik.values, name)}
             sx={{
                 borderWidth: 0,
-                borderBottomWidth: "2px", borderRadius: 0,
+                borderBottomWidth: "1.5px", borderRadius: 0,
                 borderColor: baseColors.gray[6],
+                borderStyle: "dotted",
                 px: 0, pb: "2px", pl: "0.25rem",
-                bg: baseColors.gray[1],
+                bg: baseColors.gray[3],
                 borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
                 ":focus": {
-                    borderColor: baseColors.gray[9],
-                    bg: baseColors.gray[3],
+                    borderStyle: "solid",
+                    borderColor: "primary",
+                    bg: lighten(theme.primary, 0.5),
                     outline: 0,
                 }
             }}

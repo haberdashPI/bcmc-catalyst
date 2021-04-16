@@ -13,6 +13,26 @@ export const theme = {
   tertiary: "#d5b959",
 }
 
+const buttonStyles = (color) => ({
+  bg: color,
+  textDecoration: "none",
+  boxShadow: "2px 2px 3px black",
+  border: "solid",
+  borderColor: "transparent",
+  borderWidth: "0px",
+  borderBottomWidth: "0.4em",
+  px: "1em",
+  py: "0.5em",
+  pb: "0.1em",
+  my: "0.5em",
+  mx: "0.5em",
+  outline: "none",
+  ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px black", textDecoration: "none" },
+  ":disabled": { bg: lighten(color,0.25), boxShadow: "0px 0px black" },
+  ":hover": { borderColor: darken(color, 0.2), bg: lighten(color, 0.05), textDecoration: "none" },
+  ":focus": { borderColor: darken(color, 0.2), bg: lighten(color, 0.05), textDecoration: "none" }
+})
+
 export default merge(BaseTheme, {
   breakpoints: ["480px", "768px", "1024px", "1440px"],
   fonts: {
@@ -87,25 +107,16 @@ export default merge(BaseTheme, {
     },
     primary: {
       color: "white",
-      bg: theme.primary,
-      boxShadow: "2px 2px 3px black",
-      // ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px black" },
-      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px black" },
-      },
+      ...buttonStyles(theme.primary)
+    },
     secondary: {
       color: "black",
-      bg: theme.secondary,
-      boxShadow: "2px 2px 3px black",
-      // ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px black" },
-      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px black" },
-      },
+      ...buttonStyles(theme.secondary)
+    },
     tertiary: {
       color: "black",
-      bg: theme.tertiary,
-      boxShadow: "2px 2px 3px black",
-      // ":active": { position: "relative", top: "2px", left: "2px", boxShadow: "0px 0px black" },
-      ":disabled": { bg: lighten(theme.primary,0.25), boxShadow: "0px 0px black" },
-      },
+      ...buttonStyles(theme.tertiary)
+    },
 
     dropdown: {
       fontFamily: "body",
