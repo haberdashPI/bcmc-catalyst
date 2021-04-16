@@ -75,7 +75,7 @@ const SiteFooter = () => {
         {/* {JSON.stringify(footerData.sanityFooterPage._rawBody)} */}
         <SanityContent data={footerData.sanityFooterPage._rawBody}/>
         <p sx={{ m: 0 }}> © {new Date().getFullYear()} {title} </p>
-        <p sx={{ mb: 0 }}> <a href="https://baltimore-community-mediation.sanity.studio/">Edit this website</a></p>
+        <p sx={{ mb: 0 }}> <a href="https://baltimore-community-mediation.sanity.studio/" target="_blank">Edit this website</a></p>
       </div>
     </footer>
   )
