@@ -15,7 +15,7 @@ export default {
             {
               title: 'Published Website',
               apiId: "4a637246-0035-4966-9f57-83dd090eb52f",
-              buildHookId: "60674707f6b18dba1434ef23",
+              buildHookId: "6079bb7940f7de229c24d7c9",
               name: 'sanity-production',
               url: 'https://fervent-ritchie-c19b24.netlify.app/',
             }
