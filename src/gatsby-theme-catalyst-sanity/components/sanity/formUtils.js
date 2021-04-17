@@ -15,7 +15,7 @@ import {
     Spinner,
 } from 'theme-ui'
 import { OrderedSet, Set } from 'immutable'
-import { get } from 'lodash'
+import { get, entries, range } from 'lodash'
 import * as yup from 'yup'
 import { Formik, FieldArray } from "formik"
 import { alpha, darken, lighten } from '@theme-ui/color'
@@ -129,7 +129,7 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                 submitMessage)
             fn(v)}} {...props}>
             {formik => (<>
-                {!formik.isValid && <Box sx={{
+                {visibleError(formik.errors, formik.touched) && <Box sx={{
                     position: "fixed", bottom: "0", left: "0", width: "100vw",
                     zIndex: 500, bg: lighten(theme.tertiary, 0.25), p: "1em", borderWidth: "0", borderLeftWidth: "5px", borderStyle: "solid",
                     borderColor: darken(theme.tertiary, 0.25),
@@ -152,6 +152,28 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
             </>)}
         </Formik>
     </>)
+}
+
+function visibleError(errors, touched){
+    if(errors === undefined || touched === undefined){
+        return false
+    }
+    if(errors instanceof Array){
+        for(let i of range(errors.length)){
+            if(visibleError(errors[i], touched[i])) return true
+        }
+        return false
+    }
+    else if(errors instanceof Object){
+        if(!touched instanceof Object) return false
+        for(let [key, value] of entries(errors)){
+            if(visibleError(value, touched[key])) return true
+        }
+        return false
+    }
+    else{
+        return touched && errors
+    }
 }
 
 export const ListOf = ({name, children, defaultItem, deletedMessageFn}) => {
@@ -189,14 +211,17 @@ export const Label = ({children}) => {
 export const Input = ({label, name, ...props}) => {
     const formik = useContext(FormikContext)
     const error = get(formik.touched, name) && get(formik.errors, name)
+    console.log(get(formik.values))
     // return <pre>{name}</pre>
-    return <>
+    return (<Box sx={{mt: "0.5em"}}>
         <ThemeUIInput name={name} id={name} onChange={formik.handleChange}
+            placeholder={label}
             onBlur={formik.handleBlur} variant={error ? "formError" : ""}
             sx={{borderWidth: 0,
                 borderStyle: "dotted",
                 borderBottomWidth: "1.5px", borderRadius: 0,
                 borderColor: baseColors.gray[6],
+                mt: "0px",
                 px: 0, pb: "2px", pl: "0.25em",
                 bg: error ? "tertiary" : baseColors.gray[1],
                 borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
@@ -208,17 +233,18 @@ export const Input = ({label, name, ...props}) => {
                 }
             }}
             value={get(formik.values, name)} {...props}/>
-        <ThemeUILabel sx={{
-            display: "inline",
-            mt: "1px",
-            mr: "1em", pl: "0.25em",
-            fontSize: "smaller",
-            color: baseColors.gray[6]}}>
+            <ThemeUILabel sx={{
+                display: "inline",
+                mb: "0px",
+                mr: "1em", pl: "0.25em",
+                fontSize: "smaller",
+                color: baseColors.gray[6]}}>
 
-            {label}
-        </ThemeUILabel>
+                {/* {label} */}
+                {get(formik.values, name) ? label : ""}
+            </ThemeUILabel>
         <Box sx={{display: "inline"}} variant="formValidation">{error}</Box>
-    </>
+    </Box>)
 }
 
 export const Textarea = ({label, name, ...props}) => {
@@ -263,10 +289,9 @@ export const Select = ({label, name, ...props}) => {
             sx={{
                 borderWidth: 0,
                 borderBottomWidth: "1.5px", borderRadius: 0,
-                borderColor: baseColors.gray[6],
                 borderStyle: "dotted",
                 px: 0, pb: "2px", pl: "0.25rem",
-                bg: baseColors.gray[3],
+                bg: "background",
                 borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
                 ":focus": {
                     borderStyle: "solid",

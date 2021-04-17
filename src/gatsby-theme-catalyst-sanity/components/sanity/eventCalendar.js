@@ -1,4 +1,4 @@
-import { jsx } from "theme-ui"
+import { jsx, Themed } from "theme-ui"
 import React, { useEffect, useState } from 'react'
 import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
@@ -163,19 +163,19 @@ const EventDialog = ({event, eventDismiss}) => {
                 position: "absolute",
                 p: "0.2em", m: "1em" }}
                 onClick={eventDismiss}/>
-            <h2>{event.title}</h2>
-            <DelList items={[...eventLabels(event), ...labels]}/>
+            <Themed.h3 sx={{mb: "0.1em", fontVariant: "small-caps"}}>{event.title}</Themed.h3>
             <Box>
                 <Box sx={{
                     width: "min(calc(100vw - 6em), 40em)", height: "min(calc(50vh - 6em), 15em)",
                     overflowY: "scroll"
                 }}>
+                <DelList items={[...eventLabels(event), ...labels]}/>
                     <span dangerouslySetInnerHTML={{ __html: description }}/>
                 </Box>
                 <Button sx={{m: "1rem", justifySelf: "center", alignSelf: "end"}}
                         type='button' variant="primary"
                         onClick={() => window.open(event.url,'_newtab')}>
-                    Open in Google Calendar
+                    Open in Google
                 </Button>
                 {zoomLink && <Button sx={{m: "1rem", justifySelf: "center", alignSelf: "end"}}
                         type='button' variant="secondary"
