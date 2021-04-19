@@ -1,19 +1,21 @@
 import { jsx, Themed } from "theme-ui"
 import React, { useEffect, useState } from 'react'
-import FullCalendar from "@fullcalendar/react"
-import dayGridPlugin from "@fullcalendar/daygrid"
-import listMonth from "@fullcalendar/list"
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
+import "react-big-calendar/lib/css/react-big-calendar.css"
+import moment from 'moment'
 import req from "superagent";
-import "./eventStyles.css"
-import { format, isSameDay, differenceInHours } from 'date-fns'
+import { format, isSameDay, differenceInHours, endOfMonth, startOfMonth, startOfDay, endOfDay, isBefore, isAfter } from 'date-fns'
 import { cloneDeep } from 'lodash'
 import {
     Box,
     Close,
-    Button
+    Button,
+    Spinner
 } from 'theme-ui'
 import { navigate } from "gatsby-link";
 import { alpha } from "@theme-ui/color";
+import request from "superagent"
+import theme from "gatsby-theme-catalyst-core/src/gatsby-plugin-theme-ui"
 
 let eventCache = {}
 
@@ -21,7 +23,26 @@ function eventReqStr(info){
     return ":start:"+info.startStr+":end:"+info.endStr+":timeZone:"+info.timeZone
 }
 
-const readCalendarEventsFn = node => info => {
+function cleanupEventRange(range){
+    if(range instanceof Array){
+        const min = range.reduce((curmin, val) => isBefore(val, curmin) ? val : curmin)
+        const max = range.reduce((curmax, val) => isAfter(val, curmax) ? val : curmax)
+        return {
+            startStr: startOfDay(min).toISOString(),
+            endStr: endOfDay(max).toISOString()
+        }
+    }else{
+        return {
+            startStr: range.start.toISOString(),
+            endStr: range.end.toISOString()
+        }
+    }
+}
+
+function readCalendarEvents(node, info){
+    info = cleanupEventRange(info)
+    // TODO: convert to endStr and startStr values (arrays need
+    // to be converted to a range)
     if(!node.calendar){ return Promise.resolve([]) }
     const infoStr = eventReqStr(info)
     // cache retrieved events (very simple-minded!!) to avoid unncessary function calls
@@ -36,16 +57,21 @@ const readCalendarEventsFn = node => info => {
                 id: node.calendar,
                 startStr: info.startStr,
                 endStr: info.endStr,
-                timeZone: info.timeZone,
+                // timeZone: info.timeZone,
             })
             .set('Accept', 'application/json')
             .then(response => {
                 if(response.body.error) throw Exception(response.body.error)
+                const events = response.body.events.map(x => ({
+                    ...x,
+                    start: new Date(x.start),
+                    end: new Date(x.end)
+                }))
                 eventCache[infoStr] = {
-                    value: cloneDeep(response.body.events),
+                    value: cloneDeep(events),
                     stored: new Date(Date.now())
                 }
-                return response.body.events
+                return events
             })
     }
 }
@@ -188,10 +214,22 @@ const EventDialog = ({event, eventDismiss}) => {
 }
 
 const viewIds = {
-    "list": "listMonth",
-    "month": "dayGridMonth",
-    "week": "dayGridWeek"
+    "list": "agenda",
+    "month": "month",
+    "week": "week"
 }
+
+const localizer = momentLocalizer(moment)
+
+const ColoredDateCellWrapper = ({ children }) =>
+  React.cloneElement(React.Children.only(children), {
+    style: {
+      backgroundColor: theme.primary,
+    },
+  })
+
+const allViews = Object.keys(Views).map(k => Views[k])
+
 
 const EventCalendar = ({node}) => {
     const [eventContent, setEventContent] = useState({off: true})
@@ -200,17 +238,44 @@ const EventCalendar = ({node}) => {
         !eventContent.off ? (html.style.overflow = 'hidden') : (html.style.overflow = 'visible')
     }, [eventContent.off])
 
+    const [eventList, setEventList] = useState({items: [], request: false, loaded: false})
+    if(!eventList.request){
+        const today = new Date(Date.now())
+        setEventList({items: [], request: true, loaded: false})
+        readCalendarEvents(node, {
+            start: startOfMonth(today),
+            end: endOfMonth(today)
+        }).then(events => setEventList({items: events, request: true, loaded: true}))
+    }
+
     return (<>
         <EventDialog event={eventContent}
             eventDismiss={() => setEventContent({off: true})}/>
-        <Box sx={{m: "1em"}}>
-            <FullCalendar plugins = {[ dayGridPlugin, listMonth ]}
-                initialView={viewIds[node.default_view]}
-                headerToolbar={{start: 'title', center: 'listMonth,dayGridMonth,dayGridWeek', end: 'today prev,next'}}
-                events={readCalendarEventsFn(node)}
-                eventClick={info => {
-                    info.jsEvent.preventDefault()
-                    setEventContent(info.event)
+        <Box sx={{m: "1em", height: "30em", position: "relative"}}>
+            {eventList.request && !eventList.loaded && <Box sx={{
+                position: "absolute",
+                left: "50%", bottom: "50%", transform: "translate(-50%, -50%)",
+                zIndex: 100,
+            }}>
+                <Spinner/>
+            </Box>}
+            <Calendar
+                defaultView={viewIds[node.default_view]}
+                events={eventList.items}
+                components={{
+                    timeSlotWrapper: ColoredDateCellWrapper,
+                }}
+                views={allViews}
+                onRangeChange={(date) => {
+                    setEventList({items: [], request: true, loaded: false})
+                    readCalendarEvents(node, date).
+                        then(events => {
+                            setEventList({items: events, request: true, loaded: true})
+                        })
+                }}
+                localizer={localizer}
+                onSelectEvent={(calendarEvent, uiEvent) => {
+                    setEventContent(calendarEvent)
                 }}/>
         </Box>
     </>)
