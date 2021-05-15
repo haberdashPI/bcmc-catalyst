@@ -172,7 +172,7 @@ const EventDialog = ({event, eventDismiss}) => {
         zIndex: 1000, bg: 'rgba(1,1,1,0.5)', //alpha("background", 0.5),
         backdropFilter: "blur(20px)"
     }}
-        onClick={e => e.preventDefault()}
+        onClick={eventDismiss}
     >
         <Box sx={{bg: "background", zIndex: 1010,
             display: "flex", backdropFilter: "none",
@@ -183,7 +183,9 @@ const EventDialog = ({event, eventDismiss}) => {
             position: "fixed",
             flexDirection: "column",
             boxShadow: "2px 2px 6px black",
-        }}>
+        }}
+            onClick={e => e.preventDefault()}
+        >
             <Close sx={{m: "0", top: "0", right: "0",
                 fontSize: 1,
                 position: "absolute",
