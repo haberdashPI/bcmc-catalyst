@@ -1,11 +1,8 @@
 import { jsx, Themed } from "theme-ui"
 import React, { useEffect, useState } from 'react'
-import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
-import "react-big-calendar/lib/css/react-big-calendar.css"
-import moment from 'moment'
-import req from "superagent";
-import { format, isSameDay, differenceInHours, endOfMonth, startOfMonth, startOfDay, endOfDay, isBefore, isAfter } from 'date-fns'
-import { cloneDeep } from 'lodash'
+import { MonthlyDay, MonthlyBody, MonthlyNav, DefaultMonthlyEventItem, MonthlyCalendar } from '@zach.codes/react-calendar'
+import { subHours, format, isSameDay, differenceInHours, endOfMonth, startOfMonth, startOfDay, endOfDay, isBefore, isAfter, differenceInDays } from 'date-fns'
+import { cloneDeep, range } from 'lodash'
 import {
     Box,
     Close,
@@ -16,6 +13,7 @@ import { navigate } from "gatsby-link";
 import { alpha } from "@theme-ui/color";
 import request from "superagent"
 import theme from "gatsby-theme-catalyst-core/src/gatsby-plugin-theme-ui"
+import '@zach.codes/react-calendar/dist/calendar-tailwind.css';
 
 let eventCache = {}
 
@@ -52,7 +50,7 @@ function readCalendarEvents(node, info){
         differenceInHours(eventCache[infoStr].stored, new Date(Date.now())) < 1){
         return Promise.resolve(cloneDeep(eventCache[infoStr].value))
     }else {
-        return req.post('/.netlify/functions/events')
+        return request.post('/.netlify/functions/events')
             .send({
                 id: node.calendar,
                 startStr: info.startStr,
@@ -221,18 +219,6 @@ const viewIds = {
     "week": "week"
 }
 
-const localizer = momentLocalizer(moment)
-
-const ColoredDateCellWrapper = ({ children }) =>
-  React.cloneElement(React.Children.only(children), {
-    style: {
-      backgroundColor: theme.primary,
-    },
-  })
-
-const allViews = Object.keys(Views).map(k => Views[k])
-
-
 const EventCalendar = ({node}) => {
     const [eventContent, setEventContent] = useState({off: true})
     const html = document.querySelector('html')
@@ -240,20 +226,52 @@ const EventCalendar = ({node}) => {
         !eventContent.off ? (html.style.overflow = 'hidden') : (html.style.overflow = 'visible')
     }, [eventContent.off])
 
-    const [eventList, setEventList] = useState({items: [], request: false, loaded: false})
-    if(!eventList.request){
-        const today = new Date(Date.now())
-        setEventList({items: [], request: true, loaded: false})
+    const [eventList, setEventList] = useState({
+        items: [],
+        month: startOfMonth(new Date()),
+        request: false,
+        loaded: false
+    })
+    if(!eventList.request){ requestMonth(eventList.month) }
+
+    function requestMonth(month){
+        setEventList({items: [], request: true, loaded: false, month: month})
         readCalendarEvents(node, {
-            start: startOfMonth(today),
-            end: endOfMonth(today)
-        }).then(events => setEventList({items: events, request: true, loaded: true}))
+            start: month,
+            end: endOfMonth(month)
+        }).then(events => setEventList({
+            items: events,
+            request: true,
+            loaded: true,
+            month: month,
+        }))
     }
+
+    let events = eventList.items.map(e => {
+        const days = differenceInDays(e.end, e.start) > 1
+        if(days > 1){
+            return range(0, days).map(d => ({
+                title: e.title, date: addDays(startOfDay(e.start), d)
+            }))
+        }else{
+            return [{title: e.title, date: startOfDay(e.start)}]
+        }
+    }).flat()
+
+    let [currentMonth, setCurrentMonth] = useState(startOfMonth(new Date()));
 
     return (<>
         <EventDialog event={eventContent}
             eventDismiss={() => setEventContent({off: true})}/>
-        <Box sx={{m: "1em", height: "30em", position: "relative"}}>
+        <Box sx={{
+            m: "1em",
+            position: "relative",
+            width: ["100vw", null, null, "85vw", "80vw"],
+            left: "50%",
+            right: "50%",
+            marginLeft: ["-50vw", null, null, "-42.5vw", "-40vw"],
+            marginRight: ["-50vw", null, null, "-42.5vw", "-40vw"],
+        }}>
             {eventList.request && !eventList.loaded && <Box sx={{
                 position: "absolute",
                 left: "50%", bottom: "50%", transform: "translate(-50%, -50%)",
@@ -261,24 +279,32 @@ const EventCalendar = ({node}) => {
             }}>
                 <Spinner/>
             </Box>}
-            <Calendar
-                defaultView={viewIds[node.default_view]}
-                events={eventList.items}
-                components={{
-                    timeSlotWrapper: ColoredDateCellWrapper,
-                }}
-                views={allViews}
-                onRangeChange={(date) => {
-                    setEventList({items: [], request: true, loaded: false})
-                    readCalendarEvents(node, date).
-                        then(events => {
-                            setEventList({items: events, request: true, loaded: true})
-                        })
-                }}
-                localizer={localizer}
-                onSelectEvent={(calendarEvent, uiEvent) => {
-                    setEventContent(calendarEvent)
-                }}/>
+            <MonthlyCalendar currentMonth={eventList.month}
+                onCurrentMonthChange={date => requestMonth(startOfMonth(date))}>
+
+                <MonthlyNav/>
+                <Box sx={{overflowY: "auto", height: "30em"}}>
+                    <MonthlyBody events={eventList.items.map(e => {
+                        const days = differenceInDays(e.end, e.start) > 1
+                        if(days > 1){
+                            return range(0, days).map(d => ({
+                                allday: true,
+                                title: e.title, date: addDays(startOfDay(e.start), d)
+                            }))
+                        }else{
+                            return [{title: e.title, date: e.start}]
+                        }
+                    }).flat()}>
+                    <MonthlyDay
+                        renderDay={ data => data.map((item, i) =>
+                            <DefaultMonthlyEventItem
+                                key={i}
+                                title={item.title}
+                                date={!item.allday && format(item.date, 'hh:mm')}/>
+                        ) }/>
+                    </MonthlyBody>
+                </Box>
+            </MonthlyCalendar>
         </Box>
     </>)
 }
