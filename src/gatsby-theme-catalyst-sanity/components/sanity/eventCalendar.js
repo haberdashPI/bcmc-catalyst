@@ -284,22 +284,28 @@ const EventCalendar = ({node}) => {
                 onCurrentMonthChange={date => requestMonth(startOfMonth(date))}>
 
                 <MonthlyNav/>
-                <MonthlyBody events={eventList.items.map(e => {
+                <MonthlyBody events={eventList.items.map((e, eid) => {
                     const days = differenceInDays(e.end, e.start) > 1
                     if(days > 1){
                         return range(0, days).map(d => ({
                             allday: true,
+                            eventId: eid,
                             title: e.title, date: addDays(startOfDay(e.start), d)
                         }))
                     }else{
-                        return [{title: e.title, date: e.start}]
+                        return [{title: e.title, date: e.start, eventId: eid}]
                     }
                 }).flat()}>
                 <MonthlyDay
                     renderDay={ data => data.map((item, i) =>
                         <DefaultMonthlyEventItem
                             key={i}
-                            title={item.title}
+                            title={
+                                // TODO: revise the style
+                                <Themed.a onClick={
+                                e => setEventContent(eventList.items[item.eventId])}>
+                                    {item.title}
+                                </Themed.a>}
                             date={!item.allday && format(item.date, 'hh:mm')}/>
                     ) }/>
                 </MonthlyBody>

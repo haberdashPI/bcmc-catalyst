@@ -92,3 +92,17 @@ export function MonthlyDay({ renderDay }) {
       </div>
     );
   }
+
+export const DefaultMonthlyEventItem = ({
+  title,
+  date,
+}) => {
+  return (
+    <li className="py-2">
+      <div className="flex text-sm flex-1 justify-between">
+        <h3 className="font-medium">{title}</h3>
+        <p className="text-gray-500">{date}</p>
+      </div>
+    </li>
+  );
+};
