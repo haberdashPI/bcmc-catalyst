@@ -1,6 +1,7 @@
 import { jsx, Themed } from "theme-ui"
 import React, { useEffect, useState } from 'react'
-import { MonthlyDay, MonthlyBody, MonthlyNav, DefaultMonthlyEventItem, MonthlyCalendar } from '@zach.codes/react-calendar'
+import { /* MonthlyDay, MonthlyBody, */ MonthlyNav, DefaultMonthlyEventItem, MonthlyCalendar } from '@zach.codes/react-calendar'
+import { MonthlyBody, MonthlyDay } from './calendarBody'
 import { subHours, format, isSameDay, differenceInHours, endOfMonth, startOfMonth, startOfDay, endOfDay, isBefore, isAfter, differenceInDays } from 'date-fns'
 import { cloneDeep, range } from 'lodash'
 import {
@@ -283,27 +284,25 @@ const EventCalendar = ({node}) => {
                 onCurrentMonthChange={date => requestMonth(startOfMonth(date))}>
 
                 <MonthlyNav/>
-                <Box sx={{overflowY: "auto", height: "30em"}}>
-                    <MonthlyBody events={eventList.items.map(e => {
-                        const days = differenceInDays(e.end, e.start) > 1
-                        if(days > 1){
-                            return range(0, days).map(d => ({
-                                allday: true,
-                                title: e.title, date: addDays(startOfDay(e.start), d)
-                            }))
-                        }else{
-                            return [{title: e.title, date: e.start}]
-                        }
-                    }).flat()}>
-                    <MonthlyDay
-                        renderDay={ data => data.map((item, i) =>
-                            <DefaultMonthlyEventItem
-                                key={i}
-                                title={item.title}
-                                date={!item.allday && format(item.date, 'hh:mm')}/>
-                        ) }/>
-                    </MonthlyBody>
-                </Box>
+                <MonthlyBody events={eventList.items.map(e => {
+                    const days = differenceInDays(e.end, e.start) > 1
+                    if(days > 1){
+                        return range(0, days).map(d => ({
+                            allday: true,
+                            title: e.title, date: addDays(startOfDay(e.start), d)
+                        }))
+                    }else{
+                        return [{title: e.title, date: e.start}]
+                    }
+                }).flat()}>
+                <MonthlyDay
+                    renderDay={ data => data.map((item, i) =>
+                        <DefaultMonthlyEventItem
+                            key={i}
+                            title={item.title}
+                            date={!item.allday && format(item.date, 'hh:mm')}/>
+                    ) }/>
+                </MonthlyBody>
             </MonthlyCalendar>
         </Box>
     </>)
