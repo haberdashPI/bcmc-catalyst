@@ -14,7 +14,6 @@ import { navigate } from "gatsby-link";
 import { alpha } from "@theme-ui/color";
 import request from "superagent"
 import theme from "gatsby-theme-catalyst-core/src/gatsby-plugin-theme-ui"
-import '@zach.codes/react-calendar/dist/calendar-tailwind.css';
 
 let eventCache = {}
 
@@ -51,27 +50,31 @@ function readCalendarEvents(node, info){
         differenceInHours(eventCache[infoStr].stored, new Date(Date.now())) < 1){
         return Promise.resolve(cloneDeep(eventCache[infoStr].value))
     }else {
-        return request.post('/.netlify/functions/events')
-            .send({
-                id: node.calendar,
-                startStr: info.startStr,
-                endStr: info.endStr,
-                // timeZone: info.timeZone,
-            })
-            .set('Accept', 'application/json')
-            .then(response => {
-                if(response.body.error) throw Exception(response.body.error)
-                const events = response.body.events.map(x => ({
-                    ...x,
-                    start: new Date(x.start),
-                    end: new Date(x.end)
-                }))
-                eventCache[infoStr] = {
-                    value: cloneDeep(events),
-                    stored: new Date(Date.now())
-                }
-                return events
-            })
+        return Promise.resolve([{
+            start: new Date("2020-05-29T10:00"),
+            end: new Date("2020-05-29T11:00"), 
+        }])
+        // return request.post('/.netlify/functions/events')
+        //     .send({
+        //         id: node.calendar,
+        //         startStr: info.startStr,
+        //         endStr: info.endStr,
+        //         // timeZone: info.timeZone,
+        //     })
+        //     .set('Accept', 'application/json')
+        //     .then(response => {
+        //         if(response.body.error) throw Exception(response.body.error)
+        //         const events = response.body.events.map(x => ({
+        //             ...x,
+        //             start: new Date(x.start),
+        //             end: new Date(x.end)
+        //         }))
+        //         eventCache[infoStr] = {
+        //             value: cloneDeep(events),
+        //             stored: new Date(Date.now())
+        //         }
+        //         return events
+        //     })
     }
 }
 

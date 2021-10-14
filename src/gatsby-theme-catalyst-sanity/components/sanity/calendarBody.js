@@ -2,6 +2,7 @@ import { handleOmittedDays, useMonthlyCalendar } from '@zach.codes/react-calenda
 import React, { useContext } from 'react'
 import { format, getDay, isSameDay } from 'date-fns';
 import { Box } from 'theme-ui'
+import { baseColors } from "@theme-ui/preset-tailwind"
 
 const MonthlyBodyContext = React.createContext({});
 export function useMonthlyBody() { return useContext(MonthlyBodyContext); }
@@ -14,6 +15,15 @@ const headingClasses = {
     l7: 'lg:grid-cols-7',
 };
 
+const dayBorder = {
+  height: "10em",
+  border: "solid",
+  borderColor: baseColors.gray[3],
+  p: 2,
+  borderWidth: 2,
+  borderTop: 0, borderLeft: 0
+}
+
 export function MonthlyBody({
   omitDays,
   events,
@@ -25,51 +35,29 @@ export function MonthlyBody({
     omitDays,
   });
 
-  let headingClassName = 'border-b-2 p-2 border-r-2 lg:block hidden';
   return (
-    <div className="bg-white border-l-2 border-t-2">
-      <div
-        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 ${
-          //@ts-ignore
-          headingClasses[`l${headings.length}`]
-        }`}
+    <Box sx={{
+        border: "solid", borderColor: baseColors.gray[3],
+        borderWidth: 2, borderBottom: 0, borderRight: 0,
+        
+        display: "grid", alignItems: "start", 
+          gridTemplateColumns: ["repeat(auto-wrap, 12em)", null, "repeat(7, 1fr)"],
+        }}
       >
-        {headings.map(day => (
-          <div
-            key={day.day}
-            className={headingClassName}
-            aria-label="Day of Week"
-          >
-            {day.label}
-          </div>
+        {padding.map((_, index) => (
+          <Box sx={dayBorder} key={index} aria-label="Empty Day"/>
+          ))}
+        {daysToRender.map(day => (
+          <MonthlyBodyContext.Provider
+              key={day.toISOString()}
+              value={{
+              day,
+              events: events.filter(data => isSameDay(data.date, day)),
+              }}>
+              {children}
+          </MonthlyBodyContext.Provider>
         ))}
-      </div>
-      <div
-        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 ${
-          //@ts-ignore
-          headingClasses[`l${headings.length}`]
-        }`}
-        style={{overflowY: "auto", height: "30em"}}
-      >            {padding.map((_, index) => (
-            <div
-                key={index}
-                className={headingClassName}
-                aria-label="Empty Day"
-            />
-            ))}
-            {daysToRender.map(day => (
-            <MonthlyBodyContext.Provider
-                key={day.toISOString()}
-                value={{
-                day,
-                events: events.filter(data => isSameDay(data.date, day)),
-                }}
-            >
-                {children}
-            </MonthlyBodyContext.Provider>
-            ))}
-      </div>
-    </div>
+    </Box>
   );
 }
 
@@ -78,18 +66,17 @@ export function MonthlyDay({ renderDay }) {
     let dayNumber = format(day, 'd');
 
     return (
-      <div
+      <Box
         aria-label={`Events for day ${dayNumber}`}
-        className="h-48 p-2 border-b-2 border-r-2"
+        sx={dayBorder}
       >
-        <div className="flex justify-between">
-          <div className="font-bold">{dayNumber}</div>
-          <div className="lg:hidden block">{format(day, 'EEEE')}</div>
-        </div>
-        <ul className="divide-gray-200 divide-y overflow-hidden max-h-36 overflow-y-auto">
-          {renderDay(events)}
-        </ul>
-      </div>
+        {/* TODO: align numbers to right (below doesn't work) */}
+        <Box sx={{display: "flex", alignItems: "end"}}>
+          <Box sx={{fontWeight: "bold"}}>{dayNumber}</Box>
+          {/* <Box className="lg:hidden block">{format(day, 'EEEE')}</Box> */}
+        </Box>
+        <ul sx={{overflowY: "auto"}}> {renderDay(events)} </ul>
+      </Box>
     );
   }
 
@@ -98,11 +85,11 @@ export const DefaultMonthlyEventItem = ({
   date,
 }) => {
   return (
-    <li className="py-2">
-      <div className="flex text-sm flex-1 justify-between">
-        <h3 className="font-medium">{title}</h3>
-        <p className="text-gray-500">{date}</p>
-      </div>
-    </li>
+    <Themed.li sx={{py: 2}}>
+      <Box sx={{display: "flex", alignItems: "between"}}>
+        <p>{title}</p>
+        <p sx={{color: "gray"}}>{date}</p>
+      </Box>
+    </Themed.li>
   );
 };
