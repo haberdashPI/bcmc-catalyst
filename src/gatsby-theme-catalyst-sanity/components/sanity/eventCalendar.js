@@ -1,8 +1,5 @@
 import { jsx, Themed } from "theme-ui"
 import React, { useEffect, useState } from 'react'
-import FullCalendar from "@fullcalendar/react"
-import dayGridPlugin from "@fullcalendar/daygrid"
-import listMonth from "@fullcalendar/list"
 import req from "superagent";
 import "./eventStyles.css"
 import { format, isSameDay, differenceInHours } from 'date-fns'
@@ -193,6 +190,17 @@ const viewIds = {
     "week": "dayGridWeek"
 }
 
+const CalendarView = ({initialView, readEvents, eventClick}) = {
+    let [calendarContent, setCalendarContent] = useState({
+        date: new Date(),
+        view: initialView
+    })
+
+    // TODO: select range for events based on view type
+    // (use date-fns)
+    // readEvents(start: )
+}
+
 const EventCalendar = ({node}) => {
     const [eventContent, setEventContent] = useState({off: true})
     const html = document.querySelector('html')
@@ -204,9 +212,8 @@ const EventCalendar = ({node}) => {
         <EventDialog event={eventContent}
             eventDismiss={() => setEventContent({off: true})}/>
         <Box sx={{m: "1em"}}>
-            <FullCalendar plugins = {[ dayGridPlugin, listMonth ]}
-                initialView={viewIds[node.default_view]}
-                headerToolbar={{start: 'title', center: 'listMonth,dayGridMonth,dayGridWeek', end: 'today prev,next'}}
+            <CalendarView
+                initialView={node.default_view}
                 events={readCalendarEventsFn(node)}
                 eventClick={info => {
                     info.jsEvent.preventDefault()
