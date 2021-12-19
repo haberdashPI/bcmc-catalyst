@@ -17,11 +17,11 @@ const ImageList = ({ node }) => {
         gridGap: "1rem"
     }}>
         {node.items.map((item, i) => <div key={"item"+i}>
-        {item.title && <Themed.h5 sx={{variant: "imageListTitle", fontFamily: "body", fontWeight: "bold"}}>
+            {item.image && <Figure node={item.image}/>}
+            {item.title && <Themed.h5 sx={{variant: "imageListTitle", fontFamily: "body", fontWeight: "bold"}}>
                 {item.title}
             </Themed.h5>}
             <p>{item.content}</p>
-            {item.image && <Figure node={item.image}/>}
             {item.buttons && <ButtonRow node={item.buttons}/>}
         </div>)}
     </div>
