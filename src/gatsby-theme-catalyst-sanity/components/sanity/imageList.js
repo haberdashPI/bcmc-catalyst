@@ -4,6 +4,7 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 import ButtonRow from './buttonRow'
 import Figure from './figure'
 import React from "react"
+import { SanityContent } from "gatsby-theme-catalyst-sanity"
 
 const ImageList = ({ node }) => {
 
@@ -17,11 +18,12 @@ const ImageList = ({ node }) => {
         gridGap: "1rem"
     }}>
         {node.items.map((item, i) => <div key={"item"+i}>
-            {item.image && <Figure node={item.image}/>}
             {item.title && <Themed.h5 sx={{variant: "imageListTitle", fontFamily: "body", fontWeight: "bold"}}>
                 {item.title}
             </Themed.h5>}
-            <p>{item.content}</p>
+            {item.image && <Figure node={item.image}/>}
+            <SanityContent data={item.content}/>
+            {/* <pre>{JSON.stringify(item.content)}</pre> */}
             {item.buttons && <ButtonRow node={item.buttons}/>}
         </div>)}
     </div>

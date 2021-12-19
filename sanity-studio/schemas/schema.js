@@ -6,6 +6,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type"
 
 // We import object and document schemas
 import blockContent from "./blockContent"
+import simpleBlockContent from "./simpleBlockContent"
 import excerptBlockContent from "./excerptBlockContent"
 import mediationRequest from "./mediationRequest"
 import volunteerForm from "./volunteerForm"
@@ -53,6 +54,7 @@ export default createSchema({
     volunteerForm,
     question,
     blockContent,
+    simpleBlockContent,
     hero,
     imageList,
     imageListItem,

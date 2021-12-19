@@ -96,6 +96,11 @@ export default merge(BaseTheme, {
     //   },
     // },
   },
+  styles: {
+    blockquote: {
+      fontSize: "1rem"
+    },
+  },
   buttonLink: {
     primary: { color: "white" },
     secondary: { color: "black" },
