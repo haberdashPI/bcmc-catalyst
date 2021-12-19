@@ -12,7 +12,7 @@ export default {
         {
             title: "Content",
             name: "content",
-            type: "text",
+            type: "simpleBlockContent",
         },
         {
             title: "Buttons",
