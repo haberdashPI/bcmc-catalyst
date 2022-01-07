@@ -55,6 +55,7 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
         try{
             // TODO: Revise this!
             if(process.env.FORM_SUBMISSION !== "debug"){
+                // TODO: replace this with netlify function
                 let res = await fetch('https://api.staticforms.xyz/submit', {
                     method :'POST',
                     body: JSON.stringify(message),
