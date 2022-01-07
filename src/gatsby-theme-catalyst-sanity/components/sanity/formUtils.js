@@ -211,7 +211,6 @@ export const Label = ({children}) => {
 export const Input = ({label, name, ...props}) => {
     const formik = useContext(FormikContext)
     const error = get(formik.touched, name) && get(formik.errors, name)
-    console.log(get(formik.values))
     // return <pre>{name}</pre>
     return (<Box sx={{mt: "0.5em"}}>
         <ThemeUIInput name={name} id={name} onChange={formik.handleChange}
@@ -425,4 +424,9 @@ export function renameKeys(obj, renamefn){
         ...result,
         ...{ [renamefn(key)]: obj[key] }
     }), {})
+}
+
+export function formToHtml(obj){
+    // for now, something easy (clean up later)
+    return `<pre>${JSON.stringify(obj)}</pre>`
 }

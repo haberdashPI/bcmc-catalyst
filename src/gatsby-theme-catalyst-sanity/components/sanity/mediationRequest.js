@@ -52,15 +52,13 @@ function validateFn(node, slugs){
     }
 }
 
-
-function submitValuesFn(node){
+function submitValuesFn(node) {
     return values => ({
-        accessKey: node.sendto,
+        subject: 'Mediation Request',
         replyTo: values.person[0].email,
-        ['$formType']: "Mediation Request",
-        ...(values.person.
-            map((p, i) => renameKeys(p, str => `\$Person ${i+1}: ${str}`)).
-            reduce((result, item) => {return {...result, ...item}}))
+        accessKey: node.sendto,
+        formType: 'mediation',
+        content: formToHtml(values.person)
     })
 }
 
