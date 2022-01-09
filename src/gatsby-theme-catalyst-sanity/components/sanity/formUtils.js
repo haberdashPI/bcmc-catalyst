@@ -433,17 +433,19 @@ export function formToHtml(obj){
     if(obj instanceof Array){
         for(let item of obj){
             result += formToHtml(item)
-            result += "</hr>"
+            result += "<hr/>"
         }
     }else{
         result = ""
-        result += `<div style="display: grid; grid-template-columns: 1fr 2fr;">`
+        result += `<dl>`
         for(let key of Object.keys(obj)){
-            result += 
-                `<div>${key}</div>
-                <div>${obj[key]}</div>`
+            if(obj[key]){
+                result += 
+                    `<dt>${key}</dt>
+                    <dd>${obj[key]}</dd>`
+            }
         }
-        result += "</div>"
+        result += "</dl>"
     }
     console.log(result)
     return result
