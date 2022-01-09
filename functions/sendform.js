@@ -13,6 +13,14 @@ exports.process = async function(request){
         subject: request.subject,
         html: request.content
     }
+    if(process.env.DEBUG_FORM_FUNCTION == "true"){
+        console.log(JSON.stringify(request))
+        return {
+            statusCode: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({message: "SUCCESS", toSend: message})
+        }
+    }
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
     try {
         await sgMail.send(message)

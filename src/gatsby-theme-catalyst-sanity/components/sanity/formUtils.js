@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import req from "superagent";
 import { baseColors } from "@theme-ui/preset-tailwind"
 import { jsx, Themed } from "theme-ui"
 import {
@@ -52,27 +53,25 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
         }
         let message = valuesToSubmit(values)
 
-        try{
-            // TODO: Revise this!
-            if(process.env.FORM_SUBMISSION !== "debug"){
-                // TODO: replace this with netlify function
-                let res = await fetch('https://api.staticforms.xyz/submit', {
-                    method :'POST',
-                    body: JSON.stringify(message),
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                const json = await res.json();
-                if(json.success){
+        if(process.env.FORM_SUBMISSION !== "debug"){
+            try{
+                let resp = await (req.post('/.netlify/functions/sendform').
+                    send(message).
+                    set('Accept', 'application/json'))
+                if(resp.body.error){
+                    showAlert(resp.body.error)
+                }else if(resp.body.message === "SUCCESS"){
+                    console.dir(resp.body)
                     showAlert(submitMessage)
-                } else {
-                    showAlert(json.message, true)
+                }else{
+                    throw Exception("Unexpected response: "+JSON.stringify(resp))
                 }
-            }else{
-                alert(JSON.stringify(message))
-                showAlert(submitMessage)
+            } catch (e) {
+                showAlert("Internal error: "+e.message, true)
             }
-        } catch (e) {
-            showAlert("Internal error: "+e.message, true)
+        }else{
+            alert(JSON.stringify(message))
+            showAlert(submitMessage)
         }
     }
 }
