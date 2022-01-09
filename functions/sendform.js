@@ -9,12 +9,11 @@ exports.process = async function(request){
     message = {
         to: emailEndpoints[request.formType],
         from: process.env.FROM_EMAIL,
-        replyTo: request.replyTo,
+        replyTo: request.replyTo || process.env.FROM_EMAIL,
         subject: request.subject,
         html: request.content
     }
-    if(process.env.DEBUG_FORM_FUNCTION == "true"){
-        console.log(JSON.stringify(request))
+    if(process.env.DEBUG_FORM_FUNCTION === "true"){
         return {
             statusCode: 200,
             headers: { 'Content-Type': 'application/json' },
@@ -23,11 +22,11 @@ exports.process = async function(request){
     }
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
     try {
-        await sgMail.send(message)
+        let result = await sgMail.send(message)
         return {
             statusCode: 200,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({message: "SUCCESS"})
+            body: JSON.stringify({message: "SUCCESS", sendGridResponse: result})
         }
     }catch(e){
         return {

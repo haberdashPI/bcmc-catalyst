@@ -61,12 +61,14 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
                 if(resp.body.error){
                     showAlert(resp.body.error)
                 }else if(resp.body.message === "SUCCESS"){
+                    console.log("Showing response body:")
                     console.dir(resp.body)
                     showAlert(submitMessage)
                 }else{
                     throw Exception("Unexpected response: "+JSON.stringify(resp))
                 }
             } catch (e) {
+                console.dir(e)
                 showAlert("Internal error: "+e.message, true)
             }
         }else{
@@ -427,6 +429,22 @@ export function renameKeys(obj, renamefn){
 }
 
 export function formToHtml(obj){
-    // for now, something easy (clean up later)
-    return `<pre>${JSON.stringify(obj)}</pre>`
+    let result = ""
+    if(obj instanceof Array){
+        for(let item of obj){
+            result += formToHtml(item)
+            result += "</hr>"
+        }
+    }else{
+        result = ""
+        result += `<div style="display: grid; grid-template-columns: 1fr 2fr;">`
+        for(let key of Object.keys(obj)){
+            result += 
+                `<div>${key}</div>
+                <div>${obj[key]}</div>`
+        }
+        result += "</div>"
+    }
+    console.log(result)
+    return result
 }
