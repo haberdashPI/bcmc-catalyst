@@ -13,6 +13,7 @@ exports.process = async function(request){
         subject: request.subject,
         html: request.content
     }
+    console.dir(message)
     if(process.env.DEBUG_FORM_FUNCTION === "true"){
         return {
             statusCode: 200,
@@ -48,6 +49,6 @@ exports.handler = async function(event, context){
             body: JSON.stringify({error: e.message})
         }
     }
-    
+
     return await exports.process(request)
 }
