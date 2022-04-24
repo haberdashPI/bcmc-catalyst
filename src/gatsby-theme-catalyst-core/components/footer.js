@@ -27,7 +27,6 @@ const SiteFooter = () => {
     }
   `)
 
-  // TODO: somewhere right about here, I need to insert the email subscription footer 
   return (<div>
           <div 
         sx={{
