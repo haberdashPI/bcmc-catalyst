@@ -1,5 +1,6 @@
 /** @jsx jsx */
-import { jsx, useThemeUI } from "theme-ui"
+import { jsx, useThemeUI, Grid, Button, Themed } from "theme-ui"
+import { Input } from "../../gatsby-theme-catalyst-sanity/components/sanity/formUtils"
 import {
   useSiteMetadata,
   useCatalystConfig,
@@ -26,7 +27,36 @@ const SiteFooter = () => {
     }
   `)
 
-  return (
+  // TODO: somewhere right about here, I need to insert the email subscription footer 
+  return (<div>
+          <div 
+        sx={{
+          display: "grid",
+          alignContent: "center",
+          backgroundColor: "secondary",
+          padding: "1rem",
+          width: "100%",
+          mx: "auto",
+        }}>
+
+        <div id="mc_embed_signup" sx={{maxWidth: "maxContentWidth", mx: "auto", px: "1rem", bg: "background", borderRadius: "0.5rem"}}>
+        <form action="https://communitymediation.us9.list-manage.com/subscribe/post?u=d98b0ee539e9411ceaea0d5b6&amp;id=0bd94d5a67" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <Grid gap={4} sx={{mb: "1rem"}} columns={'2fr 1fr'}>
+            <Input type="email" noFooter={true} name="EMAIL" placeholder="email address" class="required email" id="mce-EMAIL"/>
+            <Button type="submit" variant="primary" name="subscribe" id="mc-embedded-subscribe">Subscribe to Newsletter</Button>
+          </Grid>
+          <div id="mce-responses" class="clear">
+            <div class="response" id="mce-error-response" style={{display: "none"}}></div>
+            <div class="response" id="mce-success-response" style={{display: "none"}}></div>
+          </div>    
+            <div style={{position: "absolute", left: "-5000px"}} aria-hidden="true">
+              <input type="text" name="b_d98b0ee539e9411ceaea0d5b6_0bd94d5a67" tabindex="-1" value=""/>
+            </div>
+        </form>
+        </div>
+
+      </div>
+
     <footer
       sx={{
         color: "footer.text",
@@ -78,6 +108,7 @@ const SiteFooter = () => {
         <p sx={{ mb: 0 }}> <a href="https://baltimore-community-mediation.sanity.studio/" target="_blank">Edit this website</a></p>
       </div>
     </footer>
+  </div>
   )
 }
 
