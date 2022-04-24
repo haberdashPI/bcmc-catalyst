@@ -210,7 +210,7 @@ export const Label = ({children}) => {
     return (<ThemeUILabel sx={{fontSize: "smaller"}}>{children}</ThemeUILabel>)
 }
 
-export const Input = ({label, name, ...props}) => {
+export const Input = ({label, name, bg=baseColors.gray[1], noFooter=false, ...props}) => {
     const formik = useContext(FormikContext)
     const error = get(formik.touched, name) && get(formik.errors, name)
     // return <pre>{name}</pre>
@@ -224,7 +224,7 @@ export const Input = ({label, name, ...props}) => {
                 borderColor: baseColors.gray[6],
                 mt: "0px",
                 px: 0, pb: "2px", pl: "0.25em",
-                bg: error ? "tertiary" : baseColors.gray[1],
+                bg: error ? "tertiary" : bg,
                 borderTopLeftRadius: "0.25rem", borderTopRightRadius: "0.25rem",
                 ":focus": {
                     borderStyle: "solid",
@@ -234,17 +234,20 @@ export const Input = ({label, name, ...props}) => {
                 }
             }}
             value={get(formik.values, name)} {...props}/>
-            <ThemeUILabel sx={{
-                display: "inline",
-                mb: "0px",
-                mr: "1em", pl: "0.25em",
-                fontSize: "smaller",
-                color: baseColors.gray[6]}}>
+        
+        {(noFooter ? "" : <div>
+        <ThemeUILabel sx={{
+            display: "inline",
+            mb: "0px",
+            mr: "1em", pl: "0.25em",
+            fontSize: "smaller",
+            color: baseColors.gray[6]}}>
 
-                {/* {label} */}
-                {get(formik.values, name) ? label : ""}
-            </ThemeUILabel>
+            {/* {label} */}
+            {(get(formik.values, name) ? label : "")}
+        </ThemeUILabel>
         <Box sx={{display: "inline"}} variant="formValidation">{error}</Box>
+        </div>)}
     </Box>)
 }
 
@@ -385,7 +388,6 @@ function DeletedItem({children, item, onClose, onUndo}){
                 fontSize: 1,
                 p: "0.2em"
             }}
-            type="button"
             variant="tertiary"
             onClick={e => onUndo(item)}>
             Undo

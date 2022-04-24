@@ -3,7 +3,7 @@ Next steps:
 1. email list subscription
 2. option to insert a video
 3. option to create a popup window: that comes up when the parge opens
-4. contact us form: info@communitymediation.org
+    4. contact us form: info@communitymediation.org
 5. update README with account names (not passwords)
 6. make some video tutorials
     - video how to log in and change stuff on the website
