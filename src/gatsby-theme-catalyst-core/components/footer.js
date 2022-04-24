@@ -42,7 +42,7 @@ const SiteFooter = () => {
         <div id="mc_embed_signup" sx={{maxWidth: "maxContentWidth", mx: "auto", px: "1rem", bg: "background", borderRadius: "0.5rem"}}>
         <form action="https://communitymediation.us9.list-manage.com/subscribe/post?u=d98b0ee539e9411ceaea0d5b6&amp;id=0bd94d5a67" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
           <Grid gap={4} sx={{mb: "1rem"}} columns={'2fr 1fr'}>
-            <Input type="email" noFooter={true} name="EMAIL" placeholder="email address" class="required email" id="mce-EMAIL"/>
+            <Input type="email" noFooter={true} name="EMAIL" placeholder="email address" id="mce-EMAIL"/>
             <Button type="submit" variant="primary" name="subscribe" id="mc-embedded-subscribe">Subscribe to Newsletter</Button>
           </Grid>
           <div id="mce-responses" class="clear">
