@@ -48,6 +48,16 @@ const SiteFooter = () => {
             <div class="response" id="mce-error-response" style={{display: "none"}}></div>
             <div class="response" id="mce-success-response" style={{display: "none"}}></div>
           </div>    
+          <div style={{display: "none"}}>
+            <fieldset class="mc_fieldset gdprRequired mc-field-group" name="interestgroup_field">
+            <label class="checkbox subfield" for="gdpr_5269">
+              <input type="checkbox" id="gdpr_5269" name="gdpr[5269]" class="av-checkbox gdpr" checked/><span>Email</span> </label>
+            <label class="checkbox subfield" for="gdpr_5273">
+              <input type="checkbox" id="gdpr_5273" name="gdpr[5273]" class="av-checkbox gdpr"/><span>Direct Mail</span> </label>
+            <label class="checkbox subfield" for="gdpr_5277">
+              <input type="checkbox" id="gdpr_5277" name="gdpr[5277]" class="av-checkbox gdpr"/><span>Customized online advertising</span> </label>
+          </fieldset>
+          </div>
             <div style={{position: "absolute", left: "-5000px"}} aria-hidden="true">
               <input type="text" name="b_d98b0ee539e9411ceaea0d5b6_0bd94d5a67" tabindex="-1" value=""/>
             </div>
