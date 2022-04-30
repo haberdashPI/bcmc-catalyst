@@ -23,11 +23,13 @@
     "gatsby-theme-catalyst-footer": "^6.0.0-beta.4",
     "gatsby-theme-catalyst-header-top": "^6.0.0-beta.4",
     "gatsby-theme-catalyst-sanity": "^6.0.0-beta.4",
+    "get-youtube-id": "^1.0.1",
     "googleapis": "^71.0.0",
     "immutable": "^4.0.0-rc.12",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-slick": "^0.28.1",
+    "react-youtube": "^9.0.1",
     "slick-carousel": "^1.8.1",
     "superagent": "^6.1.0",
     "yup": "^0.32.9"

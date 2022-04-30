@@ -93,6 +93,10 @@ export default {
     //   title: "Wide Figure"
     // },
     {
+      type: "videoClip",
+      title: "Video Clip"
+    },
+    {
       type: "hero",
       title: "Hero Section"
     },

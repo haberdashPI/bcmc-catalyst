@@ -25,10 +25,12 @@
     "@sanity/default-login": "^2.8.0",
     "@sanity/desk-tool": "^2.8.0",
     "@sanity/production-preview": "^2.2.6",
+    "get-youtube-id": "^1.0.1",
     "prop-types": "^15.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.11.0",
+    "react-youtube": "^9.0.1",
     "sanity-plugin-dashboard-widget-netlify": "^1.1.0"
   }
 }

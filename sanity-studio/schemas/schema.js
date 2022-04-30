@@ -19,6 +19,7 @@ import buttonRow from "./buttonRow"
 import pageButton from "./pageButton"
 import urlButton from "./urlButton"
 import imageList from "./imageList"
+import videoClip from "./videoClip"
 import imageListItem from "./imageListItem"
 import siteSettings from "./siteSettings"
 import menuLink from "./menuLink"
@@ -56,6 +57,7 @@ export default createSchema({
     blockContent,
     simpleBlockContent,
     hero,
+    videoClip,
     imageList,
     imageListItem,
     buttonRow,
