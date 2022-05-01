@@ -97,6 +97,10 @@ export default {
       title: "Video Clip"
     },
     {
+      type: "popup",
+      title: "Popup"
+    },
+    {
       type: "hero",
       title: "Hero Section"
     },

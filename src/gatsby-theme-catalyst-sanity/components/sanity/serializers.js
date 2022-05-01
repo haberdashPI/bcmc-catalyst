@@ -7,6 +7,7 @@ import Hero from "./hero"
 import ButtonRow from "./buttonRow.js"
 import ImageList from "./imageList.js"
 import VideoClip from './videoClip.js'
+import Popup from "./popup.js"
 import { LoadableMediationForm, LoadableVolunteerForm, LoadableEvents } from "./loadableForms.js"
 import Newsletter from './newsletter.js'
 // import VolunteerForm from "./volunteerForm.js"
@@ -32,6 +33,7 @@ const serializers = {
     eventCalendar: LoadableEvents,
     newsletterList: Newsletter,
     videoClip: VideoClip,
+    popup: Popup,
     block(props) {
       switch (props.node.style) {
         case "h1":
