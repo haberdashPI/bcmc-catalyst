@@ -10,7 +10,6 @@ import simpleBlockContent from "./simpleBlockContent"
 import excerptBlockContent from "./excerptBlockContent"
 import mediationRequest from "./mediationRequest"
 import volunteerForm from "./volunteerForm"
-import newsletter from './newsletter'
 import eventCalendar from "./eventCalendar"
 import figure from "./figure"
 import figureWide from "./figureWide"

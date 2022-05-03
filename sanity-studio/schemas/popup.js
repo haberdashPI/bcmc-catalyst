@@ -7,7 +7,14 @@ export default {
         {
             title: "Content",
             name: "content",
-            type: "simpleBlockContent",
+            type: "popupBlockContent",
         }
-    ]
+    ],
+    preview: {
+        prepare(selection) {
+            return {
+                title: "Popup"
+            }
+        }
+    }
 }

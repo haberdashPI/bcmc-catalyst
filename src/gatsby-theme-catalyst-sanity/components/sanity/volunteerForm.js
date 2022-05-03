@@ -1,16 +1,8 @@
 import React from 'react'
 import debounce from 'debounce-promise'
 import { Form, Select, PersonSubForm, person, personSchema, formToHtml, ShowFormikData, renameKeys } from "./formUtils"
-import { set, isEmpty } from 'lodash'
+import { set } from 'lodash'
 import * as yup from 'yup'
-import {
-    Box,
-    Label,
-    Heading,
-    Button,
-} from 'theme-ui'
-import { navigate } from 'gatsby-link'
-import { useSlugIndex } from './util'
 
 function validate(values){
     let schema = values.contactby === "Email" ?

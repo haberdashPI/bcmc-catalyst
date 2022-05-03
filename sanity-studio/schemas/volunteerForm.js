@@ -5,12 +5,6 @@ export default {
     description: "By default, requests contact information. Additional questions can be added below.",
     fields: [
         {
-            title: "Access key: ",
-            name: "sendto",
-            type: "string",
-            description: "Go to https://www.staticforms.xyz/ to create an acess key, and type it in here."
-        },
-        {
             title: "Submit message",
             name: "submit",
             description: "Message to display on a succesful submission.",
