@@ -1,6 +1,6 @@
 import React from 'react'
 import debounce from 'debounce-promise'
-import { Form, Select, PersonSubForm, person, personSchema, formToHtml, ShowFormikData, renameKeys } from "./formUtils"
+import { Form as FormHelper, Select, PersonSubForm, person, personSchema, formToHtml, ShowFormikData, renameKeys } from "./formUtils"
 import { set } from 'lodash'
 import * as yup from 'yup'
 
@@ -35,16 +35,15 @@ function validate(values){
 
 function submitValuesFn(node) {
     return values => ({
-        subject: 'Volunteer Form',
+        subject: 'Website Form',
         replyTo: values.person.email,
-        accessKey: node.sendto,
-        formType: 'volunteer',
+        formType: node.sendto,
         content: formToHtml(values.person)
     })
 }
 
-const VolunteerForm = ({ node }) => {
-    return (<Form
+const Form = ({ node }) => {
+    return (<FormHelper
         initialValues = {{
             contactby: "Phone",
             person: person(node.info_questions),
@@ -59,7 +58,7 @@ const VolunteerForm = ({ node }) => {
                 <option key="Mail">Mail</option>
             </Select>
             <PersonSubForm name={'person'} questions={node.questions}/>
-    </Form>)
+    </FormHelper>)
 }
 
-export default VolunteerForm
+export default Form

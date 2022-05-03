@@ -2,7 +2,9 @@ const sgMail = require('@sendgrid/mail')
 
 const emailEndpoints = {
     volunteer: process.env.VOLUNTEER_EMAIL,
-    mediation: process.env.MEDIATION_EMAIL
+    mediation: process.env.MEDIATION_EMAIL,
+    info: process.env.INFO_EMAIL,
+    director: process.env.DIRECTOR_EMAIL
 }
 
 exports.process = async function(request){

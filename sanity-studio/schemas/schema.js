@@ -9,7 +9,7 @@ import blockContent from "./blockContent"
 import simpleBlockContent from "./simpleBlockContent"
 import excerptBlockContent from "./excerptBlockContent"
 import mediationRequest from "./mediationRequest"
-import volunteerForm from "./volunteerForm"
+import form from "./form"
 import eventCalendar from "./eventCalendar"
 import figure from "./figure"
 import figureWide from "./figureWide"
@@ -53,7 +53,7 @@ export default createSchema({
     // newsletter,
     eventCalendar,
     mediationRequest,
-    volunteerForm,
+    form,
     question,
     blockContent,
     simpleBlockContent,

@@ -2,7 +2,7 @@ import React from 'react'
 import loadable from '@loadable/component'
 
 const MediationRequest = loadable(() => import('./mediationRequest'))
-const VolunteerForm = loadable(() => import('./volunteerForm'))
+const Form = loadable(() => import('./form'))
 const Events = loadable(() => import('./eventCalendar'))
 
 export function LoadableMediationForm({node}){
@@ -11,9 +11,9 @@ export function LoadableMediationForm({node}){
     </div>)
 }
 
-export function LoadableVolunteerForm({node}){
+export function LoadableForm({node}){
     return(<div>
-        <VolunteerForm node={node}/>
+        <Form node={node}/>
     </div>)
 }
 
