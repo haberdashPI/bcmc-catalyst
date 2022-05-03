@@ -15,6 +15,7 @@ Next steps:
         - Videos
         - popups
         - adding images
+6. exit catalyst them usage
 7. Debug mobile website (e.g. event display is bad)
 8. make heading links use a search box
 9. unify form creation into a single form builder object
