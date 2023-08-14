@@ -49,8 +49,10 @@ const SiteFooter = () => {
           if(values.honeypot){
             return
           }
+          // TODO: setup a netlify function that will access the mailer lite API key
+          // on the server side (so we don't expose the API KEY client side)
           let message = req.post('')
-            .set('Authorization', `Bearer ${process.env.MAILER_LITE_API_KEY}`)
+            // .set('Authorization', `Bearer ${process.env.MAILER_LITE_API_KEY}`)
             .send()
         }}
           <Grid gap={4} sx={{mb: "1rem"}} columns={'2fr 1fr'}>
@@ -62,6 +64,7 @@ const SiteFooter = () => {
               data-inputmask=""
               autocomplete="email"
             />
+            {/* TODO: insert the honeypot here */}
             <Button onClick={onClickNewsletter} type="submit" variant="primary" name="subscribe">
               Subscribe to Newsletter
             </Button>
