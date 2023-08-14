@@ -2,11 +2,24 @@
 import { jsx, Box } from "theme-ui"
 import { SanityContent } from "gatsby-theme-catalyst-sanity"
 import { React, Fragment, useState } from "react"
+import useCookie from 'react-use-cookie'
 
+function sameDay(d1, d2) {
+  return d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate();
+}
 
 const Popup = ({node}) => {
-    const [alertMessage, setAlertMessage] = useState({on: true})
-    const alertClick = (e) => setAlertMessage({on: false})
+    const [lastPopupDate, setLastPopupDate] = useCookie(`bcmc-popup-${node._key}`, 
+                                                        new Date('1970-01-01'))
+    const now = new Date()
+    const [alertMessage, setAlertMessage] = useState({on: !sameDay(new Date(lastPopupDate), now)})
+    const alertClick = (e) => {
+        setAlertMessage({on: false})
+        setLastPopupDate(new Date())
+    }
+    
     return (<Fragment>
         <Box sx={{
             position: "absolute",
