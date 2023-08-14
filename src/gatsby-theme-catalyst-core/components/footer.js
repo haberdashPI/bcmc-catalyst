@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, useThemeUI, Grid, Button, Themed } from "theme-ui"
+/** @jsx jsx */ import { jsx, useThemeUI, Grid, Button, Themed } from "theme-ui"
 import { Input } from "../../gatsby-theme-catalyst-sanity/components/sanity/formUtils"
 import {
   useSiteMetadata,
@@ -9,6 +8,12 @@ import {
 import { useStaticQuery, graphql } from "gatsby"
 import { SanityContent } from "gatsby-theme-catalyst-sanity"
 import { IconContext } from "react-icons"
+
+  function ml_webform_success_7006652() {
+    var $ = ml_jQuery || jQuery
+    $(".ml-subscribe-form-7006652 .row-success").show()
+    $(".ml-subscribe-form-7006652 .row-form").hide()
+  }
 
 const SiteFooter = () => {
   const { title } = useSiteMetadata()
@@ -38,32 +43,31 @@ const SiteFooter = () => {
           mx: "auto",
         }}>
 
-        <div id="mc_embed_signup" sx={{maxWidth: "maxContentWidth", mx: "auto", px: "1rem", bg: "background", borderRadius: "0.5rem"}}>
-        <form action="https://communitymediation.us9.list-manage.com/subscribe/post?u=d98b0ee539e9411ceaea0d5b6&amp;id=0bd94d5a67" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+      <div sx={{maxWidth: "maxContentWidth", mx: "auto", px: "1rem", bg: "background", borderRadius: "0.5rem"}}>
+        <Formik onSubmit={v => {
+          // TODO: setAlertMessage (alal `formUtils.js`)
+          if(values.honeypot){
+            return
+          }
+          let message = req.post('')
+            .set('Authorization', `Bearer ${process.env.MAILER_LITE_API_KEY}`)
+            .send()
+        }}
           <Grid gap={4} sx={{mb: "1rem"}} columns={'2fr 1fr'}>
-            <Input type="email" noFooter={true} name="EMAIL" placeholder="email address" id="mce-EMAIL"/>
-            <Button type="submit" variant="primary" name="subscribe" id="mc-embedded-subscribe">Subscribe to Newsletter</Button>
-          </Grid>
-          <div id="mce-responses" class="clear">
-            <div class="response" id="mce-error-response" style={{display: "none"}}></div>
-            <div class="response" id="mce-success-response" style={{display: "none"}}></div>
-          </div>    
-          <div style={{display: "none"}}>
-            <fieldset class="mc_fieldset gdprRequired mc-field-group" name="interestgroup_field">
-            <label class="checkbox subfield" for="gdpr_5269">
-              <input type="checkbox" id="gdpr_5269" name="gdpr[5269]" class="av-checkbox gdpr" checked/><span>Email</span> </label>
-            <label class="checkbox subfield" for="gdpr_5273">
-              <input type="checkbox" id="gdpr_5273" name="gdpr[5273]" class="av-checkbox gdpr"/><span>Direct Mail</span> </label>
-            <label class="checkbox subfield" for="gdpr_5277">
-              <input type="checkbox" id="gdpr_5277" name="gdpr[5277]" class="av-checkbox gdpr"/><span>Customized online advertising</span> </label>
-          </fieldset>
-          </div>
-            <div style={{position: "absolute", left: "-5000px"}} aria-hidden="true">
-              <input type="text" name="b_d98b0ee539e9411ceaea0d5b6_0bd94d5a67" tabindex="-1" value=""/>
-            </div>
-        </form>
-        </div>
+            <Input
+              type="email"
+              noFooter={true}
+              name="fields[email]"
+              placeholder="email address"
+              data-inputmask=""
+              autocomplete="email"
+            />
+            <Button onClick={onClickNewsletter} type="submit" variant="primary" name="subscribe">
+              Subscribe to Newsletter
+            </Button>
 
+            </Grid>
+        </div>
       </div>
 
     <footer
