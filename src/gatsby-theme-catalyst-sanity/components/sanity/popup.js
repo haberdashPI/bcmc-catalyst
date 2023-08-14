@@ -11,7 +11,7 @@ function sameDay(d1, d2) {
 }
 
 const Popup = ({node}) => {
-    const [lastPopupDate, setLastPopupDate] = useCookie(`bcmc-popup-${node.id}`, 
+    const [lastPopupDate, setLastPopupDate] = useCookie(`bcmc-popup-${node._key}`, 
                                                         new Date('1970-01-01'))
     const now = new Date()
     const [alertMessage, setAlertMessage] = useState({on: !sameDay(new Date(lastPopupDate), now)})
