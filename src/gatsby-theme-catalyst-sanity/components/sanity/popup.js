@@ -22,13 +22,13 @@ const Popup = ({node}) => {
                     bg: "background", zIndex: 1002,
                     left: "50%", top: "50%", transform: "translate(-50%, -50%)",
                     width: "min(100vw, 40em)", height: "min(100vh, 20em)",
-                    py: "1rem", 
+                    py: "2rem", 
                     px: "2rem", borderRadius: "0.5rem", opacity: 1, 
                     position: "fixed", boxShadow: "2px 2px 6px black",
                 }}>
                     <Box sx={{position: "fixed", right: "0", top: "0", mx: "2rem", 
                               cursor: "pointer", 
-                              my: "1rem", fontSize: "2rem"}} onClick={alertClick}>
+                              my: "0.5rem", fontSize: "2rem"}} onClick={alertClick}>
                         ×
                     </Box>
                     <SanityContent data={node.content}/>
