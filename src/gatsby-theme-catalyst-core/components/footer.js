@@ -1,5 +1,7 @@
 /** @jsx jsx */ import { jsx, useThemeUI, Grid, Button, Themed } from "theme-ui"
-import { Input } from "../../gatsby-theme-catalyst-sanity/components/sanity/formUtils"
+import { Input, useAlert, FormikContext } from "../../gatsby-theme-catalyst-sanity/components/sanity/formUtils"
+import React from 'react'
+import { Formik } from "formik"
 import {
   useSiteMetadata,
   useCatalystConfig,
@@ -9,12 +11,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import { SanityContent } from "gatsby-theme-catalyst-sanity"
 import { IconContext } from "react-icons"
 
-  function ml_webform_success_7006652() {
-    var $ = ml_jQuery || jQuery
-    $(".ml-subscribe-form-7006652 .row-success").show()
-    $(".ml-subscribe-form-7006652 .row-form").hide()
-  }
-
 const SiteFooter = () => {
   const { title } = useSiteMetadata()
   const { footerContentLocation } = useCatalystConfig()
@@ -22,6 +18,8 @@ const SiteFooter = () => {
   const isLeft = footerContentLocation === "left"
   const isRight = footerContentLocation === "right"
   const isCenter = footerContentLocation === "center"
+
+  // const [Alert, setAlertLoading, setAlertMessage, setAlertOff] = useAlert();
 
   const footerData = useStaticQuery(graphql`
     query SanityFooterContent {
@@ -32,7 +30,35 @@ const SiteFooter = () => {
     }
   `)
 
+  function submitNewsEmail(values) {
+    console.dir(values)
+    if(values.honeypot){
+      return
+    }
+    if(process.env.FORM_SUBMISSION !== "debug"){
+      try{
+        let resp = req.post('/.netlify/functions/newsletter')
+          .send(values)
+          .set('Accept', 'application/json')
+        if(resp.body.error){
+          showAlert(resp.body.error)
+        }else if(resp.body.message == "SUCCESS"){
+          showAlert("You've be added to the newsletter!")
+        }else{
+          throw Exception("Unexpected response: "+JSON.stringify(resp))
+        }
+      } catch (e) {
+        console.dir(e)
+        showAlert("Internal error: "+e.message, true)
+      }
+    } else {
+      alert(JSON.stringify(values))
+      showAlert("You've been added to the newsletter!")
+    }
+  }
+
   return (<div>
+      {/* <Alert/> */}
           <div 
         sx={{
           display: "grid",
@@ -44,33 +70,32 @@ const SiteFooter = () => {
         }}>
 
       <div sx={{maxWidth: "maxContentWidth", mx: "auto", px: "1rem", bg: "background", borderRadius: "0.5rem"}}>
-        <Formik onSubmit={v => {
-          // TODO: setAlertMessage (alal `formUtils.js`)
-          if(values.honeypot){
-            return
-          }
-          // TODO: setup a netlify function that will access the mailer lite API key
-          // on the server side (so we don't expose the API KEY client side)
-          let message = req.post('')
-            // .set('Authorization', `Bearer ${process.env.MAILER_LITE_API_KEY}`)
-            .send()
-        }}
-          <Grid gap={4} sx={{mb: "1rem"}} columns={'2fr 1fr'}>
-            <Input
-              type="email"
-              noFooter={true}
-              name="fields[email]"
-              placeholder="email address"
-              data-inputmask=""
-              autocomplete="email"
-            />
-            {/* TODO: insert the honeypot here */}
-            <Button onClick={onClickNewsletter} type="submit" variant="primary" name="subscribe">
-              Subscribe to Newsletter
-            </Button>
-
-            </Grid>
-        </div>
+        <Formik onSubmit={submitNewsEmail}
+          initialValues={{email: '', honeypot: ''}}
+          // TODO: validation?
+          >
+          {formik => (<>
+            <FormikContext.Provider value={formik}>
+              <Grid as='form' onSubmit={formik.handleSubmit} gap={4} sx={{ mb: "1rem" }} 
+                    columns={'2fr 1fr'}>
+                <Input
+                  type="email"
+                  noFooter={true}
+                  name="email"
+                  placeholder="email address"
+                  autocomplete="email"
+                />
+                <Button onClick={Formik.submitForm} type="submit" variant="primary"
+                  disabled={!formik.isValid || formik.isSubmitting}
+                  name="subscribe">
+                  Subscribe to Newsletter
+                </Button>
+              </Grid>
+            </FormikContext.Provider>
+            <Input name="honeypot" style={{display: "none", height: 0}}></Input>
+          </>)}
+        </Formik>
+      </div>
       </div>
 
     <footer

@@ -23,7 +23,7 @@ import { alpha, darken, lighten } from '@theme-ui/color'
 import { navigate } from "gatsby"
 import { theme } from '../../../gatsby-plugin-theme-ui/index'
 
-const FormikContext = React.createContext({});
+export const FormikContext = React.createContext({});
 
 export function person(quests){
     let result = {
@@ -53,40 +53,40 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
         }
         let message = valuesToSubmit(values)
 
-        if(process.env.FORM_SUBMISSION !== "debug"){
-            try{
-                let resp = await (req.post('/.netlify/functions/sendform').
-                    send(message).
-                    set('Accept', 'application/json'))
-                if(resp.body.error){
-                    showAlert(resp.body.error)
-                }else if(resp.body.message === "SUCCESS"){
-                    console.log("Showing response body:")
-                    console.dir(resp.body)
-                    showAlert(submitMessage)
-                }else{
-                    throw Exception("Unexpected response: "+JSON.stringify(resp))
-                }
-            } catch (e) {
-                console.dir(e)
-                showAlert("Internal error: "+e.message, true)
+        return await submitFormTo('sendform', message, showAlert, submitMessage)
+    }
+}
+async function submitFormTo(fun, message, showAlert, submitMessage) {
+    if(process.env.FORM_SUBMISSION !== "debug"){
+        try{
+            let resp = await (req.post('/.netlify/functions/${fun}').
+                send(message).
+                set('Accept', 'application/json'))
+            if(resp.body.error){
+                showAlert(resp.body.error)
+            }else if(resp.body.message === "SUCCESS"){
+                showAlert(submitMessage)
+            }else{
+                throw Exception("Unexpected response: "+JSON.stringify(resp))
             }
-        }else{
-            alert(JSON.stringify(message))
-            showAlert(submitMessage)
+        } catch (e) {
+            console.dir(e)
+            showAlert("Internal error: "+e.message, true)
         }
+    }else{
+        alert(JSON.stringify(message))
+        showAlert(submitMessage)
     }
 }
 
-export const Form = ({ submitMessage, children, submitValues, ...props }) => {
-    const [alertMessage, setAlertMessage] = useState({on: false})
+export function useAlert(){
+    const [alertMessage, setAlertData] = useState({on: false})
     const alertClick = (e) =>
-        alertMessage.error ? setAlertMessage({on: false}) :
+        alertMessage.error ? setAlertData({on: false}) :
         alertMessage.loading ? e.preventDefault() :
         navigate('/')
-    return(<>
 
-        <Box sx={{position: "absolute",
+    const Alert = (<Box sx={{position: "absolute",
             display: alertMessage.on ? "block" : "none",
             zIndex: 1000, top: "0", left: "0"}}>
             <Box sx={{
@@ -123,11 +123,23 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                     Okay
                 </Button>
             </Box>}
-        </Box>
+        </Box>)
+
+    const setAlertLoading = setAlertData({on: true, loading: true});
+    const setAlertMessage = (str, error) => (setAlertData({ on: true, text: str, error: error }))
+    const setAlertOff = () => setAlertData({on: false});
+    return [Alert, setAlertLoading, setAlertMessage, setAlertOff]; 
+}
+
+
+export const Form = ({ submitMessage, children, submitValues, ...props }) => {
+    const [Alert, setAlertLoading, setAlertMessage, _] = useAlert();
+    return(<>
+        <Alert/>
         <Formik onSubmit={v => {
-            setAlertMessage({on: true, loading: true});
+            setAlertLoading();
             const fn = onSubmitFn(submitValues,
-                (str, error) => (setAlertMessage({ on: true, text: str, error: error })),
+                setAlertMessage,
                 submitMessage)
             fn(v)}} {...props}>
             {formik => (<>
