@@ -59,7 +59,7 @@ function onSubmitFn(valuesToSubmit, showAlert, submitMessage){
 async function submitFormTo(fun, message, showAlert, submitMessage) {
     if(process.env.FORM_SUBMISSION !== "debug"){
         try{
-            let resp = await (req.post('/.netlify/functions/${fun}').
+            let resp = await (req.post(`/.netlify/functions/${fun}`).
                 send(message).
                 set('Accept', 'application/json'))
             if(resp.body.error){
@@ -79,14 +79,20 @@ async function submitFormTo(fun, message, showAlert, submitMessage) {
     }
 }
 
-export function useAlert(){
+export function useAlert(navigateToHome = true){
     const [alertMessage, setAlertData] = useState({on: false})
-    const alertClick = (e) =>
-        alertMessage.error ? setAlertData({on: false}) :
-        alertMessage.loading ? e.preventDefault() :
-        navigate('/')
+    const alertClick = (e) => {
+        if(alertMessage.error) setAlertData({on: false})
+        else if(alertMessage.loading) e.preventDefault()
+        else {
+            setAlertData({on: false})
+            if(navigateToHome)
+                navigate('/')
+        }
+    }
 
-    const Alert = (<Box sx={{position: "absolute",
+    const Alert = () => (
+        <Box sx={{position: "absolute",
             display: alertMessage.on ? "block" : "none",
             zIndex: 1000, top: "0", left: "0"}}>
             <Box sx={{
@@ -125,7 +131,7 @@ export function useAlert(){
             </Box>}
         </Box>)
 
-    const setAlertLoading = setAlertData({on: true, loading: true});
+    const setAlertLoading = () => setAlertData({on: true, loading: true});
     const setAlertMessage = (str, error) => (setAlertData({ on: true, text: str, error: error }))
     const setAlertOff = () => setAlertData({on: false});
     return [Alert, setAlertLoading, setAlertMessage, setAlertOff]; 

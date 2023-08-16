@@ -2,6 +2,7 @@
 import { Input, useAlert, FormikContext } from "../../gatsby-theme-catalyst-sanity/components/sanity/formUtils"
 import React from 'react'
 import { Formik } from "formik"
+import req from "superagent";
 import {
   useSiteMetadata,
   useCatalystConfig,
@@ -19,7 +20,7 @@ const SiteFooter = () => {
   const isRight = footerContentLocation === "right"
   const isCenter = footerContentLocation === "center"
 
-  // const [Alert, setAlertLoading, setAlertMessage, setAlertOff] = useAlert();
+  const [Alert, setAlertLoading, showAlert, setAlertOff] = useAlert(false);
 
   const footerData = useStaticQuery(graphql`
     query SanityFooterContent {
@@ -30,24 +31,29 @@ const SiteFooter = () => {
     }
   `)
 
-  function submitNewsEmail(values) {
-    console.dir(values)
+  async function submitNewsEmail(values) {
     if(values.honeypot){
       return
     }
-    if(process.env.FORM_SUBMISSION !== "debug"){
+    if(true){
       try{
-        let resp = req.post('/.netlify/functions/newsletter')
+        let resp = await (req.post('/.netlify/functions/newsletter')
           .send(values)
-          .set('Accept', 'application/json')
-        if(resp.body.error){
-          showAlert(resp.body.error)
-        }else if(resp.body.message == "SUCCESS"){
-          showAlert("You've be added to the newsletter!")
+          .set('Accept', 'application/json'))
+        // NOTE: I don't know why `superagent` is failing to parse the JSON body but it is
+        let body = resp.body == null ? JSON.parse(resp.text) : resp.body
+        console.dir(body)
+        if(body.error){
+          showAlert(body.error)
+        }else if(body.message == "SUCCESS"){
+          showAlert( "You've been added to the newsletter! Please search your email for a"+
+            " confirmation message from volunteer@communitymediation.org. It may be in "+
+            "your spam folder.")
         }else{
           throw Exception("Unexpected response: "+JSON.stringify(resp))
         }
       } catch (e) {
+        console.log("Response exception: ")
         console.dir(e)
         showAlert("Internal error: "+e.message, true)
       }
@@ -58,7 +64,7 @@ const SiteFooter = () => {
   }
 
   return (<div>
-      {/* <Alert/> */}
+      <Alert/>
           <div 
         sx={{
           display: "grid",

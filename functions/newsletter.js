@@ -3,12 +3,12 @@ const dateFormat = require('date-fns')
 const GROUP_ID = '96428432853828661'; // Group Id for 'Newsletter Subscribers'
 
 // TODO: use `node` CLI to get group ID
-exports.process = async function(reqest){
+exports.process = async function(request){
     let mailerlite = new MailerLite({
-        api_key: process.env.MAILER_LITE_API_KEY
+        api_key: process.env.MAILER_LITE_API_TOKEN
     });
     try{
-        let subscriber = await mailerlite.createOrUpdate({
+        let subscriber = await mailerlite.subscribers.createOrUpdate({
             email: request.email,
             groups: [ GROUP_ID ],
         });
@@ -16,7 +16,10 @@ exports.process = async function(reqest){
         return {
             statusCode: 200,
             header: { 'Contet-Type': 'application/json' },
-            body: JSON.stringify({message: "SUCCESS", subscriber})
+            body: JSON.stringify({
+                message: "SUCCESS", 
+                subscriber: subscriber.data
+            })
         }
     }catch(e){
         return {
@@ -39,6 +42,7 @@ exports.handler = async function(event, context){
         }
     }
 
-    return await exports.process(request)
+    let result = await exports.process(request)
+    return result
 }
 
