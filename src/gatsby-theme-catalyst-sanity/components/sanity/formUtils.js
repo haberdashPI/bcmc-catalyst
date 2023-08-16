@@ -162,10 +162,10 @@ export const Form = ({ submitMessage, children, submitValues, ...props }) => {
                         {children}
                         <Button type="button" sx={{visibility: "hidden", my: "1rem"}} disabled={true}>Submit</Button>
                         <Box sx={{position: "absolute", right: "0", bottom: "1rem"}}>
-                        <Button sx={{my: "1rem"}} type="submit"
+                        <Button type="submit"
                             disabled = {!formik.isValid || formik.isSubmitting}
                             onClick = {formik.submitForm}
-                            sx={{mt: "1rem", mx: "0.5rem"}}> Submit </Button>
+                            sx={{my: "1rem", mt: "1rem", mx: "0.5rem"}}> Submit </Button>
                         </Box>
                     </Box>
                 </FormikContext.Provider>
