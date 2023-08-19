@@ -16,7 +16,7 @@ import {
     Spinner,
 } from 'theme-ui'
 import { OrderedSet, Set } from 'immutable'
-import { get, entries, range } from 'lodash'
+import { get, set, entries, range } from 'lodash'
 import * as yup from 'yup'
 import { Formik, FieldArray } from "formik"
 import { alpha, darken, lighten } from '@theme-ui/color'
@@ -24,6 +24,22 @@ import { navigate } from "gatsby"
 import { theme } from '../../../gatsby-plugin-theme-ui/index'
 
 export const FormikContext = React.createContext({});
+
+export function yupValidate(schema, object){
+    try {
+        schema.validateSync(object, { abortEarly: false, });
+    } catch (error) {
+        if (error.name !== "ValidationError") {
+            throw error;
+        }
+        return error.inner.reduce((errors, currentError) => {
+            errors = set(errors, currentError.path, currentError.message);
+            return errors
+        }, {})
+    }
+
+    return {}
+}
 
 export function person(quests){
     let result = {

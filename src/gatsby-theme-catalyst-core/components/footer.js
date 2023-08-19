@@ -1,5 +1,8 @@
 /** @jsx jsx */ import { jsx, useThemeUI, Grid, Button, Themed } from "theme-ui"
-import { Input, useAlert, FormikContext } from "../../gatsby-theme-catalyst-sanity/components/sanity/formUtils"
+import * as yup from 'yup'
+import { set, isEmpty } from 'lodash'
+import { Input, useAlert, FormikContext, yupValidate } from "../../gatsby-theme-catalyst-sanity/components/sanity/formUtils"
+import debounce from 'debounce-promise'
 import React from 'react'
 import { Formik } from "formik"
 import req from "superagent";
@@ -63,6 +66,10 @@ const SiteFooter = () => {
     }
   }
 
+  const emailval = yup.string().required("Required").email();
+  function validateEmail(values){ yupValidate(emailval, values.email) }
+
+  // TEST BLANK email
   return (<div>
       <Alert/>
           <div 
@@ -78,7 +85,7 @@ const SiteFooter = () => {
       <div sx={{maxWidth: "maxContentWidth", mx: "auto", px: "1rem", bg: "background", borderRadius: "0.5rem"}}>
         <Formik onSubmit={submitNewsEmail}
           initialValues={{email: '', honeypot: ''}}
-          // TODO: validation?
+          validate = {debounce(validateEmail, 250)}
           >
           {formik => (<>
             <FormikContext.Provider value={formik}>
@@ -86,7 +93,6 @@ const SiteFooter = () => {
                     columns={'2fr 1fr'}>
                 <Input
                   type="email"
-                  noFooter={true}
                   name="email"
                   placeholder="email address"
                   autocomplete="email"
@@ -97,8 +103,8 @@ const SiteFooter = () => {
                   Subscribe to Newsletter
                 </Button>
               </Grid>
+              <Input name="honeypot" style={{display: "none", height: 0}}></Input>
             </FormikContext.Provider>
-            <Input name="honeypot" style={{display: "none", height: 0}}></Input>
           </>)}
         </Formik>
       </div>

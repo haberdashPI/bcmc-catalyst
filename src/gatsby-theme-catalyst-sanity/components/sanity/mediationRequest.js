@@ -32,21 +32,7 @@ function validateFn(node, slugs){
         const personError = values.person.map((p,i) => {
             let schema = i === 0 ? {...personSchema, ...firstPersonSchema} :
                 personSchema
-            try {
-                yup.object().shape(schema).validateSync(p, {
-                    abortEarly: false,
-                });
-            } catch (error) {
-                if (error.name !== "ValidationError") {
-                    throw error;
-                }
-                return error.inner.reduce((errors, currentError) => {
-                    errors = set(errors, currentError.path, currentError.message);
-                    return errors
-                }, {})
-            }
-
-            return {}
+            return yupValidate(yup.object().shape(schema), p)
         })
         return personError.every(isEmpty) ? {} : { person: personError }
     }
