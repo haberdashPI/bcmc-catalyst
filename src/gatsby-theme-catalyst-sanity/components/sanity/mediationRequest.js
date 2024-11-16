@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import * as yup from 'yup'
 import debounce from 'debounce-promise'
-import { Select, PersonSubForm, Form, ListOf, person, personSchema, renameKeys, formToHtml, 
+import { Select, PersonSubForm, Form, ListOf, person, personSchema, renameKeys, formToHtml,
          yupValidate } from "./formUtils"
 
 import { jsx, Themed } from "theme-ui"
@@ -83,6 +83,10 @@ const MediationRequestForm = ({ node }) => {
                                 <option key="Email">Email</option>
                                 <option key="Phone">Phone</option>
                                 <option key="Mail">Mail</option>
+                            </Select>
+                            <Select label='Role' name='role'>
+                                <option key="participant">Seeking mediation</option>
+                                <option key="referral">Referring others for mediation</option>
                             </Select>
                         </>}
                         <PersonSubForm name={`person.${i}`}
